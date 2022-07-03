@@ -1,0 +1,86 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  background-color: transparent;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+body {
+  background: var(--primary-bg-color);
+}
+@media (max-width: 639px) {
+  html {
+    font-size: 80%;
+  }
+}
+.container {
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px;
+  }
+}
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+}
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+  }
+}
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+  }
+}
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px;
+  }
+}
+.page-section {
+  min-height: calc(100vh - 4rem);
+}
+/* Footer */
+.footer {
+  height: 4rem;
+  line-height: 4rem;
+  text-align: center;
+  color: var(--primary-txt-color);
+}
+.footer .container {
+  border-top: 1px solid var(--secondary-txt-color);
+}
+.footer .author {
+  color: var(--accent-color);
+  font-weight: 300;
+  position: relative;
+}
+.footer .author::after {
+  content: "";
+  position: absolute;
+  bottom: -0.2rem;
+  left: 0;
+  height: 0.1rem;
+  width: 0;
+  background-color: var(--accent-color);
+  -webkit-transition: var(--transition-three);
+  -moz-transition: var(--transition-three);
+  -o-transition: var(--transition-three);
+  transition: var(--transition-three);
+}
+.footer .author:hover::after {
+  width: 100%;
+}

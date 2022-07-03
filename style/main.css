@@ -1,0 +1,4 @@
+@import url("./variables.css");
+@import url("./global.css");
+@import url("./layouts/navbar.css");
+@import url("./layouts/pages/home.css");

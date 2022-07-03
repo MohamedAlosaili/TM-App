@@ -1,0 +1,194 @@
+.nav-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6.5rem;
+  z-index: 10;
+}
+/* Transition Start */
+.nav-bar::before,
+.nav-bar .icon,
+.nav-bar .sidbar-menu,
+.nav-bar .nav-list .nav-link,
+.nav-bar .nav-list .nav-link::after,
+.nav-bar .search-form,
+.nav-bar .search-form {
+  -webkit-transition: var(--transition-three);
+  -moz-transition: var(--transition-three);
+  -o-transition: var(--transition-three);
+  transition: var(--transition-three);
+}
+/* Transition End */
+.nav-bar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+.nav-bar .hamburger {
+  display: none;
+}
+.nav-bar .sidbar-menu {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+/* Logo Start */
+.nav-bar .logo {
+  display: flex;
+  align-items: center;
+}
+.nav-bar .logo img {
+  height: 3rem;
+  width: 3rem;
+  object-fit: cover;
+}
+.nav-bar .logo .logo-name {
+  font-size: 3rem;
+  text-transform: uppercase;
+  color: var(--accent-color);
+}
+.nav-bar .logo span {
+  font-size: 1rem;
+  color: var(--primary-txt-color);
+}
+/* Logo End */
+/* Nav-List Start */
+.nav-bar .nav-list {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  text-align: center;
+}
+.nav-bar .nav-list .nav-link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  position: relative;
+  color: var(--secondary-txt-color);
+  cursor: pointer;
+}
+.nav-bar .nav-list .nav-link .page-title {
+  font-size: 1rem;
+}
+.nav-bar .nav-list .nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -0.1rem;
+  left: 0;
+  height: 0.1rem;
+  width: 0;
+  background-color: var(--accent-color);
+  border-radius: 50%;
+}
+.nav-bar .nav-list .nav-link:hover,
+.nav-bar .nav-list .nav-link.active {
+  color: var(--primary-txt-color);
+}
+.nav-bar .nav-list .nav-link:hover::after,
+.nav-bar .nav-list .nav-link.active::after {
+  width: 100%;
+}
+/* Nav-List End */
+/* Search Form Start */
+.nav-bar .search-form {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: var(--third-bg-color);
+  padding: 0.5rem 1rem;
+  border-radius: 5rem;
+  border: 2px solid var(--primary-txt-color);
+  -webkit-box-shadow: 0 0 10px rgb(0 0 0 / 30%) inset;
+  -moz-box-shadow: 0 0 10px rgb(0 0 0 / 30%) inset;
+  box-shadow: 0 0 10px rgb(0 0 0 / 30%) inset;
+}
+.nav-bar .search-form.active {
+  border-color: var(--accent-color);
+}
+.nav-bar .search-form [type="search"] {
+  color: var(--primary-txt-color);
+}
+.nav-bar .search-form .icon {
+  font-size: 1rem;
+  color: var(--primary-txt-color);
+  cursor: pointer;
+}
+.nav-bar .search-form .icon:hover {
+  color: var(--accent-color);
+}
+/* Search Form End */
+/* Media Queries Start */
+@media (max-width: 1023px) {
+  .nav-bar::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+  }
+  .nav-bar.active::before {
+    background-color: var(--third-bg-color);
+    -webkit-backdrop-filter: blur(1rem);
+    backdrop-filter: blur(1rem);
+  }
+  .nav-bar .hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 2.5rem;
+    cursor: pointer;
+  }
+  .nav-bar .hamburger span {
+    height: 0.2rem;
+    width: 100%;
+    background-color: var(--primary-txt-color);
+    border-radius: 5rem;
+  }
+  .nav-bar .sidbar-menu {
+    position: absolute;
+    top: 100%;
+    left: -100%;
+    height: calc(100vh - 100%);
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    gap: 2rem;
+    background-color: var(--third-bg-color);
+    -webkit-backdrop-filter: blur(1rem);
+    backdrop-filter: blur(1rem);
+    padding: 2rem 1rem;
+    z-index: 1;
+  }
+  .nav-bar .sidbar-menu::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: transparent;
+    filter: blur(2rem);
+    z-index: -1;
+  }
+  .nav-bar .sidbar-menu.active {
+    left: 0;
+  }
+  .nav-bar .nav-list {
+    flex-direction: column;
+    justify-content: flex-start;
+    flex: auto;
+  }
+  .nav-bar .nav-list .nav-link {
+    flex-direction: row;
+    align-items: center;
+  }
+  .nav-bar .nav-list .nav-link .icon {
+    width: 1.5rem;
+    text-align: center;
+  }
+  .nav-bar .nav-list .nav-link .page-title {
+    margin-left: 1rem;
+  }
+  .nav-bar .nav-list .nav-link::after {
+    content: none;
+  }
+}
+/* Media Queries End */
