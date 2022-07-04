@@ -2,15 +2,16 @@
   --primary-bg-color: #1e292e;
   --secondary-bg-color: rgba(0 0 0 / 0.3);
   --third-bg-color: rgba(0 0 0 / 0.6);
-  --fourth-bg-color: rgba(0 0 0 / 0.5);
+  --fourth-bg-color: rgba(0 0 0 / 0.8);
 
   --primary-txt-color: #fff;
   --secondary-txt-color: rgba(255 255 255 / 0.5);
+  --third-txt-color: rgba(255 255 255 / 0.8);
 
   --accent-color: #ff2c1f;
 
-  --transition-three: all 0.3s ease;
-  --transition-five: all 0.5s ease;
+  --transition-three: 0.3s;
+  --transition-five: 0.5s;
 }
 /* --primary-bg-color: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%)
   no-repeat;
