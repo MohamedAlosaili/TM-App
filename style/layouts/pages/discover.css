@@ -1,0 +1,172 @@
+/* Transition Start */
+/* Transition End */
+.discover-section {
+  margin-bottom: 3rem;
+}
+.discover-section .container,
+.discover-section .discover-header {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+.discover-section .discover-header .top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255 255 255 / 0.1);
+}
+.discover-section .discover-header .section-title {
+  padding-bottom: 0;
+  flex-basis: 70%;
+  border-bottom: none;
+}
+.discover-section .discover-header .filter-wrap {
+  flex-basis: 30%;
+  display: flex;
+  justify-content: flex-end;
+}
+.discover-section .discover-header .filter {
+  gap: 0.5rem;
+  color: var(--primary-txt-color);
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+.discover-section .discover-header .genre-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  overflow: hidden;
+  height: 0;
+  -webkit-transition: var(--transition-three);
+  -moz-transition: var(--transition-three);
+  -o-transition: var(--transition-three);
+  transition: var(--transition-three);
+}
+.discover-section .discover-header .genre-list.active {
+  padding: 2rem 0;
+  height: auto;
+}
+.discover-section .discover-header .genre-list .genre-item {
+  color: var(--accent-color);
+  border: 1px solid var(--accent-color);
+  opacity: 0;
+}
+.discover-section .discover-header .genre-list.active .genre-item {
+  opacity: 1;
+  -webkit-transition: var(--transition-three),
+    opacity var(--transition-three) var(--transition-three);
+  -moz-transition: var(--transition-three),
+    opacity var(--transition-three) var(--transition-three);
+  -o-transition: var(--transition-three),
+    opacity var(--transition-three) var(--transition-three);
+  transition: var(--transition-three),
+    opacity var(--transition-three) var(--transition-three);
+}
+.discover-section .discover-header .genre-list .genre-item.active {
+  color: var(--primary-txt-color);
+  background-color: var(--accent-color);
+  -webkit-box-shadow: 0 0 10px var(--accent-color);
+  -moz-box-shadow: 0 0 10px var(--accent-color);
+  box-shadow: 0 0 10px var(--accent-color);
+}
+.discover-section .discover-header .discover-nav {
+  align-self: center;
+  display: flex;
+  border: 1px solid var(--accent-color);
+  border-radius: 2rem;
+}
+.discover-section .discover-header .discover-nav .btn {
+  color: var(--accent-color);
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+.discover-section .discover-header .discover-nav .btn.active {
+  background-color: var(--accent-color);
+  color: var(--primary-txt-color);
+  -webkit-box-shadow: 0 0 10px var(--accent-color);
+  -moz-box-shadow: 0 0 10px var(--accent-color);
+  box-shadow: 0 0 10px var(--accent-color);
+}
+.discover-section .card-container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+  gap: 2rem;
+}
+.discover-section .card-container .card-poster img {
+  width: 100%;
+}
+.discover-section .container > .btn {
+  width: min(20rem, 100%);
+  margin: 0 auto;
+  color: var(--primary-txt-color);
+  background-color: var(--accent-color);
+}
+.discover-section .container > .btn.loading {
+  pointer-events: none;
+}
+.discover-section .container > .btn.loading::before {
+  content: "";
+  position: relative;
+  display: block;
+  height: 1.6rem;
+  width: 1.6rem;
+  margin: 0 auto;
+  border: 0.25rem solid var(--primary-txt-color);
+  border-top-color: transparent;
+  border-radius: 50%;
+  box-sizing: border-box;
+  -webkit-animation: loading 1s infinite linear;
+  -moz-animation: loading 1s infinite linear;
+  animation: loading 1s infinite linear;
+}
+@-webkit-keyframes loading {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(1turn);
+  }
+}
+@-moz-keyframes loading {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(1turn);
+  }
+}
+@keyframes loading {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(1turn);
+  }
+}
+/* Media Queries Start */
+@media (hover: hover) {
+  .discover-section .discover-header .filter:hover {
+    color: var(--accent-color);
+  }
+  .discover-section .discover-header .genre-item:hover {
+    color: var(--primary-txt-color);
+    background-color: var(--accent-color);
+    -webkit-box-shadow: 0 0 10px var(--accent-color);
+    -moz-box-shadow: 0 0 10px var(--accent-color);
+    box-shadow: 0 0 10px var(--accent-color);
+  }
+  .discover-section .card-container .card-poster {
+    height: 100%;
+  }
+  .discover-section .card-container .card-poster img {
+    height: 100%;
+  }
+  .discover-section .container > .btn:hover {
+    -webkit-box-shadow: 0 0 10px var(--accent-color);
+    -moz-box-shadow: 0 0 10px var(--accent-color);
+    box-shadow: 0 0 10px var(--accent-color);
+  }
+}
+/* Media Queries End */

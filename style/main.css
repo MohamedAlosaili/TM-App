@@ -1,4 +1,7 @@
 @import url("./variables.css");
 @import url("./global.css");
 @import url("./layouts/navbar.css");
+@import url("./layouts/pages/common-style.css");
 @import url("./layouts/pages/home.css");
+@import url("./layouts/pages/discover.css");
+@import url("./layouts/pages/search-watchlist.css");

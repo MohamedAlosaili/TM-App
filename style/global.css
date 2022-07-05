@@ -22,13 +22,34 @@ body {
 }
 .container {
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 0 16px;
 }
 .page-section {
   display: flex;
   flex-direction: column;
   gap: 3rem;
-  min-height: calc(100vh - 4rem);
+  min-height: calc(100vh - 4rem - 1px);
+}
+.page-section .container {
+  padding-bottom: 3rem;
+}
+.btn {
+  padding: 0.5rem 1rem;
+  border-radius: 3rem;
+  cursor: pointer;
+  font-size: 1rem;
+  user-select: none;
+  -webkit-transition: var(--transition-three), transform 0s;
+  -moz-transition: var(--transition-three), transform 0s;
+  -o-transition: var(--transition-three), transform 0s;
+  transition: var(--transition-three), transform 0s;
+}
+.btn:active {
+  -webkit-transform: scale(0.98);
+  -moz-transform: scale(0.98);
+  -ms-transform: scale(0.98);
+  -o-transform: scale(0.98);
+  transform: scale(0.98);
 }
 /* Footer Start */
 .footer {
@@ -38,7 +59,7 @@ body {
   color: var(--primary-txt-color);
 }
 .footer .container {
-  border-top: 1px solid var(--secondary-txt-color);
+  border-top: 0.1rem solid var(--secondary-txt-color);
 }
 .footer .author {
   color: var(--accent-color);

@@ -1,0 +1,40 @@
+.page-result {
+  position: relative;
+}
+.page-result::before {
+  content: "";
+  position: absolute;
+  height: 6.5rem;
+  width: 100%;
+  background-color: var(--third-bg-color);
+  -webkit-backdrop-filter: blur(1rem);
+  backdrop-filter: blur(1rem);
+}
+.page-result .container {
+  padding-top: 10rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+.page-result .section-title span {
+  color: var(--accent-color);
+}
+.page-result .section-title .icon {
+  margin-left: 0.5rem;
+}
+.page-result .card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+  gap: 2rem;
+}
+.page-result .card-container .card-poster img {
+  width: 100%;
+}
+@media (hover: hover) {
+  .page-result .card-container .card-poster {
+    height: 100%;
+  }
+  .page-result .card-container .card-poster img {
+    height: 100%;
+  }
+}

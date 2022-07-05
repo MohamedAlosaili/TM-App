@@ -34,10 +34,6 @@ function getCards(arr) {
     popularMovies.append(figure);
   });
 }
-const current = new Date();
-const DOB = new Date("1972-06-07");
-const calculate = Math.trunc((current - DOB) / 1000 / 60 / 60 / 24 / 30 / 12);
-console.log(calculate);
 
 const hamburger = document.querySelector(".hamburger");
 const menu = document.querySelector(".sidbar-menu");
@@ -47,3 +43,39 @@ hamburger.addEventListener("click", () => {
   hamburger.closest(".nav-bar").classList.toggle("active");
   menu.classList.toggle("active");
 });
+
+// const btns = document.querySelectorAll(".discover-section .btn");
+
+// btns.forEach((btn) => {
+//   btn.addEventListener("click", () => {
+//     btns.forEach((btn) => btn.classList.remove("active"));
+//     btn.classList.add("active");
+//   });
+// });
+
+// const btn = document.querySelector(".discover-section .container > .btn");
+// const container = document.querySelector(".card-container");
+// const cards = document.querySelectorAll(".card-container .card");
+
+// btn.addEventListener("click", () => {
+//   btn.innerHTML = "";
+//   btn.classList.add("loading");
+//   setTimeout(() => {
+//     btn.innerHTML = "Load More";
+//     btn.classList.remove("loading");
+//   }, 1000);
+// });
+
+// const filter = document.querySelector("button.filter");
+// const geners = document.querySelector(".genre-list");
+// const genreItems = document.querySelectorAll(".genre-item");
+
+// genreItems.forEach((item) => {
+//   item.addEventListener("click", (e) => {
+//     e.target.classList.toggle("active");
+//   });
+// });
+
+// filter.addEventListener("click", () => {
+//   geners.classList.toggle("active");
+// });
