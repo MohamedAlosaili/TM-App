@@ -1,0 +1,96 @@
+.header-section .btn .icon {
+  margin-right: 0.5rem;
+}
+.info-section .container {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.movie-header .genre-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.movie-header .genre-list .genre-item {
+  color: var(--primary-txt-color);
+  position: relative;
+}
+.movie-header .genre-list .genre-item:not(:last-child)::after {
+  content: "|";
+  margin-left: 0.5rem;
+}
+.movie-header .date-time-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+.movie-header .date-time-info .define {
+  color: var(--accent-color);
+  font-weight: 500;
+  opacity: 0.9;
+}
+.info-section .overview {
+  color: var(--primary-txt-color);
+  padding: 1rem 1rem 0;
+  font-size: 1.1rem;
+}
+.info-section .card-container {
+  grid-template-columns: repeat(11, auto);
+}
+.info-section .card-container .cast-poster img {
+  width: 12rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+.info-section .card-container .cast-poster figcaption {
+  color: var(--primary-txt-color);
+  font-weight: 600;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+.info-section .card-container .cast-poster .character {
+  padding: 0 0.5rem;
+  color: var(--secondary-txt-color);
+}
+.info-section .card-container .more-cast {
+  width: 12rem;
+  height: auto;
+  aspect-ratio: 2 / 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  color: var(--primary-txt-color);
+  background-color: var(--secondary-bg-color);
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+.info-section .card-container .more-cast .icon {
+  color: var(--primary-txt-color);
+}
+.info-section .card-container .more-cast,
+.info-section .card-container .more-cast .icon {
+  -webkit-transition: var(--transition-three);
+  -moz-transition: var(--transition-three);
+  -o-transition: var(--transition-three);
+  transition: var(--transition-three);
+}
+@media (hover: hover) {
+  .info-section .card-container .more-cast:hover {
+    color: var(--accent-color);
+  }
+  .info-section .card-container .more-cast:hover .icon {
+    color: var(--accent-color);
+    transform: translateX(0.5rem);
+  }
+}
+@media (max-width: 767px) {
+  .movie-header .genre-list {
+    justify-content: center;
+  }
+  .movie-header .date-time-info {
+    justify-content: center;
+  }
+}

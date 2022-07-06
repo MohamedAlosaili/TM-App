@@ -8,30 +8,36 @@ import {
 // getInfo();
 async function getInfo() {
   try {
-    const req = await fetch(POPULAR_MOVIES);
+    const req = await fetch(
+      "https://api.themoviedb.org/3/movie/438148?api_key=f9e2c5697b7fbecaa38a5d0713c3b191&language=en-US&append_to_response=videos,credits"
+    );
     if (!req.ok) throw req.json().errors[0];
     const res = await req.json();
     console.log(res);
-    // getCards(res.results);
+    // getCards(res);
   } catch (err) {
     throw err;
   }
 }
 
-const popularMovies = document.querySelector(".card-container");
-
+const popularMovies = document.querySelector(".cast-container");
+console.log(popularMovies);
 function getCards(arr) {
-  arr.forEach((movie) => {
-    const figure = document.createElement("figure");
-    figure.classList.add(".card-poster");
+  arr.credits.cast.forEach((cast, idx) => {
+    if (idx >= 10) return;
+    const card = document.createElement("div");
+    card.classList.add(".card");
 
-    figure.innerHTML = `
-      <img src="https://image.tmdb.org/t/p/w300${movie.poster_path}" alt="${
-      movie.original_title
+    card.innerHTML = `
+      <figure class="cast-poster">
+      <img src="https://image.tmdb.org/t/p/w300${cast.profile_path}" alt="${
+      cast.name ?? cast.original_name
     }">
-      <figcaption>${movie.original_title ?? movie.title}</figcaption>
+      <figcaption>${cast.name ?? cast.original_name}</figcaption>
+      <p class="character">${cast.character}</p>
+      </figure>
     `;
-    popularMovies.append(figure);
+    popularMovies.append(card);
   });
 }
 
@@ -78,4 +84,14 @@ hamburger.addEventListener("click", () => {
 
 // filter.addEventListener("click", () => {
 //   geners.classList.toggle("active");
+// });
+
+const watchBtn = document.querySelectorAll(".watchlist-btn");
+
+// watchBtn.forEach((btn) => {
+//   btn.addEventListener("click", () => {
+//     if (btn.firstElementChild.classList.contains("fa-plus"))
+//       btn.firstElementChild.className = "fa-solid fa-check";
+//     else btn.firstElementChild.className = "fa-solid fa-plus";
+//   });
 // });

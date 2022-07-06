@@ -1,6 +1,7 @@
 /* section Start */
 .section .card-container {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(20, auto);
   gap: 2rem;
   overflow-x: scroll;
   padding: 2rem 1rem 1rem;
