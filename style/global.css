@@ -23,6 +23,86 @@ body {
 .container {
   margin: 0 auto;
   padding: 0 16px;
+  width: 100%;
+}
+.layer {
+  position: fixed;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  background-color: var(--third-bg-color);
+  visibility: hidden;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 5;
+  -webkit-transition: var(--transition-three);
+  -moz-transition: var(--transition-three);
+  -o-transition: var(--transition-three);
+  transition: var(--transition-three);
+}
+.layer.active {
+  visibility: visible;
+  pointer-events: auto;
+  opacity: 1;
+}
+.loading-spinner {
+  height: 4em;
+  width: 4rem;
+  visibility: hidden;
+  pointer-events: none;
+}
+.loading-spinner.active {
+  visibility: visible;
+  pointer-events: auto;
+}
+.loading-spinner,
+.loading-spinner .load-in,
+.loading-spinner .load-out {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  z-index: 100;
+}
+.loading-spinner .load-in,
+.loading-spinner .load-out {
+  display: block;
+  border-radius: 50%;
+}
+.loading-spinner .load-in {
+  height: 60%;
+  width: 60%;
+  border-width: 0.2rem;
+  border-style: solid;
+  border-color: var(--accent-color) var(--accent-color) var(--accent-color)
+    transparent;
+  animation: turn-right 1s infinite linear;
+}
+.loading-spinner .load-out {
+  height: 90%;
+  width: 90%;
+  border-width: 0.2rem;
+  border-style: solid;
+  border-color: var(--primary-txt-color) transparent var(--primary-txt-color)
+    var(--primary-txt-color);
+  animation: turn-left 1s infinite linear;
+}
+@keyframes turn-right {
+  0% {
+    transform: translate(-50%, -50%) rotate(0);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(1turn);
+  }
+}
+@keyframes turn-left {
+  0% {
+    transform: translate(-50%, -50%) rotate(0);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(-1turn);
+  }
 }
 .page-section {
   display: flex;
@@ -91,27 +171,27 @@ body {
 }
 @media (min-width: 640px) {
   .container {
-    max-width: 640px;
+    max-width: calc(640px - 17px);
   }
 }
 @media (min-width: 768px) {
   .container {
-    max-width: 768px;
+    max-width: calc(768px - 17px);
   }
 }
 @media (min-width: 1024px) {
   .container {
-    max-width: 1024px;
+    max-width: calc(1024px - 17px);
   }
 }
 @media (min-width: 1280px) {
   .container {
-    max-width: 1280px;
+    max-width: calc(1280px - 17px);
   }
 }
 @media (min-width: 1536px) {
   .container {
-    max-width: 1536px;
+    max-width: calc(1536px - 17px);
   }
 }
 /* Media Queries End */

@@ -1,4 +1,9 @@
 /* section Start */
+.home-page {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
 .section .card-container {
   display: grid;
   grid-template-columns: repeat(20, auto);

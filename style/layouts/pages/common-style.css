@@ -1,7 +1,10 @@
 /* Header Poster Start */
 .header-section {
-  height: 100vh;
+  min-height: 100vh;
   position: relative;
+}
+.header-section .container {
+  padding-bottom: 5rem;
 }
 .header-section .header-backdrop-img {
   position: absolute;
@@ -24,7 +27,7 @@
 }
 .header-section .container {
   position: relative;
-  height: 100%;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   gap: 4rem;
@@ -73,11 +76,11 @@
   -moz-box-shadow: 0 0 10px var(--accent-color);
   box-shadow: 0 0 10px var(--accent-color);
 }
-.header-section .list-btn {
+.header-section .watchlist-btn {
   color: var(--accent-color);
   border: 1px solid var(--accent-color);
 }
-.header-section .list-btn:hover {
+.header-section .watchlist-btn.active {
   background-color: var(--accent-color);
   color: var(--primary-txt-color);
   -webkit-box-shadow: 0 0 10px var(--accent-color);
@@ -154,8 +157,21 @@
   color: var(--primary-txt-color);
   font-weight: 600;
   text-transform: capitalize;
-  padding-bottom: 0.5rem;
-  border-bottom: 0.15rem solid rgba(255 255 255 / 0.1);
+  padding: 0.5rem 0.5rem 0.5rem 1rem;
+  font-size: 1.8rem;
+  position: relative;
+}
+.section-title::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0.2rem;
+  background-color: var(--accent-color);
+}
+.card-container .card {
+  position: relative;
 }
 .card-container .card-poster {
   position: relative;
@@ -170,12 +186,32 @@
   z-index: 1;
   margin-bottom: 0.5rem;
 }
+.card-container .card .no-img {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  height: 100%;
+  width: auto;
+  aspect-ratio: 2 / 3;
+  background-color: var(--secondary-bg-color);
+  border-radius: 0.5rem;
+  margin-bottom: 0.8rem;
+  text-align: center;
+  color: var(--primary-txt-color);
+  line-height: 1.6;
+}
+.card-container .card .no-img .icon {
+  font-size: 3rem;
+  color: var(--accent-color);
+}
 .card-container .card-poster .card-title {
   padding: 0 0.5rem;
   color: var(--third-txt-color);
   z-index: 3;
 }
-.card-container .card-poster .watchlist-btn {
+.card-container .card .watchlist-btn {
   position: absolute;
   top: 0;
   left: 0.5rem;
@@ -206,6 +242,13 @@
 }
 @media (hover: hover) {
   /* This Media Target Only Devices Can Hover On Elements */
+  .header-section .watchlist-btn:hover {
+    background-color: var(--accent-color);
+    color: var(--primary-txt-color);
+    -webkit-box-shadow: 0 0 10px var(--accent-color);
+    -moz-box-shadow: 0 0 10px var(--accent-color);
+    box-shadow: 0 0 10px var(--accent-color);
+  }
   .card-container .card-poster::before {
     content: "";
     position: absolute;

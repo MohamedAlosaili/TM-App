@@ -23,7 +23,26 @@
   color: var(--accent-color);
 }
 .watchlist-page .section-title .icon {
-  margin-left: 0.5rem;
+  position: relative;
+  display: inline-block;
+  transform: translateY(25%);
+  height: 2rem;
+  width: 1.5rem;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 75%, 0 100%);
+  background-color: var(--accent-color);
+  border-radius: 0.2rem;
+  margin-left: 1rem;
+}
+.watchlist-page .section-title .icon::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -75%) rotate(45deg);
+  height: 0.75rem;
+  width: 0.35rem;
+  border-right: 0.19rem solid var(--primary-txt-color);
+  border-bottom: 0.19rem solid var(--primary-txt-color);
 }
 .search-result .card-container,
 .watchlist-page .card-container {

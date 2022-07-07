@@ -5,7 +5,7 @@
 .nav-bar .nav-list .nav-link,
 .nav-bar .nav-list .nav-link::after,
 .nav-bar .search-form,
-.nav-bar .search-form [type="search"]::placeholder {
+.nav-bar .search-form [type="text"]::placeholder {
   -webkit-transition: var(--transition-three);
   -moz-transition: var(--transition-three);
   -o-transition: var(--transition-three);
@@ -70,6 +70,9 @@
   color: var(--secondary-txt-color);
   cursor: pointer;
 }
+.nav-bar .nav-list .nav-link .icon {
+  color: var(--secondary-txt-color);
+}
 .nav-bar .nav-list .nav-link .page-title {
   font-size: 1rem;
 }
@@ -82,11 +85,10 @@
   width: 0;
   background-color: var(--accent-color);
 }
-.nav-bar .nav-list .nav-link:hover,
-.nav-bar .nav-list .nav-link.active {
+.nav-bar .nav-list .nav-link.active,
+.nav-bar .nav-list .nav-link.active .icon {
   color: var(--primary-txt-color);
 }
-.nav-bar .nav-list .nav-link:hover::after,
 .nav-bar .nav-list .nav-link.active::after {
   width: 100%;
 }
@@ -99,7 +101,7 @@
   background-color: var(--third-bg-color);
   padding: 0.5rem 1rem;
   border-radius: 5rem;
-  border: 0.1rem solid var(--secondary-txt-color);
+  border: 0.2rem solid var(--secondary-txt-color);
   -webkit-box-shadow: 0 0 10px rgb(0 0 0 / 30%) inset;
   -moz-box-shadow: 0 0 10px rgb(0 0 0 / 30%) inset;
   box-shadow: 0 0 10px rgb(0 0 0 / 30%) inset;
@@ -107,10 +109,10 @@
 .nav-bar .search-form.active {
   border-color: var(--accent-color);
 }
-.nav-bar .search-form [type="search"] {
+.nav-bar .search-form [type="text"] {
   color: var(--primary-txt-color);
 }
-.nav-bar .search-form [type="search"]:focus::placeholder {
+.nav-bar .search-form [type="text"]:focus::placeholder {
   color: var(--primary-txt-color);
 }
 .nav-bar .search-form .icon {
@@ -118,11 +120,20 @@
   color: var(--primary-txt-color);
   cursor: pointer;
 }
-.nav-bar .search-form .icon:hover {
-  color: var(--accent-color);
-}
 /* Search Form End */
 /* Media Queries Start */
+@media (hover: hover) {
+  .nav-bar .nav-list .nav-link:hover,
+  .nav-bar .nav-list .nav-link:hover .icon {
+    color: var(--primary-txt-color);
+  }
+  .nav-bar .nav-list .nav-link:hover::after {
+    width: 100%;
+  }
+  .nav-bar .search-form .icon:hover {
+    color: var(--accent-color);
+  }
+}
 @media (max-width: 1023px) {
   .nav-bar::before {
     content: "";
