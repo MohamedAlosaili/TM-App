@@ -40,11 +40,11 @@
             </div>
             <aside class="sidbar-menu">
                 <nav class="nav-list">
-                    <a data-page="home" class="nav-link">
+                    <a data-page="home" class="nav-link active">
                         <i class="icon fa-solid fa-house"></i>
                         <h3 class="page-title">Home</h3>
                     </a>
-                    <a data-page="movie" class="nav-link active">
+                    <a data-page="movie" class="nav-link">
                         <i class="icon fa-solid fa-clapperboard"></i>
                         <h3 class="page-title">Movies</h3>
                     </a>
@@ -57,25 +57,20 @@
                         <h3 class="page-title">Watchlist</h3>
                     </a>
                 </nav>
-                <form class="search-form ">
-                    <input type="text" placeholder="Search. . .">
+                <form class="search-form" data-search-form>
+                    <input type="text" data-search-input placeholder="Search. . .">
                     <button class="icon fa-solid fa-magnifying-glass"></button>
                 </form>
             </aside>
         </div>
     </header>
 
-    <div class="layer"></div>
-    <div class="loading-spinner active">
-        <span class="load-out"></span>
-        <span class="load-in"></span>
-    </div>
-
     <main class="page-section" data-main-page></main>
 
     <footer class="footer">
         <div class="container">
-            &copy; <span class="year">2022 </span><a href="https://github.com/MohamedAlosaili/midNightMovie-App"
+            <img src="./imgs/logo.png" alt="TM logo">
+            &copy; <span data-copyright-year></span><a href="https://github.com/MohamedAlosaili/midNightMovie-App"
                 class="author">@MohamedAlosaili</a> All Right Reserved
         </div>
     </footer>

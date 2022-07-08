@@ -1,7 +1,6 @@
 /* Transition Start */
 .discover-section .discover-header .genre-list.active,
-.discover-section .discover-header .discover-nav .nav-back,
-.discover-section .card-container {
+.discover-section .discover-header .discover-nav .nav-back {
   -webkit-transition: var(--transition-three);
   -moz-transition: var(--transition-three);
   -o-transition: var(--transition-three);
@@ -117,9 +116,20 @@
 }
 .discover-section .card-container.popular,
 .discover-section .card-container.trending,
-.discover-section .card-container.top-rated {
+.discover-section .card-container.top_rated {
   transform: translateY(0);
   opacity: 1;
+  animation: transparency 0.8s forwards;
+}
+@keyframes transparency {
+  0% {
+    transform: translateY(2rem);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0rem);
+    opacity: 1;
+  }
 }
 .discover-section .card-container .card-poster img {
   width: 100%;
