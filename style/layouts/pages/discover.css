@@ -139,8 +139,6 @@
   margin: 0 auto;
   color: var(--primary-txt-color);
   background-color: var(--accent-color);
-}
-.discover-section .container > .btn {
   height: 2.6rem;
   position: relative;
 }

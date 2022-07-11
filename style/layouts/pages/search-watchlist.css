@@ -49,6 +49,42 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
   gap: 2rem;
+  position: relative;
+}
+.empty-cards {
+  position: absolute;
+  top: 5rem;
+  width: 100%;
+  text-align: center;
+  color: var(--primary-txt-color);
+  line-height: 1.6;
+}
+.empty-cards::before,
+.empty-cards::after {
+  content: "";
+  position: absolute;
+  top: -4rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.empty-cards::before {
+  height: 2rem;
+  width: 1.2rem;
+  border: 0.2rem solid var(--primary-txt-color);
+  border-radius: 0.3rem;
+}
+.empty-cards::after {
+  height: 2.5rem;
+  width: 0.2rem;
+  transform: rotate(30deg);
+  background-color: var(--primary-txt-color);
+}
+.empty-cards a {
+  color: var(--secondary-txt-color);
+  -webkit-transition: var(--transition-three);
+  -moz-transition: var(--transition-three);
+  -o-transition: var(--transition-three);
+  transition: var(--transition-three);
 }
 .search-result .card-container .card-poster img,
 .watchlist-page .card-container .card-poster img {
@@ -62,5 +98,10 @@
   .search-result .card-container .card-poster img,
   .watchlist-page .card-container .card-poster img {
     height: 100%;
+  }
+}
+@media (hover: hover) {
+  .empty-cards a:hover {
+    color: var(--accent-color);
   }
 }

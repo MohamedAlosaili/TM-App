@@ -1,8 +1,9 @@
 import MainClass from "./mainClass.js";
-import { getNewDiscoverPageCards } from "../functions.js";
+import { getNewDiscoverPageCards, getMoreCards } from "../functions.js";
+import { dataObj } from "../app.js";
 
-class Movies extends MainClass {
-  pageName = "movie";
+class Discover extends MainClass {
+  pageName;
   filterBtn;
   genreList;
   cardContainer;
@@ -17,7 +18,11 @@ class Movies extends MainClass {
                 <div class="container">
                     <header class="discover-header">
                         <div class="top">
-                            <h2 class="section-title">Discover in Movies</h2>
+                            <h2 class="section-title">Discover in ${
+                              dataObj.pageName === `movie`
+                                ? `movies`
+                                : `TV shows`
+                            }</h2>
                             <div class="filter-wrap">
                                 <button class="filter btn" data-filter>Filter <i class="icon fa-solid fa-filter"></i></button>
                             </div>
@@ -54,6 +59,7 @@ class Movies extends MainClass {
     this._discoverNavListener();
     this._discoverFilterListener();
     this._watchlistBtnListener();
+    this._loadMoreListener();
   }
 
   _discoverNavListener() {
@@ -67,7 +73,7 @@ class Movies extends MainClass {
         btn.classList.add("active");
 
         this.discoverPage = btn.dataset.discoverPage;
-        getNewDiscoverPageCards(this.discoverPage);
+        getNewDiscoverPageCards(this.discoverPage, dataObj.pageName);
 
         const parentWidth =
           parseInt(
@@ -88,6 +94,20 @@ class Movies extends MainClass {
     this.cardContainer.className = `card-container ${this.discoverPage}`;
     this.cardContainer.innerHTML = this._getSectionCards(pageData);
   }
+
+  _loadMoreListener() {
+    this.loadMoreBtn.addEventListener("click", (e) => {
+      this.renderLoader(e.currentTarget, false);
+
+      getMoreCards();
+
+      if (dataObj.pageNum === 500) this.remove();
+    });
+  }
+
+  clearLoadMore() {
+    this.loadMoreBtn.innerHTML = "Load More";
+  }
 }
 
-export default new Movies();
+export default new Discover();

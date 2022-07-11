@@ -1,8 +1,6 @@
 import mainClass from "./mainClass.js";
 
 class Home extends mainClass {
-  pageName = "home";
-
   rendermainPageElement(homeObj) {
     const { trendDay, trendWeek, popularMovies, popularTV } = homeObj;
 
