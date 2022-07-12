@@ -107,10 +107,6 @@
   color: var(--primary-txt-color);
 }
 .discover-section .card-container {
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
-  gap: 2rem;
   transform: translateY(2rem);
   opacity: 0;
 }

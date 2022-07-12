@@ -22,7 +22,7 @@ class Navbar {
         // Deal with links
         this._navLinks.forEach((link) => link.classList.remove("active"));
         e.currentTarget.classList.add("active");
-        this._mobileMenuState("remove", "visible");
+        this._mobileMenuState("remove", "scroll");
 
         // Deal with pages
         const pageName = link.dataset.page;
@@ -53,7 +53,7 @@ class Navbar {
   _mobileMenuListener() {
     this._mobileMenuToggler.addEventListener("click", (e) => {
       if (this._mobileMenu.classList.contains("active"))
-        this._mobileMenuState("remove", "visible");
+        this._mobileMenuState("remove", "scroll");
       else this._mobileMenuState("add", "hidden");
     });
   }

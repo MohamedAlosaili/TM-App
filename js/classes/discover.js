@@ -13,7 +13,7 @@ class Discover extends MainClass {
 
   rendermainPageElement(movieObj, generList) {
     this._mainPage.innerHTML = `
-            ${this._getHomeHeaderSection(movieObj)}
+            ${this._getHomeHeaderSection(movieObj, dataObj.pageName)}
             <section class="discover-section" id="first-section">
                 <div class="container">
                     <header class="discover-header">
@@ -37,8 +37,8 @@ class Discover extends MainClass {
                             <button class="btn" data-discover-page="top_rated">Top Rated</button>
                         </nav>
                     </header>
-                    <div class="card-container popular" data-discover-container>
-                        ${this._getSectionCards(movieObj)}
+                    <div class="card-container grid popular" data-discover-container>
+                        ${this._getSectionCards(movieObj, dataObj.pageName)}
                     </div>
                     <button class="btn" data-load-more>Load More</button>
                 </div>
@@ -52,13 +52,9 @@ class Discover extends MainClass {
       "[data-discover-container]"
     );
     this.loadMoreBtn = this._mainPage.querySelector("[data-load-more]");
-    this.watchlistBtns = this._mainPage.querySelectorAll(
-      "[data-watchlist-btn]"
-    );
 
     this._discoverNavListener();
     this._discoverFilterListener();
-    this._watchlistBtnListener();
     this._loadMoreListener();
   }
 
@@ -67,7 +63,7 @@ class Discover extends MainClass {
 
     this.navBtn.forEach((btn, idx) => {
       btn.addEventListener("click", () => {
-        this.cardContainer.className = "card-container";
+        this.cardContainer.className = "card-container grid";
 
         this.navBtn.forEach((btn) => btn.classList.remove("active"));
         btn.classList.add("active");
@@ -91,8 +87,11 @@ class Discover extends MainClass {
   }
 
   getNewDiscoverPage(pageData) {
-    this.cardContainer.className = `card-container ${this.discoverPage}`;
-    this.cardContainer.innerHTML = this._getSectionCards(pageData);
+    this.cardContainer.className = `card-container grid ${this.discoverPage}`;
+    this.cardContainer.innerHTML = this._getSectionCards(
+      pageData,
+      dataObj.pageName
+    );
   }
 
   _loadMoreListener() {
@@ -101,7 +100,7 @@ class Discover extends MainClass {
 
       getMoreCards();
 
-      if (dataObj.pageNum === 500) this.remove();
+      if (dataObj.pageNum === 500) e.currentTarget.remove();
     });
   }
 

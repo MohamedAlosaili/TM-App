@@ -4,13 +4,6 @@
   flex-direction: column;
   gap: 3rem;
 }
-.section .card-container {
-  display: grid;
-  grid-template-columns: repeat(20, auto);
-  gap: 2rem;
-  overflow-x: scroll;
-  padding: 2rem 1rem 1rem;
-}
 .section .card-container::-webkit-scrollbar {
   height: 0.5rem;
 }

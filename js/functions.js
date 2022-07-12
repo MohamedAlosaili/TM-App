@@ -11,8 +11,8 @@ import {
 import { dataObj } from "./app.js";
 import Home from "./classes/home.js";
 import Discover from "./classes/discover.js";
-import Navbar from "./classes/navbar.js";
 import Watchlist from "./classes/watchlist.js";
+import MoviePage from "./classes/moviePage.js";
 
 async function fetchData(API_URL) {
   try {
@@ -59,8 +59,16 @@ export function getWatchlistPage() {
   Watchlist.renderLoader();
 
   const watchlistCards = JSON.parse(localStorage.getItem("watchlist"));
-  console.log(watchlistCards);
   Watchlist.rendermainPageElement(watchlistCards);
+}
+
+export async function getMoviePage(type, id) {
+  console.log(id, type);
+  const movieObj = await fetchData(
+    FULL_DETAILS(type, id, "&append_to_response=videos,credits,images,similar")
+  );
+
+  MoviePage.rendermainPageElement(movieObj, type);
 }
 
 export async function controlChangePages(pageName) {
@@ -97,19 +105,25 @@ export async function getMoreCards() {
   );
 
   Discover.clearLoadMore();
-  Discover.cardContainer.innerHTML += Discover._getSectionCards(newCards);
+  Discover.cardContainer.innerHTML += Discover._getSectionCards(
+    newCards,
+    dataObj.pageName
+  );
 }
 
-export function addToWatchlist(parent, id) {
-  const posterImg = parent.querySelector("img")?.src ?? null;
+export function addToWatchlist(btn) {
+  const parent = btn.closest(".poster-parent");
+
+  const posterImg = parent.querySelector("[data-poster]")?.src ?? null;
   const title = (
     parent.querySelector(".card-title") ?? parent.querySelector(".post-title")
   ).innerHTML;
 
   const watchlistObj = {
-    id: id,
+    id: btn.id,
     title: title,
     poster_path: posterImg,
+    media_type: btn.dataset.type,
   };
 
   let exist = false;

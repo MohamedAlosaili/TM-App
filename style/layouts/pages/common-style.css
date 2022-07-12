@@ -171,7 +171,23 @@
   background-color: var(--accent-color);
 }
 .card-container {
-  flex: 1;
+  gap: 2rem;
+  padding: 2rem 1rem 1rem;
+}
+.card-container.flex {
+  display: flex;
+  overflow-x: scroll;
+}
+.card-container.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+}
+.section .card-container.flex::-webkit-scrollbar {
+  height: 0.5rem;
+}
+.section .card-container.flex::-webkit-scrollbar-thumb {
+  background-color: var(--secondary-bg-color);
+  border-radius: 5rem;
 }
 .card-container .card {
   position: relative;
@@ -190,15 +206,32 @@
   overflow-y: hidden;
   z-index: 5;
 }
-.card-container .expand-btn .icon,
 .card-container .expand-btn .text {
   opacity: 0;
   transform: translateY(10rem);
   visibility: hidden;
+  position: relative;
   -webkit-transition: var(--transition-five);
   -moz-transition: var(--transition-five);
   -o-transition: var(--transition-five);
   transition: var(--transition-five);
+}
+.card-container .expand-btn .text::before,
+.card-container .expand-btn .text::after {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f424";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: red;
+  font-size: 3rem;
+  opacity: 0.4;
+  z-index: -1;
+}
+.card-container .expand-btn .text::after {
+  transform: translate(-50%, -50%) rotate(90deg);
 }
 .card-container .expand-btn .icon {
   color: var(--accent-color);
@@ -224,7 +257,7 @@
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
-  height: 100%;
+  height: 18rem;
   width: auto;
   aspect-ratio: 2 / 3;
   background-color: var(--secondary-bg-color);
@@ -233,6 +266,9 @@
   text-align: center;
   color: var(--primary-txt-color);
   line-height: 1.6;
+}
+.card-container.grid .card .no-img {
+  height: 100%;
 }
 .card-container .card .no-img .icon {
   font-size: 3rem;
@@ -277,7 +313,7 @@
   .card-container .expand-btn:hover .icon,
   .card-container .expand-btn:hover .text {
     opacity: 1;
-    transform: translateY(0.5rem);
+    transform: translateY(-2rem);
     visibility: visible;
   }
   .header-section .watchlist-btn:hover {

@@ -19,6 +19,7 @@ html {
 }
 body {
   background: var(--primary-bg-color);
+  overflow-y: scroll;
 }
 /* Transition Start */
 .scroll-to-top,
@@ -139,6 +140,7 @@ body {
   opacity: 0;
   transform: translateY(1rem);
   cursor: pointer;
+  z-index: 20;
   -webkit-box-shadow: 0 0 10px var(--accent-color);
   -moz-box-shadow: 0 0 10px var(--accent-color);
   box-shadow: 0 0 10px var(--accent-color);
@@ -179,6 +181,7 @@ body {
   left: 0;
   height: 0.15rem;
   width: 0;
+  background-color: var(--accent-color);
 }
 .footer .author:hover::after {
   width: 100%;

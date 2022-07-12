@@ -9,7 +9,7 @@ class Watchlist extends MainClass {
         <section class="watchlist-page">
             <div class="container">
                 <h2 class="section-title">WatchList<span class="icon"></span></h2> 
-                <div class="card-container">
+                <div class="card-container grid">
                     ${
                       this._getSectionCards(watchlistCards) ||
                       `<div class="empty-cards">

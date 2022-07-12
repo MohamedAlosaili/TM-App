@@ -1,9 +1,5 @@
 import { POSTER_URL, BACKDROP_URL } from "../config.js";
-import {
-  addToWatchlist,
-  removeFromWatchlist,
-  checkTheWatchlist,
-} from "../functions.js";
+import { checkTheWatchlist } from "../functions.js";
 
 export default class MainClass {
   _mainPage = document.querySelector("[data-main-page]");
@@ -20,7 +16,11 @@ export default class MainClass {
     `;
   }
 
-  _getHomeHeaderSection(arrOfMovies) {
+  mainPageListener(handler) {
+    this._mainPage.addEventListener("click", handler);
+  }
+
+  _getHomeHeaderSection(arrOfMovies, type = null) {
     const result = arrOfMovies.results[0];
     return `
         <article class="header-section">
@@ -37,7 +37,9 @@ export default class MainClass {
                ${
                  result.poster_path
                    ? `
-               <img src="${POSTER_URL}${result.poster_path}" alt="'${
+               <img src="${POSTER_URL}${
+                       result.poster_path
+                     }" data-poster alt="'${
                        result.title ??
                        result.original_title ??
                        result.name ??
@@ -69,11 +71,21 @@ export default class MainClass {
                 <div class="button">
                     <button class="btn more-btn" id="${
                       result.id
-                    }" data-expand-card>More info</button>
+                    }" data-expand-card data-type="${
+      type ?? result.media_type
+    }">More info</button>
                     ${
                       checkTheWatchlist(result.id)
-                        ? `<button class="btn watchlist-btn active" id="${result.id}" data-watchlist-btn="header">Added to watchlist</button>`
-                        : `<button class="btn watchlist-btn" id="${result.id}" data-watchlist-btn="header">Add to watchlist</button>`
+                        ? `<button class="btn watchlist-btn active" id="${
+                            result.id
+                          }" data-watchlist-btn="header" data-type="${
+                            type ?? result.media_type
+                          }">Added to watchlist</button>`
+                        : `<button class="btn watchlist-btn" id="${
+                            result.id
+                          }" data-watchlist-btn="header" data-type="${
+                            type ?? result.media_type
+                          }">Add to watchlist</button>`
                     }
                 </div>
             </section>
@@ -85,29 +97,29 @@ export default class MainClass {
     `;
   }
 
-  _getSectionCards(arrOfMovies) {
+  _getSectionCards(arrOfCards, type = null) {
     const cardContainer = document.createElement("div");
 
-    if (!arrOfMovies || arrOfMovies.length === 0) {
+    if (!arrOfCards || arrOfCards.length === 0) {
       return false;
     }
 
-    arrOfMovies.results.forEach((card) => {
+    arrOfCards.results.forEach((card) => {
       const cardEl = document.createElement("div");
       cardEl.className = "card poster-parent";
-      cardEl.id = card.id;
 
       cardEl.innerHTML = `
             <button class="expand-btn" id="${card.id}" title="${
         card.title ?? card.original_title ?? card.name ?? card.original_name
-      }" data-expand-card>
-            <i class="icon fa-solid fa-expand"></i>
+      }" data-expand-card data-type="${type ?? card.media_type}">
             <p class="text">Expand</p>
       </button>
             <figure class="card-poster">
                 ${
-                  card.poster_path
-                    ? `<img src="${POSTER_URL}${card.poster_path}"
+                  card.poster_path || card.profile_path
+                    ? `<img src="${POSTER_URL}${
+                        card.poster_path ?? card.profile_path
+                      }"
                 alt="'${
                   card.title ??
                   card.original_title ??
@@ -128,9 +140,17 @@ export default class MainClass {
             </figure>
             ${
               checkTheWatchlist(card.id)
-                ? `<button class="watchlist-btn btn active" id="${card.id}" data-watchlist-btn title="Remove from watchlist"><i
+                ? `<button class="watchlist-btn btn active" id="${
+                    card.id
+                  }" data-watchlist-btn title="Remove from watchlist"  data-type="${
+                    type ?? card.media_type
+                  }"><i
                       class="fa-solid fa-check"></i></button>`
-                : `<button class="watchlist-btn btn" id="${card.id}" data-watchlist-btn title="Add to watchlist"><i
+                : `<button class="watchlist-btn btn" id="${
+                    card.id
+                  }" data-watchlist-btn title="Add to watchlist" data-type="${
+                    type ?? card.media_type
+                  }"><i
                       class="fa-solid fa-plus"></i></button>`
             }
         `;
@@ -154,40 +174,5 @@ export default class MainClass {
     });
     const genreItems = generList.innerHTML;
     return genreItems;
-  }
-
-  _watchlistBtnListener() {
-    this._mainPage.addEventListener("click", (e) => {
-      e.stopImmediatePropagation();
-      if (e.target.closest("[data-watchlist-btn]")) {
-        const btn = e.target.closest("[data-watchlist-btn]");
-
-        if (btn.classList.contains("active")) {
-          if (btn.dataset.watchlistBtn === "header")
-            btn.innerHTML = "Add to watchlist";
-          else {
-            btn.children[0].className = "fa-solid fa-plus";
-            btn.setAttribute("title", "Add to watchlist");
-          }
-
-          removeFromWatchlist(btn.id);
-        } else {
-          if (btn.dataset.watchlistBtn === "header")
-            btn.innerHTML = "Added to watchlist";
-          else {
-            btn.children[0].className = "fa-solid fa-check";
-            btn.setAttribute("title", "Remove from watchlist");
-          }
-
-          addToWatchlist(btn.closest(".poster-parent"), btn.id);
-        }
-        console.log(btn);
-        btn.classList.toggle("active");
-      }
-    });
-  }
-
-  _expandCardListener() {
-    this._mainPage.addEventListener("click", () => {});
   }
 }
