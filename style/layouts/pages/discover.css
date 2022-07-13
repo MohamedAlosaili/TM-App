@@ -7,12 +7,6 @@
   transition: var(--transition-three);
 }
 /* Transition End */
-.discover-section .container,
-.discover-section .discover-header {
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
-}
 .discover-section .discover-header .top {
   display: flex;
   flex-wrap: wrap;
@@ -110,6 +104,17 @@
   transform: translateY(2rem);
   opacity: 0;
 }
+.discover-section .card-container .loading-spinner {
+  top: 5rem;
+  visibility: visible;
+  pointer-events: auto;
+}
+.discover-section .card-container.popular .loading-spinner,
+.discover-section .card-container.trending .loading-spinner,
+.discover-section .card-container.top_rated .loading-spinner {
+  visibility: hidden;
+  pointer-events: none;
+}
 .discover-section .card-container.popular,
 .discover-section .card-container.trending,
 .discover-section .card-container.top_rated {
@@ -126,9 +131,6 @@
     transform: translateY(0rem);
     opacity: 1;
   }
-}
-.discover-section .card-container .card-poster img {
-  width: 100%;
 }
 .discover-section .container > .btn {
   width: min(20rem, 100%);
@@ -163,9 +165,6 @@
     box-shadow: 0 0 10px var(--accent-color);
   }
   .discover-section .card-container .card-poster {
-    height: 100%;
-  }
-  .discover-section .card-container .card-poster img {
     height: 100%;
   }
   .discover-section .container > .btn:hover {

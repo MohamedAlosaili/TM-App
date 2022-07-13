@@ -7,6 +7,8 @@ import { moviePageHandler } from "../handlerFunctions.js";
 class MoviePage extends MainClass {
   _movieHeader;
   trailerContainer;
+  trailerVideo;
+  trailerUrl;
 
   rendermainPageElement(movieObj, type) {
     this._mainPage.innerHTML = `
@@ -26,7 +28,27 @@ class MoviePage extends MainClass {
                 <section class="videos section">
                     <h2 class="section-title">Videos</h2>
                     <div class="card-container flex">
-                        ${this._getMovieVideos(movieObj.videos)}
+                        ${
+                          this._getMovieVideos(movieObj.videos) ||
+                          `
+                               <div class="no-videos">
+                                    <i class="icon fa-solid fa-video-slash"></i>
+                                    <p class="text">
+                                        We don't find any videos for <span class="movie-name">${
+                                          movieObj.title ??
+                                          movieObj.original_title ??
+                                          movieObj.name ??
+                                          movieObj.original_name
+                                        }</span><br> you can watch videos on youtube <a href="https://www.youtube.com/results?search_query=${
+                            movieObj.title ??
+                            movieObj.original_title ??
+                            movieObj.name ??
+                            movieObj.original_name
+                          }" target="_blank">Click</a>
+                                    </p>
+                                </div> 
+                            `
+                        }
                     </div>
                 </section>
                 <section class="similar section">
@@ -41,6 +63,10 @@ class MoviePage extends MainClass {
 
     this._movieHeader = document.querySelector("[data-movie-header]");
     this.trailerContainer = document.querySelector("[data-trailer-container]");
+    this.trailerVideo = this.trailerContainer.querySelector(
+      "[data-trailer-video]"
+    );
+    this.trailerUrl = this.trailerVideo?.src;
 
     this._movieHeaderListener(moviePageHandler);
   }
@@ -49,14 +75,26 @@ class MoviePage extends MainClass {
     return `
         <article class="header-section movie-header poster-parent" data-movie-header>
         <figure class="header-backdrop-img">
-            <img src="${BACKDROP_URL}${movieObj.backdrop_path}" alt="'${
-      movieObj.title ??
-      movieObj.original_title ??
-      movieObj.name ??
-      movieObj.original_name
-    }' backdrop">
+        ${
+          movieObj.backdrop_path
+            ? `<img src="${BACKDROP_URL}${movieObj.backdrop_path}" alt="'${
+                movieObj.title ??
+                movieObj.original_title ??
+                movieObj.name ??
+                movieObj.original_name
+              }' backdrop">
+            `
+            : `
+            <img src="${BACKDROP_URL}${movieObj.poster_path}" alt="'${
+                movieObj.title ??
+                movieObj.original_title ??
+                movieObj.name ??
+                movieObj.original_name
+              }' backdrop">
+            `
+        }
         </figure>
-        <div class="container">
+        <div class="container" data-poster-parent>
             <figure class="poster-img">
                 <img src="${POSTER_URL}${
       movieObj.poster_path
@@ -106,13 +144,37 @@ class MoviePage extends MainClass {
                     }
                 </div>
                 <div class="trailer-container" data-trailer-container>
-                    <div class="layer" data-trailer-layer></div>
-                    <iframe class="trailer-frame" src="${VIDEO_URL}${this._getFirstTrailerKey(
-      movieObj
-    )}"
+                    <div class="layer" data-trailer-layer></div>      
+                    ${
+                      this._getFirstTrailerKey(movieObj)
+                        ? `
+                    <iframe class="trailer-frame" data-trailer-video src="${VIDEO_URL}${this._getFirstTrailerKey(
+                            movieObj
+                          )}"
                         frameborder="0"
-                        allowfullscreen>
+                        allowfullscreen loading="lazy">
                     </iframe>
+                    `
+                        : `
+                        <div class="trailer-frame no-videos">
+                            <i class="icon fa-solid fa-video-slash"></i>
+                            <p class="text">
+                                We don't find a trailer for <span class="movie-name">${
+                                  movieObj.title ??
+                                  movieObj.original_title ??
+                                  movieObj.name ??
+                                  movieObj.original_name
+                                }</span> you can watch videos on youtube <a href="https://www.youtube.com/results?search_query=${
+                            movieObj.title ??
+                            movieObj.original_title ??
+                            movieObj.name ??
+                            movieObj.original_name
+                          }" target="_blank">Click</a>
+                            </p>
+                        </div>
+                    `
+                    }
+                    
                     <button class="btn" title="Close Video" data-close-trailer><i class="fa-solid fa-xmark"></i></button>
                 </div>
             </section>
@@ -167,12 +229,12 @@ class MoviePage extends MainClass {
                 ${
                   cast.profile_path
                     ? `<img src="${POSTER_URL}${cast.profile_path}"
-                    alt="${cast.name ?? original_name}">`
+                        alt="${cast.name ?? original_name}" loading="lazy">`
                     : `
                     <div class="no-img">
-                    <i class="icon fa-solid fa-file-image"></i>
-                    Image Not <br> Available
-                </div>
+                        <i class="icon fa-solid fa-file-image"></i>
+                        Image Not <br> Available
+                    </div>
                     `
                 }
                 <figcaption>${cast.name ?? cast.original_name}</figcaption>
@@ -209,7 +271,7 @@ class MoviePage extends MainClass {
       videoEl.innerHTML = `
             <div class=video-card>
                 <iframe class="trailer-frame" src="${VIDEO_URL}${video.key}"
-                    frameborder="0" allowfullscreen>
+                    frameborder="0" allowfullscreen loading="lazy">
                 </iframe>
             <div>
         `;

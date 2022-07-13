@@ -3,17 +3,21 @@ import { checkTheWatchlist } from "../functions.js";
 
 export default class MainClass {
   _mainPage = document.querySelector("[data-main-page]");
+  _layer = document.querySelector("[data-layer]");
   pageName = "home";
   watchlistBtns;
 
   renderLoader(parent = this._mainPage, layer = true) {
     parent.innerHTML = `
-    ${layer ? `<div class="layer"></div>` : ""}
-    <div class="loading-spinner active">
+    <div class="loading-spinner">
         <span class="load-out"></span>
         <span class="load-in"></span>
     </div>
+    ${layer ? `<div class="layer active"></div>` : ""}
     `;
+  }
+  renderLayer(type) {
+    this._layer.classList[type]("active");
   }
 
   mainPageListener(handler) {
@@ -32,7 +36,7 @@ export default class MainClass {
       result.original_name
     }' backdrop">
             </figure>
-            <div class="movie-content container poster-parent">
+            <div class="movie-content container" data-poster-parent>
             <figure class="poster-img">
                ${
                  result.poster_path
@@ -106,7 +110,8 @@ export default class MainClass {
 
     arrOfCards.results.forEach((card) => {
       const cardEl = document.createElement("div");
-      cardEl.className = "card poster-parent";
+      cardEl.className = "card";
+      cardEl.dataset.posterParent = "";
 
       cardEl.innerHTML = `
             <button class="expand-btn" id="${card.id}" title="${
@@ -120,16 +125,16 @@ export default class MainClass {
                     ? `<img src="${POSTER_URL}${
                         card.poster_path ?? card.profile_path
                       }"
-                alt="'${
-                  card.title ??
-                  card.original_title ??
-                  card.name ??
-                  card.original_name
-                }' poster">`
+                        alt="'${
+                          card.title ??
+                          card.original_title ??
+                          card.name ??
+                          card.original_name
+                        }' poster" loading="lazy" data-poster>`
                     : `<div class="no-img">
-                    <i class="icon fa-solid fa-file-image"></i>
-                    Image Not <br> Available
-                </div>`
+                        <i class="icon fa-solid fa-file-image"></i>
+                        Image Not <br> Available
+                    </div>`
                 }
                 <figcaption class="card-title">${
                   card.title ??

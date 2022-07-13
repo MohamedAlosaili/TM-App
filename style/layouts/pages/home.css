@@ -1,17 +1,3 @@
-/* section Start */
-.home-page {
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
-}
-.section .card-container::-webkit-scrollbar {
-  height: 0.5rem;
-}
-.section .card-container::-webkit-scrollbar-thumb {
-  background-color: var(--secondary-bg-color);
-  border-radius: 5rem;
-}
-/* section Movies End */
 /* Media Queries Start */
 @media (hover: hover) {
   /* This Media Target Only Devices Can Hover On Elements */

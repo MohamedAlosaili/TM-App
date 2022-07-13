@@ -34,6 +34,9 @@
   display: flex;
   justify-content: center;
 }
+.nav-bar .sidbar-menu .layer {
+  z-index: -1;
+}
 /* Logo Start */
 .nav-bar .logo {
   display: flex;

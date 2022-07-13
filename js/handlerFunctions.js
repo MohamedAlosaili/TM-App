@@ -54,11 +54,17 @@ function expandBtnHandler(e) {
 }
 
 export function moviePageHandler(e) {
-  if (e.target.closest("[data-trailer-btn]"))
+  if (e.target.closest("[data-trailer-btn]")) {
     MoviePage.trailerContainer.classList.add("active");
+    MoviePage.trailerVideo
+      ? (MoviePage.trailerVideo.src = MoviePage.trailerUrl)
+      : false;
+  }
   if (
     e.target.closest("[data-close-trailer]") ||
     e.target.closest("[data-trailer-layer]")
-  )
+  ) {
     MoviePage.trailerContainer.classList.remove("active");
+    MoviePage.trailerVideo ? (MoviePage.trailerVideo.src = "") : false;
+  }
 }

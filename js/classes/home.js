@@ -6,7 +6,7 @@ class Home extends mainClass {
 
     this._mainPage.innerHTML = `
         ${this._getHomeHeaderSection(trendDay)}
-        <div class="container home-page">
+        <div class="container flex-container-column">
             <section class="section" id="first-section" data-popular-section>
                 <h2 class="section-title">Today's Trend</h2>
                 <div class="card-container flex">

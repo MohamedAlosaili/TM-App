@@ -44,13 +44,6 @@
   border-right: 0.19rem solid var(--primary-txt-color);
   border-bottom: 0.19rem solid var(--primary-txt-color);
 }
-.search-result .card-container,
-.watchlist-page .card-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
-  gap: 2rem;
-  position: relative;
-}
 .empty-cards {
   position: absolute;
   top: 5rem;

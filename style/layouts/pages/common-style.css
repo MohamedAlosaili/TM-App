@@ -34,7 +34,7 @@
   padding-top: 6.5rem;
 }
 .header-section .poster-img img {
-  box-shadow: 0 0 1.2rem var(--third-bg-color);
+  box-shadow: 0 0 1.2rem var(--secondary-bg-color);
   width: 16rem;
   border-radius: 0.5rem;
 }
@@ -153,6 +153,11 @@
   }
 }
 /* Header Poster End */
+.flex-container-column {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
 .section-title {
   color: var(--primary-txt-color);
   font-weight: 600;
@@ -173,21 +178,18 @@
 .card-container {
   gap: 2rem;
   padding: 2rem 1rem 1rem;
+  position: relative;
 }
 .card-container.flex {
   display: flex;
   overflow-x: scroll;
+  scrollbar-color: var(--secondary-bg-color) transparent;
+  scrollbar-width: thin;
+  min-height: 21.5rem;
 }
 .card-container.grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
-}
-.section .card-container.flex::-webkit-scrollbar {
-  height: 0.5rem;
-}
-.section .card-container.flex::-webkit-scrollbar-thumb {
-  background-color: var(--secondary-bg-color);
-  border-radius: 5rem;
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
 }
 .card-container .card {
   position: relative;
@@ -243,13 +245,19 @@
   position: relative;
   overflow: hidden;
   border-radius: 0.5rem;
+  aspect-ratio: 2 / 3;
   z-index: 1;
 }
 .card-container .card-poster img {
-  border-radius: 0.5rem;
+  height: 100%;
+  width: 100%;
+}
+.card-container.flex .card-poster img {
+  display: block;
   width: 12rem;
-  z-index: 1;
+  border-radius: 0.5rem;
   margin-bottom: 0.5rem;
+  z-index: 1;
 }
 .card-container .card .no-img {
   display: flex;
@@ -306,6 +314,11 @@
   }
   .header-section .rate {
     margin: auto;
+  }
+}
+@media (max-width: 639px) {
+  .card-container.grid {
+    grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
   }
 }
 @media (hover: hover) {

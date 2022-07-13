@@ -16,12 +16,26 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 3rem;
+  scrollbar-color: var(--accent-color) transparent;
+  scrollbar-width: thin;
 }
 body {
   background: var(--primary-bg-color);
   overflow-y: scroll;
 }
+::-webkit-scrollbar-track {
+  background-color: var(--primary-bg-color);
+}
+::-webkit-scrollbar {
+  width: 0.6rem;
+  height: 0.6rem;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--accent-color);
+  border-radius: 5rem;
+}
 /* Transition Start */
+.layer,
 .scroll-to-top,
 .footer .author::after {
   -webkit-transition: var(--transition-three);
@@ -40,16 +54,27 @@ body {
   inset: 0;
   height: 100%;
   width: 100%;
-  background-color: var(--third-bg-color);
-  z-index: 50;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 5;
+  background-color: var(--secondary-bg-color);
   -webkit-transition: var(--transition-three);
   -moz-transition: var(--transition-three);
   -o-transition: var(--transition-three);
   transition: var(--transition-three);
 }
+.layer.active {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
 .loading-spinner {
   height: 4em;
   width: 4rem;
+}
+.loading-spinner + .layer {
+  z-index: 50;
 }
 .loading-spinner,
 .loading-spinner .load-in,
@@ -104,6 +129,13 @@ body {
   flex-direction: column;
   gap: 3rem;
   min-height: calc(100vh - 4rem - 1px);
+}
+.page-section .card-container.flex::-webkit-scrollbar {
+  height: 0.5rem;
+}
+.page-section .card-container.flex::-webkit-scrollbar-thumb {
+  background-color: var(--secondary-bg-color);
+  border-radius: 5rem;
 }
 .page-section .container {
   padding-bottom: 3rem;

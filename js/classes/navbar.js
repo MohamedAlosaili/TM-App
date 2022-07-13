@@ -58,10 +58,11 @@ class Navbar {
     });
   }
 
-  _mobileMenuState(classType, overflow) {
+  mobileMenuState(classType, overflow) {
     this._mobileMenuToggler.classList[classType]("active");
     this._mobileMenu.classList[classType]("active");
     this._navbar.classList[classType]("active");
+    mainClass.renderLayer(classType);
     document.body.style.overflowY = overflow;
   }
 

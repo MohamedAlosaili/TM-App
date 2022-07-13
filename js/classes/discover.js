@@ -15,8 +15,8 @@ class Discover extends MainClass {
     this._mainPage.innerHTML = `
             ${this._getHomeHeaderSection(movieObj, dataObj.pageName)}
             <section class="discover-section" id="first-section">
-                <div class="container">
-                    <header class="discover-header">
+                <div class="container flex-container-column">
+                    <header class="discover-header flex-container-column">
                         <div class="top">
                             <h2 class="section-title">Discover in ${
                               dataObj.pageName === `movie`
@@ -38,6 +38,10 @@ class Discover extends MainClass {
                         </nav>
                     </header>
                     <div class="card-container grid popular" data-discover-container>
+                        <div class="loading-spinner">
+                          <span class="load-out"></span>
+                          <span class="load-in"></span>
+                        </div>    
                         ${this._getSectionCards(movieObj, dataObj.pageName)}
                     </div>
                     <button class="btn" data-load-more>Load More</button>
@@ -64,6 +68,12 @@ class Discover extends MainClass {
     this.navBtn.forEach((btn, idx) => {
       btn.addEventListener("click", () => {
         this.cardContainer.className = "card-container grid";
+        const loader = document.createElement("div");
+        loader.innerHTML = `
+          <span class="load-out"></span>
+          <span class="load-in"></span>
+        `;
+        this.cardContainer.append(loader);
 
         this.navBtn.forEach((btn) => btn.classList.remove("active"));
         btn.classList.add("active");
