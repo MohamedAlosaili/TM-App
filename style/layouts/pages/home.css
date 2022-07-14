@@ -1,8 +1,1 @@
-/* Media Queries Start */
-@media (hover: hover) {
-  /* This Media Target Only Devices Can Hover On Elements */
-  .section .card-container .card-poster {
-    height: 18rem;
-  }
-}
-/* Media Queries End */
+

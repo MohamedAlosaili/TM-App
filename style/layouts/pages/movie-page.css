@@ -1,8 +1,8 @@
 /* Transition Start */
 .movie-header .trailer-container,
 .movie-header .trailer-container::before,
-.info-section .card-container .more-cast,
-.info-section .card-container .more-cast .icon {
+.info-section .card-container .more,
+.info-section .card-container .more .icon {
   -webkit-transition: var(--transition-three);
   -moz-transition: var(--transition-three);
   -o-transition: var(--transition-three);
@@ -154,12 +154,12 @@
   color: var(--secondary-txt-color);
   max-width: 12rem;
 }
-.info-section .card-container .more-cast {
+.info-section .card-container .more {
   padding: 0;
   height: 100%;
   cursor: pointer;
 }
-.info-section .card-container .more-cast .wraper {
+.info-section .card-container .more .wraper {
   width: 12rem;
   height: auto;
   aspect-ratio: 2 / 3;
@@ -172,7 +172,11 @@
   background-color: var(--secondary-bg-color);
   border-radius: 0.5rem;
 }
-.info-section .card-container .more-cast .icon {
+.info-section .card-container .more.imgs .wraper {
+  height: 25rem;
+  width: auto;
+}
+.info-section .card-container .more .icon {
   color: var(--primary-txt-color);
 }
 .info-section .card-container .video-card {
@@ -184,11 +188,22 @@
   width: 100%;
   height: 100%;
 }
+.info-section .card-container .posters-img,
+.info-section .card-container .backdrops-img {
+  height: 25rem;
+  border-radius: 0.5rem;
+}
+.info-section .card-container .poster-img {
+  aspect-ratio: 0.667;
+}
+.info-section .card-container .backdrop-img {
+  aspect-ratio: 1.778;
+}
 @media (hover: hover) {
-  .info-section .card-container .more-cast:hover {
+  .info-section .card-container .more:hover {
     color: var(--accent-color);
   }
-  .info-section .card-container .more-cast:hover .icon {
+  .info-section .card-container .more:hover .icon {
     color: var(--accent-color);
     transform: translateX(0.5rem);
   }

@@ -21,13 +21,12 @@ const FULL_DETAILS = (type, id, extraDetails = "") =>
 // Movies & TV Show
 const POPULAR = (type) =>
   `${API_URL}${type}/popular?api_key=${API_KEY}&language=en-US`;
-const TOP_RATED = (type) =>
-  `${API_URL}${type}/top_rated?api_key=${API_KEY}&language=en-US`;
-const TREND = (type) =>
-  `${API_URL}trending/${type}/day?api_key=${API_KEY}&language=en-US`;
 
 const CUSTOM_REQUEST = (type) =>
   `${API_URL}${type}?api_key=${API_KEY}&language=en-US`;
+
+const SEARCH = (query) => `
+${API_URL}search/multi?api_key=${API_KEY}&language=en-US&query=${query}&page=1`;
 
 export {
   POSTER_URL,
@@ -38,7 +37,6 @@ export {
   WEEK_TREND,
   FULL_DETAILS,
   POPULAR,
-  TOP_RATED,
-  TREND,
   CUSTOM_REQUEST,
+  SEARCH,
 };

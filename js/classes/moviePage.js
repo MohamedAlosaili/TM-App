@@ -9,6 +9,9 @@ class MoviePage extends MainClass {
   trailerContainer;
   trailerVideo;
   trailerUrl;
+  cardContainer;
+  navBtn;
+  _movieObj;
 
   rendermainPageElement(movieObj, type) {
     this._mainPage.innerHTML = `
@@ -19,13 +22,13 @@ class MoviePage extends MainClass {
                     <h2 class="section-title">Overview</h2>
                     <p>${movieObj.overview}</p>
                 </section>
-                <section class="cast section">
+                <section class="section">
                     <h2 class="section-title">Cast</h2>
                     <div class="card-container flex">
                         ${this._getCastCards(movieObj.credits)}    
                     </div>
                 </section>
-                <section class="videos section">
+                <section class="section">
                     <h2 class="section-title">Videos</h2>
                     <div class="card-container flex">
                         ${
@@ -51,7 +54,25 @@ class MoviePage extends MainClass {
                         }
                     </div>
                 </section>
-                <section class="similar section">
+                <section class="section">
+                    <h2 class="section-title">Images</h2>
+                    <nav class="section-nav home-nav">
+                        <div class="nav-back" data-nav-back></div>
+                        <button class="btn active" data-image-type="backdrops">Backdrops <span class="num">${
+                          movieObj.images.backdrops.length
+                        }</span></button>
+                        <button class="btn" data-image-type="posters">Posters <span class="num">${
+                          movieObj.images.posters.length
+                        }</span></button>
+                    </nav>
+                    <div class="card-container flex" data-images-container>
+                        ${this._getMovieImages(
+                          movieObj.images.backdrops,
+                          "backdrops"
+                        )}
+                    </div>
+                </section>
+                <section class="section">
                     <h2 class="section-title">Similar movies</h2>
                     <div class="card-container flex">
                         ${this._getSectionCards(movieObj.similar, type)}
@@ -67,8 +88,17 @@ class MoviePage extends MainClass {
       "[data-trailer-video]"
     );
     this.trailerUrl = this.trailerVideo?.src;
+    this.navBtn = this._mainPage.querySelectorAll("[data-image-type]");
+    this.cardContainer = this._mainPage.querySelector(
+      "[data-images-container]"
+    );
+    this._movieObj = movieObj;
+
+    dataObj.moviePage.backdrops = movieObj.images.backdrops;
+    dataObj.moviePage.posters = movieObj.images.posters;
 
     this._movieHeaderListener(moviePageHandler);
+    this._sectionNavListener();
   }
 
   _movieHeaderSection(movieObj, type) {
@@ -143,8 +173,7 @@ class MoviePage extends MainClass {
                         : `<button class="btn watchlist-btn" id="${movieObj.id}" data-watchlist-btn="header" data-type="${type}">Add to watchlist</button>`
                     }
                 </div>
-                <div class="trailer-container" data-trailer-container>
-                    <div class="layer" data-trailer-layer></div>      
+                <div class="trailer-container" data-trailer-container>      
                     ${
                       this._getFirstTrailerKey(movieObj)
                         ? `
@@ -214,7 +243,7 @@ class MoviePage extends MainClass {
     let lotOfCards = false;
     if (castObj.cast.length > 10) {
       lotOfCards = true;
-      dataObj.cast = castObj.cast;
+      dataObj.moviePage.cast = castObj.cast;
       castObj.cast.length = 10;
     }
 
@@ -245,7 +274,7 @@ class MoviePage extends MainClass {
     });
     if (lotOfCards) {
       const seeAllCards = document.createElement("div");
-      seeAllCards.className = "more-cast btn";
+      seeAllCards.className = "more cast btn";
       seeAllCards.innerHTML = `
             <p class="wraper">
                 All Cast
@@ -284,8 +313,102 @@ class MoviePage extends MainClass {
     return videos;
   }
 
+  _getMovieImages(arrOfObj, type) {
+    let lotOfImgs = false;
+
+    if (arrOfObj.length > 10) {
+      arrOfObj.length = 10;
+      lotOfImgs = true;
+    } else if (arrOfObj.length === 0) {
+      return `
+            <div class="no-videos">
+            <i class="icon fa-solid fa-image"></i>
+            <p class="text">
+                We don't find any ${type} for <span class="movie-name">${
+        this._movieObj.title ??
+        this._movieObj.original_title ??
+        this._movieObj.name ??
+        this._movieObj.original_name
+      }</span><br> you can discover ${type} on google <a href="https://www.google.com/search?q=${
+        this._movieObj.title ??
+        this._movieObj.original_title ??
+        this._movieObj.name ??
+        this._movieObj.original_name
+      }" target="_blank">Click</a>
+            </p>
+        </div>  
+        `;
+    }
+
+    const imgsCopy = arrOfObj;
+    const urls = {
+      backdrops: BACKDROP_URL,
+      posters: POSTER_URL,
+    };
+
+    const imagesContainer = document.createElement("div");
+
+    imgsCopy.forEach((img) => {
+      const imgEl = document.createElement("img");
+      imgEl.className = `${type}-img`;
+      imgEl.src = `${urls[type]}${img.file_path}`;
+      imgEl.setAttribute("loading", "lazy");
+
+      imagesContainer.append(imgEl);
+    });
+
+    if (lotOfImgs) {
+      const seeAllCards = document.createElement("div");
+      seeAllCards.className = "more imgs btn";
+      seeAllCards.innerHTML = `
+                  <p class="wraper">
+                      All ${type}
+                      <i class="icon fa-solid fa-chevron-right"></i>
+                  </p>
+              `;
+
+      imagesContainer.append(seeAllCards);
+    }
+
+    const imgs = imagesContainer.innerHTML;
+
+    return imgs;
+  }
+
   _movieHeaderListener(handler) {
     this._movieHeader.addEventListener("click", handler);
+  }
+
+  _sectionNavListener() {
+    const navBack = document.querySelector("[data-nav-back]");
+
+    this.navBtn.forEach((btn, idx) => {
+      btn.addEventListener("click", () => {
+        const loader = document.createElement("div");
+        loader.innerHTML = `
+          <span class="load-out"></span>
+          <span class="load-in"></span>
+        `;
+        this.cardContainer.append(loader);
+
+        this.navBtn.forEach((btn) => btn.classList.remove("active"));
+        btn.classList.add("active");
+
+        const type = btn.dataset.imageType;
+        console.log(type, btn);
+        console.log(dataObj.moviePage);
+        this.cardContainer.innerHTML = this._getMovieImages(
+          dataObj.moviePage[type],
+          type
+        );
+
+        const parentWidth =
+          parseInt(
+            getComputedStyle(btn.parentElement).getPropertyValue("width")
+          ) / 2;
+        navBack.style.left = `${idx * parentWidth}px`;
+      });
+    });
   }
 }
 

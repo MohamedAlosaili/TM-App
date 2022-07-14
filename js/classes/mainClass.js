@@ -16,8 +16,13 @@ export default class MainClass {
     ${layer ? `<div class="layer active"></div>` : ""}
     `;
   }
-  renderLayer(type) {
+  renderLayer(type, zIndex = 5) {
     this._layer.classList[type]("active");
+    this._layer.style.zIndex = zIndex;
+  }
+
+  layerListener(handler) {
+    this._layer.addEventListener("click", handler);
   }
 
   mainPageListener(handler) {

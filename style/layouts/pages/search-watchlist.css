@@ -1,3 +1,12 @@
+/* Transition Start */
+.empty-cards,
+.empty-cards a::before {
+  -webkit-transition: var(--transition-three);
+  -moz-transition: var(--transition-three);
+  -o-transition: var(--transition-three);
+  transition: var(--transition-three);
+}
+/* Transition End */
 .search-result,
 .watchlist-page {
   position: relative;
@@ -73,11 +82,9 @@
   background-color: var(--primary-txt-color);
 }
 .empty-cards a {
-  color: var(--secondary-txt-color);
-  -webkit-transition: var(--transition-three);
-  -moz-transition: var(--transition-three);
-  -o-transition: var(--transition-three);
-  transition: var(--transition-three);
+  color: var(--accent-color);
+  font-weight: 600;
+  position: relative;
 }
 .search-result .card-container .card-poster img,
 .watchlist-page .card-container .card-poster img {
@@ -91,6 +98,18 @@
   .search-result .card-container .card-poster img,
   .watchlist-page .card-container .card-poster img {
     height: 100%;
+  }
+  .empty-cards a::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 0.1rem;
+    background-color: var(--accent-color);
+  }
+  .empty-cards a:hover::before {
+    width: 100%;
   }
 }
 @media (hover: hover) {

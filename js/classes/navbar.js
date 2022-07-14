@@ -1,5 +1,10 @@
 import { dataObj } from "../app.js";
 import { controlChangePages, getSearchResult } from "../functions.js";
+import { layerHandler } from "../handlerFunctions.js";
+import MainClass from "./mainClass.js";
+import SearchResult from "./searchResult.js";
+
+const mainClass = new MainClass();
 
 class Navbar {
   _navbar = document.querySelector(".nav-bar");
@@ -14,6 +19,7 @@ class Navbar {
     this._searchFromListener();
     this._mobileMenuListener();
     this._setFooterYear();
+    mainClass.layerListener(layerHandler);
   }
 
   _navLinksListener() {
@@ -22,11 +28,10 @@ class Navbar {
         // Deal with links
         this._navLinks.forEach((link) => link.classList.remove("active"));
         e.currentTarget.classList.add("active");
-        this._mobileMenuState("remove", "scroll");
+        this.mobileMenuState("remove", "scroll");
 
         // Deal with pages
         const pageName = link.dataset.page;
-        console.log(pageName);
         controlChangePages(pageName);
       });
     });
@@ -45,7 +50,10 @@ class Navbar {
       e.preventDefault();
 
       if (searchInput.value) {
+        SearchResult.renderLoader();
         getSearchResult(searchInput.value);
+        searchInput.value = "";
+        // searchInput.blur();
       }
     });
   }
@@ -53,8 +61,8 @@ class Navbar {
   _mobileMenuListener() {
     this._mobileMenuToggler.addEventListener("click", (e) => {
       if (this._mobileMenu.classList.contains("active"))
-        this._mobileMenuState("remove", "scroll");
-      else this._mobileMenuState("add", "hidden");
+        this.mobileMenuState("remove", "scroll");
+      else this.mobileMenuState("add", "hidden");
     });
   }
 

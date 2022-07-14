@@ -32,7 +32,11 @@ export const dataObj = {
     watchlist: Watchlist,
     moviePage: MoviePage,
   },
-  cast: [],
+  moviePage: {
+    cast: [],
+    backdrops: [],
+    posters: [],
+  },
 };
 
 function getBookmarks() {

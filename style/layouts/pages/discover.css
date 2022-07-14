@@ -1,6 +1,5 @@
 /* Transition Start */
-.discover-section .discover-header .genre-list.active,
-.discover-section .discover-header .discover-nav .nav-back {
+.discover-section .discover-header .genre-list.active {
   -webkit-transition: var(--transition-three);
   -moz-transition: var(--transition-three);
   -o-transition: var(--transition-three);
@@ -69,36 +68,6 @@
   -webkit-box-shadow: 0 0 10px var(--accent-color);
   -moz-box-shadow: 0 0 10px var(--accent-color);
   box-shadow: 0 0 10px var(--accent-color);
-}
-.discover-section .discover-header .discover-nav {
-  align-self: center;
-  display: flex;
-  width: min(30rem, 100%);
-  border: 0.16rem solid var(--accent-color);
-  border-radius: 2rem;
-  position: relative;
-}
-.discover-section .discover-header .discover-nav .nav-back {
-  position: absolute;
-  top: -0.04rem;
-  left: 0;
-  height: calc(100% + 0.08rem);
-  width: calc(100% / 3);
-  background-color: var(--accent-color);
-  border-radius: 3rem;
-  -webkit-box-shadow: 0 0 10px var(--accent-color);
-  -moz-box-shadow: 0 0 10px var(--accent-color);
-  box-shadow: 0 0 10px var(--accent-color);
-}
-.discover-section .discover-header .discover-nav .btn {
-  position: relative;
-  flex-basis: calc(100% / 3);
-  color: var(--accent-color);
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-}
-.discover-section .discover-header .discover-nav .btn.active {
-  color: var(--primary-txt-color);
 }
 .discover-section .card-container {
   transform: translateY(2rem);

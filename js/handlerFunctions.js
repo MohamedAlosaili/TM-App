@@ -1,4 +1,5 @@
 import { dataObj } from "./app.js";
+import MainClass from "./classes/mainClass.js";
 import MoviePage from "./classes/moviePage.js";
 import Navbar from "./classes/navbar.js";
 import {
@@ -6,6 +7,18 @@ import {
   removeFromWatchlist,
   getMoviePage,
 } from "./functions.js";
+
+const mainClass = new MainClass();
+
+export function layerHandler() {
+  Navbar.mobileMenuState("remove", "scroll");
+  console.log(dataObj.pageName);
+  if (dataObj.pageName === "moviePage") {
+    MoviePage.trailerContainer.classList.remove("active");
+    MoviePage.trailerVideo ? (MoviePage.trailerVideo.src = "") : false;
+    mainClass.renderLayer("remove");
+  }
+}
 
 export function mainPageHandler(e) {
   if (e.target.closest("[data-watchlist-btn]")) watchlistBtnHandler(e);
@@ -47,7 +60,7 @@ function expandBtnHandler(e) {
   const type = card.dataset.type;
 
   location.hash = `${type}-${id}`;
-  dataObj.pageName = "movie-page";
+  dataObj.pageName = "moviePage";
   getMoviePage(type, id);
 
   Navbar.updateNavLinks();
@@ -59,12 +72,11 @@ export function moviePageHandler(e) {
     MoviePage.trailerVideo
       ? (MoviePage.trailerVideo.src = MoviePage.trailerUrl)
       : false;
+    mainClass.renderLayer("add", 10);
   }
-  if (
-    e.target.closest("[data-close-trailer]") ||
-    e.target.closest("[data-trailer-layer]")
-  ) {
+  if (e.target.closest("[data-close-trailer]")) {
     MoviePage.trailerContainer.classList.remove("active");
     MoviePage.trailerVideo ? (MoviePage.trailerVideo.src = "") : false;
+    mainClass.renderLayer("remove");
   }
 }

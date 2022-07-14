@@ -30,7 +30,7 @@ class Discover extends MainClass {
                                ${this._getGenerList(generList)}
                             </ul>
                         </div>
-                        <nav class="discover-nav">
+                        <nav class="section-nav">
                             <div class="nav-back" data-nav-back></div>
                             <button class="btn active" data-discover-page="popular">Popular</button>
                             <button class="btn" data-discover-page="trending">Trending</button>
@@ -57,12 +57,12 @@ class Discover extends MainClass {
     );
     this.loadMoreBtn = this._mainPage.querySelector("[data-load-more]");
 
-    this._discoverNavListener();
+    this._sectionNavListener();
     this._discoverFilterListener();
     this._loadMoreListener();
   }
 
-  _discoverNavListener() {
+  _sectionNavListener() {
     const navBack = document.querySelector("[data-nav-back]");
 
     this.navBtn.forEach((btn, idx) => {

@@ -4,15 +4,15 @@ import {
   WEEK_TREND,
   FULL_DETAILS,
   POPULAR,
-  TOP_RATED,
-  TREND,
   CUSTOM_REQUEST,
+  SEARCH,
 } from "./config.js";
 import { dataObj } from "./app.js";
 import Home from "./classes/home.js";
 import Discover from "./classes/discover.js";
 import Watchlist from "./classes/watchlist.js";
 import MoviePage from "./classes/moviePage.js";
+import SearchResult from "./classes/searchResult.js";
 
 async function fetchData(API_URL) {
   try {
@@ -63,12 +63,21 @@ export function getWatchlistPage() {
 }
 
 export async function getMoviePage(type, id) {
-  console.log(id, type);
   const movieObj = await fetchData(
-    FULL_DETAILS(type, id, "&append_to_response=videos,credits,images,similar")
+    FULL_DETAILS(
+      type,
+      id,
+      "&include_image_language=en,null&append_to_response=videos,credits,images,similar"
+    )
   );
-
+  console.log(movieObj);
   MoviePage.rendermainPageElement(movieObj, type);
+}
+
+export async function getSearchResult(query) {
+  const results = await fetchData(SEARCH(query));
+
+  SearchResult.rendermainPageElement(results, query);
 }
 
 export async function controlChangePages(pageName) {
@@ -80,8 +89,6 @@ export async function controlChangePages(pageName) {
     location.hash = pageName;
   }
 }
-
-export function getSearchResult() {}
 
 export async function getNewDiscoverPageCards(pageName, type) {
   let reqUrl;
