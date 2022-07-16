@@ -11,7 +11,7 @@ import { dataObj } from "./app.js";
 import Home from "./classes/home.js";
 import Discover from "./classes/discover.js";
 import Watchlist from "./classes/watchlist.js";
-import MoviePage from "./classes/moviePage.js";
+import { moviePage } from "./classes/moviePage.js";
 import SearchResult from "./classes/searchResult.js";
 
 async function fetchData(API_URL) {
@@ -46,7 +46,11 @@ export async function getHomePage() {
   Home.rendermainPageElement(homeObj);
 }
 
-export async function getDiscoverPage(type) {
+export async function getDiscoverPage(type = null) {
+  console.log(type);
+  !type ? dataObj.pageName : false;
+  console.log(type);
+
   const popular = await fetchData(POPULAR(type));
   const generList = await fetchData(GENRE_LIST(type));
 
@@ -62,7 +66,10 @@ export function getWatchlistPage() {
   Watchlist.rendermainPageElement(watchlistCards);
 }
 
-export async function getMoviePage(type, id) {
+export async function getMoviePage(id) {
+  const regex = /[a-zA-Z]+/;
+  const type = dataObj.pageName.match(regex).join("");
+
   const movieObj = await fetchData(
     FULL_DETAILS(
       type,
@@ -71,7 +78,7 @@ export async function getMoviePage(type, id) {
     )
   );
   console.log(movieObj);
-  MoviePage.rendermainPageElement(movieObj, type);
+  moviePage.rendermainPageElement(movieObj, type);
 }
 
 export async function getSearchResult(query) {

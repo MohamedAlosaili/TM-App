@@ -1,15 +1,17 @@
-import Navbar from "./classes/navbar.js";
-import Home from "./classes/home.js";
-import Discover from "./classes/discover.js";
-import Watchlist from "./classes/watchlist.js";
 import {
   getDiscoverPage,
   getHomePage,
   getWatchlistPage,
   getMoviePage,
+  getSearchResult,
 } from "./functions.js";
 import { mainPageHandler } from "./handlerFunctions.js";
-import MoviePage from "./classes/moviePage.js";
+import { moviePage } from "./classes/moviePage.js";
+import SearchResult from "./classes/searchResult.js";
+import Navbar from "./classes/navbar.js";
+import Home from "./classes/home.js";
+import Discover from "./classes/discover.js";
+import Watchlist from "./classes/watchlist.js";
 
 export const dataObj = {
   watchlist: {
@@ -21,16 +23,20 @@ export const dataObj = {
   pages: {
     home: getHomePage,
     movie: getDiscoverPage,
+    "movie-": getMoviePage,
     tv: getDiscoverPage,
+    "tv-": getMoviePage,
     watchlist: getWatchlistPage,
-    moviePage: getMoviePage,
+    "search?q=": getSearchResult,
   },
   classes: {
     home: Home,
     movie: Discover,
     tv: Discover,
     watchlist: Watchlist,
-    moviePage: MoviePage,
+    "movie-": moviePage,
+    "tv-": moviePage,
+    "search?q=": SearchResult,
   },
   moviePage: {
     cast: [],
@@ -49,29 +55,31 @@ const init = (function () {
   getBookmarks();
   Navbar.callClassFunctions();
   renderPage();
+
+  Home.renderLoader();
 })();
 
 function renderPage() {
   let urlHash = location.hash.slice(1);
+  if (urlHash === "") urlHash = "home";
+  if (urlHash.endsWith("/first_section"))
+    urlHash = urlHash.slice(0, urlHash.indexOf("/first_section"));
 
-  let moviePage;
+  const reqex = /^[a-zA-Z]+([?q=]+|-|)/g;
+  const pageRequest = urlHash.match(reqex).join("");
 
-  if (urlHash === "" || urlHash === "first-section") {
-    urlHash = "home";
-    location.hash = "home";
-  } else if (urlHash.startsWith("movie-") || urlHash.startsWith("tv-")) {
-    moviePage = urlHash;
+  let param = urlHash.slice(urlHash.indexOf(pageRequest.slice(-1)) + 1);
+  param ? (param = param.replace("%20", " ")) : false;
+  if (!param) param = urlHash;
 
-    urlHash = "moviePage";
-  }
+  if (dataObj.pages[pageRequest] && dataObj.classes[pageRequest]) {
+    dataObj.pageName = pageRequest;
+    dataObj.pages[pageRequest](param);
 
-  const params = moviePage ? moviePage.split("-") : [urlHash];
-  console.log(params);
-  dataObj.pageName = urlHash;
-  dataObj.pages[urlHash](params[0], params[1]);
-  Navbar.updateNavLinks();
+    Navbar.updateNavLinks();
 
-  dataObj.classes[urlHash].mainPageListener(mainPageHandler);
+    dataObj.classes[pageRequest].mainPageListener(mainPageHandler);
+  } else wrongPageRequested();
 }
 
 const scrollTopBtn = document.querySelector("[data-scroll-top]");
@@ -86,3 +94,7 @@ scrollTopBtn.addEventListener("click", () => {
     behavior: "smooth",
   });
 });
+
+function wrongPageRequested() {
+  console.log("wrong page");
+}

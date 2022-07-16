@@ -14,7 +14,9 @@ class Discover extends MainClass {
   rendermainPageElement(movieObj, generList) {
     this._mainPage.innerHTML = `
             ${this._getHomeHeaderSection(movieObj, dataObj.pageName)}
-            <section class="discover-section" id="first-section">
+            <section class="discover-section" id="${
+              dataObj.pageName
+            }/first_section">
                 <div class="container flex-container-column">
                     <header class="discover-header flex-container-column">
                         <div class="top">

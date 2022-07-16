@@ -1,4 +1,5 @@
 /* Transition Start */
+.section-all,
 .movie-header .trailer-container,
 .movie-header .trailer-container::before,
 .info-section .card-container .more,
@@ -199,7 +200,39 @@
 .info-section .card-container .backdrop-img {
   aspect-ratio: 1.778;
 }
+.section-all {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  min-height: calc(100% - 4rem);
+  background-color: var(--primary-bg-color);
+  padding-top: 10rem;
+  z-index: 5;
+}
+.section-all .container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.section-all.active {
+  left: 0;
+}
+.section-all.active + .movie-header,
+.section-all.active ~ .info-section {
+  display: none;
+}
+.section-all .btn {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--accent-color);
+  border: 0.15rem solid var(--accent-color);
+}
 @media (hover: hover) {
+  .section-all .btn:hover {
+    color: var(--primary-txt-color);
+    background-color: var(--accent-color);
+  }
   .info-section .card-container .more:hover {
     color: var(--accent-color);
   }

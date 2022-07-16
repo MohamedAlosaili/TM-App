@@ -1,11 +1,14 @@
 import { POSTER_URL, BACKDROP_URL } from "../config.js";
 import { checkTheWatchlist } from "../functions.js";
+import { dataObj } from "../app.js";
 
 export default class MainClass {
   _mainPage = document.querySelector("[data-main-page]");
   _layer = document.querySelector("[data-layer]");
   pageName = "home";
   watchlistBtns;
+
+  resnderPage(path) {}
 
   renderLoader(parent = this._mainPage, layer = true) {
     parent.innerHTML = `
@@ -100,7 +103,9 @@ export default class MainClass {
             </section>
             </div>
             <button class="explore-btn">
-                <a href="#first-section" class="arrow-link"><i class="fa-solid fa-angles-down"></i></a>
+                <a href="#${
+                  dataObj.pageName
+                }/first_section" class="arrow-link"><i class="fa-solid fa-angles-down"></i></a>
             </button>
     </article>
     `;
@@ -114,6 +119,8 @@ export default class MainClass {
     }
 
     arrOfCards.results.forEach((card) => {
+      if (card.media_type) if (card.media_type === "person") return;
+
       const cardEl = document.createElement("div");
       cardEl.className = "card";
       cardEl.dataset.posterParent = "";
@@ -186,3 +193,7 @@ export default class MainClass {
     return genreItems;
   }
 }
+
+const mainClass = new MainClass();
+
+export { mainClass };

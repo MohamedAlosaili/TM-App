@@ -4,7 +4,7 @@ import { checkTheWatchlist } from "../functions.js";
 import { dataObj } from "../app.js";
 import { moviePageHandler } from "../handlerFunctions.js";
 
-class MoviePage extends MainClass {
+export default class MoviePage extends MainClass {
   _movieHeader;
   trailerContainer;
   trailerVideo;
@@ -15,6 +15,15 @@ class MoviePage extends MainClass {
 
   rendermainPageElement(movieObj, type) {
     this._mainPage.innerHTML = `
+        <section class="section-all" data-section-all>
+            <div class="container">
+                <button class="btn" data-back-btn>Back</button>
+                <h2 class="section-title" data-section-title></h2>
+                <div class="card-container grid" data-section-container>
+                    
+                </div>
+            </div>
+        </section>
         ${this._movieHeaderSection(movieObj, type)}
         <section class="info-section">
             <div class="container">
@@ -37,7 +46,7 @@ class MoviePage extends MainClass {
                                <div class="no-videos">
                                     <i class="icon fa-solid fa-video-slash"></i>
                                     <p class="text">
-                                        We don't find any videos for <span class="movie-name">${
+                                        We don't find any videos for <span class="underline active">${
                                           movieObj.title ??
                                           movieObj.original_title ??
                                           movieObj.name ??
@@ -84,14 +93,10 @@ class MoviePage extends MainClass {
 
     this._movieHeader = document.querySelector("[data-movie-header]");
     this.trailerContainer = document.querySelector("[data-trailer-container]");
-    this.trailerVideo = this.trailerContainer.querySelector(
-      "[data-trailer-video]"
-    );
+    this.trailerVideo = document.querySelector("[data-trailer-video]");
     this.trailerUrl = this.trailerVideo?.src;
-    this.navBtn = this._mainPage.querySelectorAll("[data-image-type]");
-    this.cardContainer = this._mainPage.querySelector(
-      "[data-images-container]"
-    );
+    this.cardContainer = document.querySelector("[data-images-container]");
+    this.navBtn = document.querySelectorAll("[data-image-type]");
     this._movieObj = movieObj;
 
     dataObj.moviePage.backdrops = movieObj.images.backdrops;
@@ -239,20 +244,22 @@ class MoviePage extends MainClass {
     return trailerKey;
   }
 
-  _getCastCards(castObj) {
+  _getCastCards(castObj, shirnk = true) {
     let lotOfCards = false;
-    if (castObj.cast.length > 10) {
-      lotOfCards = true;
-      dataObj.moviePage.cast = castObj.cast;
-      castObj.cast.length = 10;
-    }
 
+    if (shirnk) {
+      if (castObj.cast.length > 10) {
+        lotOfCards = true;
+        dataObj.moviePage.cast = castObj.cast;
+        castObj.cast.length = 10;
+      }
+    }
     const castContainer = document.createElement("div");
 
     castObj.cast.forEach((cast) => {
       const card = document.createElement("div");
       card.className = "card";
-      console.log(cast);
+
       card.innerHTML = `
             <figure class="cast-poster">
                 ${
@@ -276,7 +283,7 @@ class MoviePage extends MainClass {
       const seeAllCards = document.createElement("div");
       seeAllCards.className = "more cast btn";
       seeAllCards.innerHTML = `
-            <p class="wraper">
+            <p class="wraper" data-moreten-btn data-type="cast">
                 All Cast
                 <i class="icon fa-solid fa-chevron-right"></i>
             </p>
@@ -324,17 +331,12 @@ class MoviePage extends MainClass {
             <div class="no-videos">
             <i class="icon fa-solid fa-image"></i>
             <p class="text">
-                We don't find any ${type} for <span class="movie-name">${
+                We don't find any ${type} for <span class="underline active">${
         this._movieObj.title ??
         this._movieObj.original_title ??
         this._movieObj.name ??
         this._movieObj.original_name
-      }</span><br> you can discover ${type} on google <a href="https://www.google.com/search?q=${
-        this._movieObj.title ??
-        this._movieObj.original_title ??
-        this._movieObj.name ??
-        this._movieObj.original_name
-      }" target="_blank">Click</a>
+      }
             </p>
         </div>  
         `;
@@ -361,7 +363,7 @@ class MoviePage extends MainClass {
       const seeAllCards = document.createElement("div");
       seeAllCards.className = "more imgs btn";
       seeAllCards.innerHTML = `
-                  <p class="wraper">
+                  <p class="wraper" data-moreten-btn data-type="images">
                       All ${type}
                       <i class="icon fa-solid fa-chevron-right"></i>
                   </p>
@@ -412,4 +414,6 @@ class MoviePage extends MainClass {
   }
 }
 
-export default new MoviePage();
+const moviePage = new MoviePage();
+
+export { moviePage };

@@ -1,3 +1,4 @@
+import { dataObj } from "../app.js";
 import mainClass from "./mainClass.js";
 
 class Home extends mainClass {
@@ -7,7 +8,9 @@ class Home extends mainClass {
     this._mainPage.innerHTML = `
         ${this._getHomeHeaderSection(trendDay)}
         <div class="container flex-container-column">
-            <section class="section" id="first-section" data-popular-section>
+            <section class="section" id="${
+              dataObj.pageName
+            }/first_section" data-popular-section>
                 <h2 class="section-title">Today's Trend</h2>
                 <div class="card-container flex">
                     ${this._getSectionCards(trendDay)}

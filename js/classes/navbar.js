@@ -1,10 +1,8 @@
 import { dataObj } from "../app.js";
 import { controlChangePages, getSearchResult } from "../functions.js";
 import { layerHandler } from "../handlerFunctions.js";
-import MainClass from "./mainClass.js";
 import SearchResult from "./searchResult.js";
-
-const mainClass = new MainClass();
+import { mainClass } from "../classes/mainClass.js";
 
 class Navbar {
   _navbar = document.querySelector(".nav-bar");
@@ -52,8 +50,12 @@ class Navbar {
       if (searchInput.value) {
         SearchResult.renderLoader();
         getSearchResult(searchInput.value);
+
+        this.updateNavLinks();
+        dataObj.pageName = "search";
+        location.hash = `search?q=${searchInput.value}`;
         searchInput.value = "";
-        // searchInput.blur();
+        searchInput.blur();
       }
     });
   }
