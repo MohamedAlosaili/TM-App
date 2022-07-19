@@ -39,6 +39,7 @@ export const dataObj = {
     "search?q=": SearchResult,
   },
   moviePage: {
+    movieObj: {},
     cast: [],
     backdrops: [],
     posters: [],

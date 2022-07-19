@@ -124,10 +124,12 @@ body {
     transform: translate(-50%, -50%) rotate(-1turn);
   }
 }
-.page-section {
+.flex-column {
   display: flex;
   flex-direction: column;
   gap: 3rem;
+}
+.page-section {
   min-height: calc(100vh - 4rem - 1px);
 }
 .page-section .card-container.flex::-webkit-scrollbar {
@@ -206,10 +208,6 @@ body {
   color: var(--primary-txt-color);
 }
 /* Footer Start */
-.footer {
-  position: relative;
-  z-index: 10;
-}
 .footer .container {
   height: 4rem;
   display: flex;

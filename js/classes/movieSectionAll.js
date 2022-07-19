@@ -1,76 +1,107 @@
 import { dataObj } from "../app.js";
+import { BACKDROP_URL, POSTER_URL } from "../config.js";
 import MoviePage from "./moviePage.js";
 
 class MovieSectionAll extends MoviePage {
+  infoSection;
+  headerSection;
   sectionAll;
   sectionAllBackBtn;
   sectionTitle;
   cardContainer;
 
   getSectionAll(type) {
+    this.infoSection = document.querySelector("[data-info-section]");
+    this.headerSection = document.querySelector("[data-movie-header]");
+    setTimeout(() => {
+      this.infoSection.style.display = "none";
+      this.headerSection.style.display = "none";
+    }, 300);
+
     this.sectionAll = document.querySelector("[data-section-all]");
     this.sectionAll.classList.add("active");
+    window.scrollTo({ top: 0, behavior: "smooth" });
     const obj = dataObj.moviePage[type] ?? null;
+
+    this.sectionAllBackBtn = document.querySelector("[data-back-btn]");
+    this.sectionTitle = document.querySelector("[data-section-title]");
+    this.sectionContainer = document.querySelector("[data-section-container]");
 
     this.rendermainPageElement(obj, type);
   }
 
   rendermainPageElement(sectionObj, type) {
-    this.sectionAllBackBtn = document.querySelector("[data-back-btn]");
-    this.sectionTitle = document.querySelector("[data-section-title]");
-    this.cardContainer = document.querySelector("[data-section-container]");
-
     this.sectionTitle.innerHTML = `All ${type}`;
-    this.cardContainer.innerHTML = this._getSectionContent(sectionObj, type);
+
+    if (type === "cast") {
+      this.sectionContainer.classList.add("grid");
+      this.sectionContainer.classList.remove("flex");
+    } else {
+      this.sectionContainer.classList.remove("grid");
+      this.sectionContainer.classList.add("flex");
+    }
+
+    this.sectionContainer.innerHTML = this._getSectionContent(sectionObj, type);
 
     this.sectionAllBackListener();
   }
 
   _getSectionContent(sectionObj, type) {
-    this.cardContainer.innerHTML = "";
+    this.sectionContainer.innerHTML = "";
     if (type === "cast") {
-      this._getCastCards(sectionObj, false);
-      return;
+      return this._getCastCards(sectionObj, false);
     } else {
-      const posters = dataObj.moviePage.posters;
-      const backdrops = dataObj.moviePage.backdrops;
-      this.getAllImages(posters, "Posters");
-      this.getAllImages(backdrops, "Backdrops");
+      return this._getImagesSection();
     }
   }
 
+  _getImagesSection() {
+    return `
+      <section class="posters">
+        <h3 class="imgs-title">Posters</h3>
+        <div class="posters-container">
+          ${this.getAllImages(dataObj.moviePage.posters, "poster")}
+        </div>
+      </section>
+      <section class="backdrops">
+        <h3 class="imgs-title">Backdrops</h3>
+        <div class="backdrops-container">
+          ${this.getAllImages(dataObj.moviePage.backdrops, "backdrop")}
+        </div>
+      </section>
+    `;
+  }
+
   getAllImages(arr, type) {
-    const section = document.createElement("section");
-    section.className = "imgs-section";
-
-    const sectionTitle = document.createElement("h3");
-    sectionTitle.innerHTML = type;
-
     const imgContainer = document.createElement("div");
-    imgContainer.className = "imgs-container";
-
-    section.append(sectionTitle, imgContainer);
+    const movie = dataObj.moviePage.movieObj;
     arr.forEach((item) => {
       const img = document.createElement("img");
-      img.src = item.file_path;
-      img.style.aspectRatio = item.aspect_ratio;
-      console.log(this._movieObj);
+      img.src =
+        type === "poster"
+          ? `${POSTER_URL}${item.file_path}`
+          : `${BACKDROP_URL}${item.file_path}`;
+
+      img.className = `${type}-img`;
+      img.setAttribute("loading", "lazy");
       img.alt =
-        this._movieObj.title ??
-        this._movieObj.original_title ??
-        this._movieObj.name ??
-        this._movieObj.original_name;
+        movie.title ??
+        movie.original_title ??
+        movie.name ??
+        movie.original_name;
 
       imgContainer.append(img);
     });
 
-    console.log(section);
-
-    this.cardContainer += section.innerHTML;
+    const imgs = imgContainer.innerHTML;
+    return imgs;
   }
 
   sectionAllBackListener() {
     this.sectionAllBackBtn.addEventListener("click", () => {
+      this.infoSection.style.display = "block";
+      this.headerSection.style.display = "block";
+
       this.sectionAll.classList.remove("active");
     });
   }

@@ -24,9 +24,11 @@ class Navbar {
     this._navLinks.forEach((link) => {
       link.addEventListener("click", (e) => {
         // Deal with links
-        this._navLinks.forEach((link) => link.classList.remove("active"));
-        e.currentTarget.classList.add("active");
-        this.mobileMenuState("remove", "scroll");
+        this._navLinks.forEach((link) =>
+          link.classList.remove("active", "shake")
+        );
+        e.currentTarget.classList.add("active", "shake");
+        this.mobileMenuState("remove", "scroll", "close");
 
         // Deal with pages
         const pageName = link.dataset.page;
@@ -52,7 +54,8 @@ class Navbar {
         getSearchResult(searchInput.value);
 
         this.updateNavLinks();
-        dataObj.pageName = "search";
+        this.mobileMenuState("remove", "scroll", "close");
+        dataObj.pageName = "search?q=";
         location.hash = `search?q=${searchInput.value}`;
         searchInput.value = "";
         searchInput.blur();
@@ -63,13 +66,13 @@ class Navbar {
   _mobileMenuListener() {
     this._mobileMenuToggler.addEventListener("click", (e) => {
       if (this._mobileMenu.classList.contains("active"))
-        this.mobileMenuState("remove", "scroll");
-      else this.mobileMenuState("add", "hidden");
+        this.mobileMenuState("remove", "scroll", "close");
+      else this.mobileMenuState("add", "hidden", "open");
     });
   }
 
-  mobileMenuState(classType, overflow) {
-    this._mobileMenuToggler.classList[classType]("active");
+  mobileMenuState(classType, overflow, toggler) {
+    this._mobileMenuToggler.className = `hamburger ${toggler}`;
     this._mobileMenu.classList[classType]("active");
     this._navbar.classList[classType]("active");
     mainClass.renderLayer(classType);

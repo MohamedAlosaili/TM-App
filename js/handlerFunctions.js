@@ -1,4 +1,5 @@
 import { dataObj } from "./app.js";
+import Discover from "./classes/discover.js";
 import { mainClass } from "./classes/mainClass.js";
 import { moviePage } from "./classes/moviePage.js";
 import MovieSectionAll from "./classes/movieSectionAll.js";
@@ -7,10 +8,12 @@ import {
   addToWatchlist,
   removeFromWatchlist,
   getMoviePage,
+  getNewDiscoverPageCards,
+  getMoreCards,
 } from "./functions.js";
 
 export function layerHandler() {
-  Navbar.mobileMenuState("remove", "scroll");
+  Navbar.mobileMenuState("remove", "scroll", "close");
   console.log(dataObj.pageName);
   if (dataObj.pageName === "tv-" || dataObj.pageName === "movie-") {
     moviePage.trailerContainer.classList.remove("active");
@@ -80,4 +83,45 @@ export function moviePageHandler(e) {
     moviePage.trailerVideo ? (moviePage.trailerVideo.src = "") : false;
     mainClass.renderLayer("remove");
   }
+}
+
+export function sectionNavHandler(e) {
+  Discover.loadMoreBtn.style.display = "block";
+  dataObj.pageNum = 1;
+
+  const navBack = document.querySelector("[data-nav-back]");
+  const btn = e.target.closest("[data-discover-page]");
+  const idx = btn.dataset.idx;
+
+  Discover.cardContainer.className = "card-container grid";
+  const loader = document.createElement("div");
+  loader.className = "loading-spinner";
+  loader.innerHTML = `
+          <span class="load-out"></span>
+          <span class="load-in"></span>
+        `;
+  Discover.cardContainer.prepend(loader);
+
+  for (let i = 1; i < Discover.discoverNav.children.length; i++)
+    Discover.discoverNav.children[i].classList.remove("active");
+  btn.classList.add("active");
+
+  setTimeout(() => {
+    Discover.discoverPage = btn.dataset.discoverPage;
+    getNewDiscoverPageCards(Discover.discoverPage, dataObj.pageName);
+  }, 3000);
+  const parentWidth =
+    parseInt(getComputedStyle(btn.parentElement).getPropertyValue("width")) / 3;
+  navBack.style.left = `${idx * parentWidth}px`;
+
+  Discover.discoverNav.removeEventListener("click", sectionNavHandler);
+}
+
+export function loadMoreHandler(e) {
+  Discover.renderLoader(e.currentTarget, false);
+  console.log("loadMore Cliked");
+  getMoreCards();
+
+  if (dataObj.pageNum === 500) Discover.loadMoreBtn.style.display = "none";
+  Discover.loadMoreBtn.removeEventListener("click", loadMoreHandler);
 }

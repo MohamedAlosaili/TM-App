@@ -1,5 +1,4 @@
 /* Transition Start */
-.section-all,
 .movie-header .trailer-container,
 .movie-header .trailer-container::before,
 .info-section .card-container .more,
@@ -137,20 +136,20 @@
   padding: 1rem;
   font-size: 1.1rem;
 }
-.info-section .card-container .cast-poster img {
+.card-container .cast-poster img {
   display: block;
   width: 12rem;
   aspect-ratio: 2 / 3;
   border-radius: 0.5rem;
   cursor: pointer;
 }
-.info-section .card-container .cast-poster figcaption {
+.card-container .cast-poster figcaption {
   color: var(--primary-txt-color);
   font-weight: 600;
   padding: 0.5rem;
   cursor: pointer;
 }
-.info-section .card-container .cast-poster .character {
+.card-container .cast-poster .character {
   padding: 0 0.5rem;
   color: var(--secondary-txt-color);
   max-width: 12rem;
@@ -194,39 +193,11 @@
   height: 25rem;
   border-radius: 0.5rem;
 }
-.info-section .card-container .poster-img {
+.card-container .poster-img {
   aspect-ratio: 0.667;
 }
-.info-section .card-container .backdrop-img {
+.card-container .backdrop-img {
   aspect-ratio: 1.778;
-}
-.section-all {
-  position: fixed;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  min-height: calc(100% - 4rem);
-  background-color: var(--primary-bg-color);
-  padding-top: 10rem;
-  z-index: 5;
-}
-.section-all .container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-.section-all.active {
-  left: 0;
-}
-.section-all.active + .movie-header,
-.section-all.active ~ .info-section {
-  display: none;
-}
-.section-all .btn {
-  font-size: 1.1rem;
-  font-weight: 500;
-  color: var(--accent-color);
-  border: 0.15rem solid var(--accent-color);
 }
 @media (hover: hover) {
   .section-all .btn:hover {

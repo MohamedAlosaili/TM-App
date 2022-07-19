@@ -77,7 +77,11 @@ export async function getMoviePage(id) {
       "&include_image_language=en,null&append_to_response=videos,credits,images,similar"
     )
   );
-  console.log(movieObj);
+
+  dataObj.moviePage.movieObj = movieObj;
+  dataObj.moviePage.backdrops = [...movieObj.images.backdrops];
+  dataObj.moviePage.posters = [...movieObj.images.posters];
+
   moviePage.rendermainPageElement(movieObj, type);
 }
 
@@ -117,7 +121,7 @@ export async function getMoreCards() {
   const newCards = await fetchData(
     `${dataObj.discoverCurrentUrl}&page=${dataObj.pageNum}`
   );
-
+  Discover.loadMoreListener();
   Discover.clearLoadMore();
   Discover.cardContainer.innerHTML += Discover._getSectionCards(
     newCards,

@@ -11,21 +11,27 @@ export default class MoviePage extends MainClass {
   trailerUrl;
   cardContainer;
   navBtn;
-  _movieObj;
 
   rendermainPageElement(movieObj, type) {
     this._mainPage.innerHTML = `
         <section class="section-all" data-section-all>
             <div class="container">
-                <button class="btn" data-back-btn>Back</button>
+                <button class="btn" data-back-btn><i class="fa-solid fa-chevron-left"></i></button>
                 <h2 class="section-title" data-section-title></h2>
-                <div class="card-container grid" data-section-container>
+                <div class="card-container" data-section-container>
                     
                 </div>
             </div>
+            <footer class="footer">
+              <div class="container">
+                <img src="./imgs/logo.png" alt="TM logo">
+                &copy; <span data-copyright-year>${new Date().getFullYear()}</span><a href="https://github.com/MohamedAlosaili/midNightMovie-App"
+                    class="underline accent-color">@MohamedAlosaili</a> All Right Reserved
+              </div>
+            </footer>
         </section>
         ${this._movieHeaderSection(movieObj, type)}
-        <section class="info-section">
+        <section class="info-section" data-info-section>
             <div class="container">
                 <section class="overview section">
                     <h2 class="section-title">Overview</h2>
@@ -34,7 +40,7 @@ export default class MoviePage extends MainClass {
                 <section class="section">
                     <h2 class="section-title">Cast</h2>
                     <div class="card-container flex">
-                        ${this._getCastCards(movieObj.credits)}    
+                        ${this._getCastCards(movieObj.credits.cast)}    
                     </div>
                 </section>
                 <section class="section">
@@ -65,13 +71,13 @@ export default class MoviePage extends MainClass {
                 </section>
                 <section class="section">
                     <h2 class="section-title">Images</h2>
-                    <nav class="section-nav home-nav">
+                    <nav class="section-nav movie-nav">
                         <div class="nav-back" data-nav-back></div>
                         <button class="btn active" data-image-type="backdrops">Backdrops <span class="num">${
-                          movieObj.images.backdrops.length
+                          dataObj.moviePage.backdrops.length
                         }</span></button>
                         <button class="btn" data-image-type="posters">Posters <span class="num">${
-                          movieObj.images.posters.length
+                          dataObj.moviePage.posters.length
                         }</span></button>
                     </nav>
                     <div class="card-container flex" data-images-container>
@@ -92,15 +98,16 @@ export default class MoviePage extends MainClass {
         `;
 
     this._movieHeader = document.querySelector("[data-movie-header]");
+
     this.trailerContainer = document.querySelector("[data-trailer-container]");
     this.trailerVideo = document.querySelector("[data-trailer-video]");
     this.trailerUrl = this.trailerVideo?.src;
+
+    console.log(dataObj.moviePage.backdrops);
+    console.log(dataObj.moviePage.posters);
+
     this.cardContainer = document.querySelector("[data-images-container]");
     this.navBtn = document.querySelectorAll("[data-image-type]");
-    this._movieObj = movieObj;
-
-    dataObj.moviePage.backdrops = movieObj.images.backdrops;
-    dataObj.moviePage.posters = movieObj.images.posters;
 
     this._movieHeaderListener(moviePageHandler);
     this._sectionNavListener();
@@ -108,8 +115,8 @@ export default class MoviePage extends MainClass {
 
   _movieHeaderSection(movieObj, type) {
     return `
-        <article class="header-section movie-header poster-parent" data-movie-header>
-        <figure class="header-backdrop-img">
+        <article class="landing movie-header" data-movie-header>
+        <figure class="backdrop">
         ${
           movieObj.backdrop_path
             ? `<img src="${BACKDROP_URL}${movieObj.backdrop_path}" alt="'${
@@ -130,15 +137,22 @@ export default class MoviePage extends MainClass {
         }
         </figure>
         <div class="container" data-poster-parent>
-            <figure class="poster-img">
-                <img src="${POSTER_URL}${
-      movieObj.poster_path
-    }" data-poster alt="'${
-      movieObj.title ??
-      movieObj.original_title ??
-      movieObj.name ??
-      movieObj.original_name
-    }' poster">
+            <figure class="poster">
+            ${
+              movieObj.poster_path
+                ? `<img src="${POSTER_URL}${
+                    movieObj.poster_path
+                  }" data-poster alt="'${
+                    movieObj.title ??
+                    movieObj.original_title ??
+                    movieObj.name ??
+                    movieObj.original_name
+                  }' poster">`
+                : `<div class="no-img">
+                      <i class="icon fa-solid fa-file-image"></i>
+                      Image Not <br> Available
+                    </div>`
+            }
             </figure>
             <section class="post-info">
                 <h2 class="post-title">${
@@ -244,19 +258,18 @@ export default class MoviePage extends MainClass {
     return trailerKey;
   }
 
-  _getCastCards(castObj, shirnk = true) {
+  _getCastCards(castArr, shirnk = true) {
     let lotOfCards = false;
-
+    console.log(castArr);
     if (shirnk) {
-      if (castObj.cast.length > 10) {
+      dataObj.moviePage.cast = [...castArr];
+      if (castArr.length > 10) {
         lotOfCards = true;
-        dataObj.moviePage.cast = castObj.cast;
-        castObj.cast.length = 10;
+        castArr.length = 10;
       }
     }
     const castContainer = document.createElement("div");
-
-    castObj.cast.forEach((cast) => {
+    castArr.forEach((cast) => {
       const card = document.createElement("div");
       card.className = "card";
 
@@ -320,29 +333,30 @@ export default class MoviePage extends MainClass {
     return videos;
   }
 
-  _getMovieImages(arrOfObj, type) {
+  _getMovieImages(imgsArr, type) {
     let lotOfImgs = false;
 
-    if (arrOfObj.length > 10) {
-      arrOfObj.length = 10;
+    const imgsCopy = [...imgsArr];
+
+    if (imgsCopy.length > 10) {
+      imgsCopy.length = 10;
       lotOfImgs = true;
-    } else if (arrOfObj.length === 0) {
+    } else if (imgsCopy.length === 0) {
       return `
-            <div class="no-videos">
-            <i class="icon fa-solid fa-image"></i>
-            <p class="text">
-                We don't find any ${type} for <span class="underline active">${
-        this._movieObj.title ??
-        this._movieObj.original_title ??
-        this._movieObj.name ??
-        this._movieObj.original_name
+      <div class="no-videos">
+      <i class="icon fa-solid fa-image"></i>
+      <p class="text">
+      We don't find any ${type} for <span class="underline active">${
+        dataObj.moviePage.movieObj.title ??
+        dataObj.moviePage.movieObj.original_title ??
+        dataObj.moviePage.movieObj.name ??
+        dataObj.moviePage.movieObj.original_name
       }
-            </p>
-        </div>  
-        `;
+      </p>
+      </div>  
+      `;
     }
 
-    const imgsCopy = arrOfObj;
     const urls = {
       backdrops: BACKDROP_URL,
       posters: POSTER_URL,
@@ -359,6 +373,7 @@ export default class MoviePage extends MainClass {
       imagesContainer.append(imgEl);
     });
 
+    console.log(lotOfImgs);
     if (lotOfImgs) {
       const seeAllCards = document.createElement("div");
       seeAllCards.className = "more imgs btn";
@@ -386,19 +401,10 @@ export default class MoviePage extends MainClass {
 
     this.navBtn.forEach((btn, idx) => {
       btn.addEventListener("click", () => {
-        const loader = document.createElement("div");
-        loader.innerHTML = `
-          <span class="load-out"></span>
-          <span class="load-in"></span>
-        `;
-        this.cardContainer.append(loader);
-
         this.navBtn.forEach((btn) => btn.classList.remove("active"));
         btn.classList.add("active");
 
         const type = btn.dataset.imageType;
-        console.log(type, btn);
-        console.log(dataObj.moviePage);
         this.cardContainer.innerHTML = this._getMovieImages(
           dataObj.moviePage[type],
           type

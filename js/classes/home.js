@@ -7,7 +7,7 @@ class Home extends mainClass {
 
     this._mainPage.innerHTML = `
         ${this._getHomeHeaderSection(trendDay)}
-        <div class="container flex-container-column">
+        <div class="container flex-column">
             <section class="section" id="${
               dataObj.pageName
             }/first_section" data-popular-section>

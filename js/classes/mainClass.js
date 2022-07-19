@@ -5,10 +5,6 @@ import { dataObj } from "../app.js";
 export default class MainClass {
   _mainPage = document.querySelector("[data-main-page]");
   _layer = document.querySelector("[data-layer]");
-  pageName = "home";
-  watchlistBtns;
-
-  resnderPage(path) {}
 
   renderLoader(parent = this._mainPage, layer = true) {
     parent.innerHTML = `
@@ -19,6 +15,7 @@ export default class MainClass {
     ${layer ? `<div class="layer active"></div>` : ""}
     `;
   }
+
   renderLayer(type, zIndex = 5) {
     this._layer.classList[type]("active");
     this._layer.style.zIndex = zIndex;
@@ -35,8 +32,8 @@ export default class MainClass {
   _getHomeHeaderSection(arrOfMovies, type = null) {
     const result = arrOfMovies.results[0];
     return `
-        <article class="header-section">
-            <figure class="header-backdrop-img">
+        <article class="landing">
+            <figure class="backdrop">
                 <img src="${BACKDROP_URL}${result.backdrop_path}" alt="'${
       result.title ??
       result.original_title ??
@@ -44,8 +41,8 @@ export default class MainClass {
       result.original_name
     }' backdrop">
             </figure>
-            <div class="movie-content container" data-poster-parent>
-            <figure class="poster-img">
+            <div class="container" data-poster-parent>
+            <figure class="poster">
                ${
                  result.poster_path
                    ? `
@@ -119,7 +116,7 @@ export default class MainClass {
     }
 
     arrOfCards.results.forEach((card) => {
-      if (card.media_type) if (card.media_type === "person") return;
+      if (card.media_type === "person") return;
 
       const cardEl = document.createElement("div");
       cardEl.className = "card";
@@ -176,21 +173,6 @@ export default class MainClass {
     });
     const cards = cardContainer.innerHTML;
     return cards;
-  }
-
-  _getGenerList(genres) {
-    const generList = document.createElement("ul");
-
-    genres.genres.forEach((genre) => {
-      const genreItem = document.createElement("li");
-      genreItem.className = "genre-item btn";
-      genreItem.id = genre.id;
-      genreItem.innerHTML = genre.name;
-
-      generList.append(genreItem);
-    });
-    const genreItems = generList.innerHTML;
-    return genreItems;
   }
 }
 

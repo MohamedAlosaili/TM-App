@@ -1,6 +1,6 @@
 import MainClass from "./mainClass.js";
-import { getNewDiscoverPageCards, getMoreCards } from "../functions.js";
 import { dataObj } from "../app.js";
+import { sectionNavHandler, loadMoreHandler } from "../handlerFunctions.js";
 
 class Discover extends MainClass {
   pageName;
@@ -8,7 +8,7 @@ class Discover extends MainClass {
   genreList;
   cardContainer;
   discoverPage;
-  navBtn;
+  discoverNav;
   loadMoreBtn;
 
   rendermainPageElement(movieObj, generList) {
@@ -19,31 +19,17 @@ class Discover extends MainClass {
             }/first_section">
                 <div class="container flex-container-column">
                     <header class="discover-header flex-container-column">
-                        <div class="top">
-                            <h2 class="section-title">Discover in ${
-                              dataObj.pageName === `movie`
-                                ? `movies`
-                                : `TV shows`
-                            }</h2>
-                            <div class="filter-wrap">
-                                <button class="filter btn" data-filter>Filter <i class="icon fa-solid fa-filter"></i></button>
-                            </div>
-                            <ul class="genre-list" data-genre-list>
-                               ${this._getGenerList(generList)}
-                            </ul>
-                        </div>
-                        <nav class="section-nav">
+                        <h2 class="section-title">Discover in ${
+                          dataObj.pageName === `movie` ? `movies` : `TV shows`
+                        }</h2>
+                        <nav class="section-nav" data-discover-nav>
                             <div class="nav-back" data-nav-back></div>
-                            <button class="btn active" data-discover-page="popular">Popular</button>
-                            <button class="btn" data-discover-page="trending">Trending</button>
-                            <button class="btn" data-discover-page="top_rated">Top Rated</button>
+                            <button class="btn active" data-discover-page="popular" data-idx="0">Popular</button>
+                            <button class="btn" data-discover-page="trending" data-idx="1">Trending</button>
+                            <button class="btn" data-discover-page="top_rated" data-idx="2">Top Rated</button>
                         </nav>
                     </header>
-                    <div class="card-container grid popular" data-discover-container>
-                        <div class="loading-spinner">
-                          <span class="load-out"></span>
-                          <span class="load-in"></span>
-                        </div>    
+                    <div class="card-container grid popular" data-discover-container>    
                         ${this._getSectionCards(movieObj, dataObj.pageName)}
                     </div>
                     <button class="btn" data-load-more>Load More</button>
@@ -53,52 +39,22 @@ class Discover extends MainClass {
 
     this.filterBtn = this._mainPage.querySelector("[data-filter]");
     this.genreList = this._mainPage.querySelector("[data-genre-list]");
-    this.navBtn = this._mainPage.querySelectorAll("[data-discover-page]");
+    this.discoverNav = this._mainPage.querySelector("[data-discover-nav]");
     this.cardContainer = this._mainPage.querySelector(
       "[data-discover-container]"
     );
     this.loadMoreBtn = this._mainPage.querySelector("[data-load-more]");
 
     this._sectionNavListener();
-    this._discoverFilterListener();
-    this._loadMoreListener();
+    this.loadMoreListener();
   }
 
   _sectionNavListener() {
-    const navBack = document.querySelector("[data-nav-back]");
-
-    this.navBtn.forEach((btn, idx) => {
-      btn.addEventListener("click", () => {
-        this.cardContainer.className = "card-container grid";
-        const loader = document.createElement("div");
-        loader.innerHTML = `
-          <span class="load-out"></span>
-          <span class="load-in"></span>
-        `;
-        this.cardContainer.append(loader);
-
-        this.navBtn.forEach((btn) => btn.classList.remove("active"));
-        btn.classList.add("active");
-
-        this.discoverPage = btn.dataset.discoverPage;
-        getNewDiscoverPageCards(this.discoverPage, dataObj.pageName);
-
-        const parentWidth =
-          parseInt(
-            getComputedStyle(btn.parentElement).getPropertyValue("width")
-          ) / 3;
-        navBack.style.left = `${idx * parentWidth}px`;
-      });
-    });
-  }
-
-  _discoverFilterListener() {
-    this.filterBtn.addEventListener("click", () => {
-      this.genreList.classList.toggle("active");
-    });
+    this.discoverNav.addEventListener("click", sectionNavHandler);
   }
 
   getNewDiscoverPage(pageData) {
+    this._sectionNavListener();
     this.cardContainer.className = `card-container grid ${this.discoverPage}`;
     this.cardContainer.innerHTML = this._getSectionCards(
       pageData,
@@ -106,14 +62,8 @@ class Discover extends MainClass {
     );
   }
 
-  _loadMoreListener() {
-    this.loadMoreBtn.addEventListener("click", (e) => {
-      this.renderLoader(e.currentTarget, false);
-
-      getMoreCards();
-
-      if (dataObj.pageNum === 500) e.currentTarget.remove();
-    });
+  loadMoreListener() {
+    this.loadMoreBtn.addEventListener("click", loadMoreHandler);
   }
 
   clearLoadMore() {
