@@ -39,8 +39,9 @@ class Navbar {
 
   updateNavLinks() {
     this._navLinks.forEach((link) => {
-      if (link.dataset.page === dataObj.pageName) link.classList.add("active");
-      else link.classList.remove("active");
+      if (link.dataset.page === dataObj.pageName)
+        link.classList.add("active", "shake");
+      else link.classList.remove("active", "shake");
     });
   }
 
@@ -53,10 +54,10 @@ class Navbar {
         SearchResult.renderLoader();
         getSearchResult(searchInput.value);
 
-        this.updateNavLinks();
         this.mobileMenuState("remove", "scroll", "close");
         dataObj.pageName = "search?q=";
         location.hash = `search?q=${searchInput.value}`;
+        this.updateNavLinks();
         searchInput.value = "";
         searchInput.blur();
       }

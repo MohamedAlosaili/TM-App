@@ -93,23 +93,22 @@ export function sectionNavHandler(e) {
   const btn = e.target.closest("[data-discover-page]");
   const idx = btn.dataset.idx;
 
-  Discover.cardContainer.className = "card-container grid";
+  Discover.cardContainer.className = "cards-container grid";
   const loader = document.createElement("div");
   loader.className = "loading-spinner";
   loader.innerHTML = `
           <span class="load-out"></span>
           <span class="load-in"></span>
         `;
-  Discover.cardContainer.prepend(loader);
+  Discover.cardContainer.append(loader);
 
   for (let i = 1; i < Discover.discoverNav.children.length; i++)
     Discover.discoverNav.children[i].classList.remove("active");
   btn.classList.add("active");
 
-  setTimeout(() => {
-    Discover.discoverPage = btn.dataset.discoverPage;
-    getNewDiscoverPageCards(Discover.discoverPage, dataObj.pageName);
-  }, 3000);
+  Discover.discoverPage = btn.dataset.discoverPage;
+  getNewDiscoverPageCards(Discover.discoverPage, dataObj.pageName);
+
   const parentWidth =
     parseInt(getComputedStyle(btn.parentElement).getPropertyValue("width")) / 3;
   navBack.style.left = `${idx * parentWidth}px`;
@@ -119,7 +118,7 @@ export function sectionNavHandler(e) {
 
 export function loadMoreHandler(e) {
   Discover.renderLoader(e.currentTarget, false);
-  console.log("loadMore Cliked");
+
   getMoreCards();
 
   if (dataObj.pageNum === 500) Discover.loadMoreBtn.style.display = "none";

@@ -1,44 +1,42 @@
 /* Transition Start */
-.movie-header .trailer-container,
-.movie-header .trailer-container::before,
-.info-section .card-container .more,
-.info-section .card-container .more .icon {
+.movie-landing .trailer-container,
+.movie-landing .trailer-container::before,
+.info-section .cards-container .more .wraper,
+.info-section .cards-container .more .icon {
   -webkit-transition: var(--transition-three);
   -moz-transition: var(--transition-three);
   -o-transition: var(--transition-three);
   transition: var(--transition-three);
 }
 /* Transition End */
-.movie-header {
-  min-height: 100vh;
-}
-.header-section .btn .icon {
+/* Movie Landing Start */
+.movie-landing .more-btn .icon {
   margin-right: 0.5rem;
 }
-.movie-header .genre-list {
+.movie-landing .genre-list {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
 }
-.movie-header .genre-list .genre-item {
+.movie-landing .genre-list .genre-item {
   color: var(--primary-txt-color);
   position: relative;
 }
-.movie-header .genre-list .genre-item:not(:last-child)::after {
+.movie-landing .genre-list .genre-item:not(:last-child)::after {
   content: "|";
   margin-left: 0.5rem;
 }
-.movie-header .date-time-info {
+.movie-landing .date-time-info {
   display: flex;
   flex-wrap: wrap;
   gap: 2rem;
 }
-.movie-header .date-time-info .define {
+.movie-landing .date-time-info .define {
   color: var(--accent-color);
   font-weight: 500;
   opacity: 0.9;
 }
-.movie-header .trailer-container {
+.movie-landing .trailer-container {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -52,7 +50,15 @@
   padding: 1rem;
   z-index: 15;
 }
-.movie-header .trailer-frame {
+.movie-landing .trailer-container.active {
+  visibility: visible;
+  pointer-events: auto;
+  opacity: 1;
+  transform: translate(-50%, -50%);
+}
+.movie-landing .trailer-frame {
+  height: 100%;
+  width: 100%;
   background-color: rgba(0 0 0 / 0.5);
   backdrop-filter: blur(10rem);
 }
@@ -83,30 +89,10 @@
   color: var(--accent-color);
   font-weight: 600;
 }
-.movie-header .trailer-container .layer {
-  content: "";
-  position: fixed;
-  top: -50vh;
-  left: -50vw;
-  height: 200vh;
-  width: 200vw;
-  opacity: 0;
-  background-color: var(--third-bg-color);
-  z-index: -1;
-}
-.movie-header .trailer-container.active {
-  visibility: visible;
-  pointer-events: auto;
-  opacity: 1;
-  transform: translate(-50%, -50%);
-}
-.movie-header .trailer-container.active .layer {
-  opacity: 1;
-}
-.movie-header .trailer-container .btn {
+.movie-landing .trailer-container .btn {
   position: absolute;
-  top: -1rem;
-  left: -1rem;
+  top: -0.5rem;
+  left: -0.5rem;
   height: 2rem;
   width: 2rem;
   display: grid;
@@ -119,50 +105,41 @@
   -moz-box-shadow: 0 0 10px var(--accent-color);
   box-shadow: 0 0 10px var(--accent-color);
 }
-.movie-header .trailer-container .trailer-frame {
-  height: 100%;
-  width: 100%;
-}
-.info-section .container {
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
-}
+/* Movie Landing End */
+/* Info Section Start */
 .info-section .overview {
   border-bottom: 0.15rem solid rgba(255 255 255 / 0.1);
 }
 .info-section .overview p {
+  font-size: 1.1rem;
+  line-height: 1.8;
   color: var(--primary-txt-color);
   padding: 1rem;
-  font-size: 1.1rem;
 }
-.card-container .cast-poster img {
-  display: block;
+/* Cast Cards */
+.cards-container .cast-poster img {
   width: 12rem;
-  aspect-ratio: 2 / 3;
+  aspect-ratio: 0.667;
   border-radius: 0.5rem;
   cursor: pointer;
 }
-.card-container .cast-poster figcaption {
+.cards-container .cast-poster figcaption {
   color: var(--primary-txt-color);
   font-weight: 600;
   padding: 0.5rem;
   cursor: pointer;
 }
-.card-container .cast-poster .character {
+.cards-container .cast-poster .character {
   padding: 0 0.5rem;
   color: var(--secondary-txt-color);
-  max-width: 12rem;
 }
-.info-section .card-container .more {
+.info-section .cards-container .more {
   padding: 0;
-  height: 100%;
-  cursor: pointer;
 }
-.info-section .card-container .more .wraper {
+.info-section .cards-container .more .wraper {
   width: 12rem;
   height: auto;
-  aspect-ratio: 2 / 3;
+  aspect-ratio: 0.667;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -171,58 +148,60 @@
   color: var(--primary-txt-color);
   background-color: var(--secondary-bg-color);
   border-radius: 0.5rem;
+  cursor: pointer;
 }
-.info-section .card-container .more.imgs .wraper {
+.info-section .cards-container .more.imgs .wraper {
   height: 25rem;
   width: auto;
 }
-.info-section .card-container .more .icon {
+.info-section .cards-container .more .icon {
   color: var(--primary-txt-color);
 }
-.info-section .card-container .video-card {
+.info-section .cards-container .video-card {
   width: 25rem;
   height: auto;
   aspect-ratio: 267 / 160;
 }
-.info-section .card-container .trailer-container .trailer-frame {
+.info-section .cards-container .trailer-container .trailer-frame {
   width: 100%;
   height: 100%;
 }
-.info-section .card-container .posters-img,
-.info-section .card-container .backdrops-img {
+.info-section .cards-container .posters-img,
+.info-section .cards-container .backdrops-img {
   height: 25rem;
   border-radius: 0.5rem;
 }
-.card-container .poster-img {
+.cards-container .poster-img {
   aspect-ratio: 0.667;
 }
-.card-container .backdrop-img {
+.cards-container .backdrop-img {
   aspect-ratio: 1.778;
 }
+/* Media Queries Start */
 @media (hover: hover) {
   .section-all .btn:hover {
     color: var(--primary-txt-color);
     background-color: var(--accent-color);
   }
-  .info-section .card-container .more:hover {
+  .info-section .cards-container .more .wraper:hover {
     color: var(--accent-color);
   }
-  .info-section .card-container .more:hover .icon {
+  .info-section .cards-container .more .wraper:hover .icon {
     color: var(--accent-color);
     transform: translateX(0.5rem);
   }
 }
 @media (max-width: 1023px) {
-  .movie-header .trailer-container .btn {
+  .movie-landing .trailer-container .btn {
     left: 50%;
     margin-left: -1rem;
   }
 }
 @media (max-width: 767px) {
-  .movie-header .genre-list {
+  .movie-landing .genre-list {
     justify-content: center;
   }
-  .movie-header .date-time-info {
+  .movie-landing .date-time-info {
     justify-content: center;
   }
 }
@@ -237,3 +216,4 @@
     font-size: 1rem;
   }
 }
+/* Media Queries End */

@@ -132,10 +132,10 @@ body {
 .page-section {
   min-height: calc(100vh - 4rem - 1px);
 }
-.page-section .card-container.flex::-webkit-scrollbar {
+.page-section .cards-container.flex::-webkit-scrollbar {
   height: 0.5rem;
 }
-.page-section .card-container.flex::-webkit-scrollbar-thumb {
+.page-section .cards-container.flex::-webkit-scrollbar-thumb {
   background-color: var(--secondary-bg-color);
   border-radius: 5rem;
 }

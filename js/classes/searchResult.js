@@ -6,7 +6,7 @@ class SearchResult extends MainClass {
         <section class="search-result">
         <div class="container">
             <h2 class="section-title"><span>Result of:</span> ${query}</h2>
-            <div class="card-container grid">
+            <div class="cards-container grid">
                 ${
                   this._getSectionCards(resultCards) ||
                   `<div class="empty-cards">

@@ -115,20 +115,20 @@ export default class MainClass {
       return false;
     }
 
-    arrOfCards.results.forEach((card) => {
+    arrOfCards.results.forEach((card, idx) => {
       if (card.media_type === "person") return;
 
       const cardEl = document.createElement("div");
       cardEl.className = "card";
       cardEl.dataset.posterParent = "";
-
+      cardEl.style.transitionDelay = `${idx * 50}ms`;
       cardEl.innerHTML = `
             <button class="expand-btn" id="${card.id}" title="${
         card.title ?? card.original_title ?? card.name ?? card.original_name
       }" data-expand-card data-type="${type ?? card.media_type}">
             <p class="text">Expand</p>
       </button>
-            <figure class="card-poster">
+            <figure class="poster">
                 ${
                   card.poster_path || card.profile_path
                     ? `<img src="${POSTER_URL}${
@@ -159,13 +159,13 @@ export default class MainClass {
                   }" data-watchlist-btn title="Remove from watchlist"  data-type="${
                     type ?? card.media_type
                   }"><i
-                      class="fa-solid fa-check"></i></button>`
+                      class="icon fa-solid fa-check"></i></button>`
                 : `<button class="watchlist-btn btn" id="${
                     card.id
                   }" data-watchlist-btn title="Add to watchlist" data-type="${
                     type ?? card.media_type
                   }"><i
-                      class="fa-solid fa-plus"></i></button>`
+                      class="icon fa-solid fa-plus"></i></button>`
             }
         `;
 

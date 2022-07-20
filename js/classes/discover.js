@@ -17,8 +17,8 @@ class Discover extends MainClass {
             <section class="discover-section" id="${
               dataObj.pageName
             }/first_section">
-                <div class="container flex-container-column">
-                    <header class="discover-header flex-container-column">
+                <div class="container flex-column">
+                    <header class="discover-header flex-column">
                         <h2 class="section-title">Discover in ${
                           dataObj.pageName === `movie` ? `movies` : `TV shows`
                         }</h2>
@@ -29,7 +29,7 @@ class Discover extends MainClass {
                             <button class="btn" data-discover-page="top_rated" data-idx="2">Top Rated</button>
                         </nav>
                     </header>
-                    <div class="card-container grid popular" data-discover-container>    
+                    <div class="cards-container grid popular" data-discover-container>    
                         ${this._getSectionCards(movieObj, dataObj.pageName)}
                     </div>
                     <button class="btn" data-load-more>Load More</button>
@@ -55,7 +55,11 @@ class Discover extends MainClass {
 
   getNewDiscoverPage(pageData) {
     this._sectionNavListener();
-    this.cardContainer.className = `card-container grid ${this.discoverPage}`;
+    setTimeout(
+      () =>
+        (this.cardContainer.className = `cards-container grid ${this.discoverPage}`),
+      300
+    );
     this.cardContainer.innerHTML = this._getSectionCards(
       pageData,
       dataObj.pageName

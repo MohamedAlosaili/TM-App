@@ -7,35 +7,29 @@
   height: 0.15rem;
   background-color: rgba(255 255 255 / 0.1);
 }
-.discover-section .card-container .card {
+.discover-section .cards-container .card {
   transform: translateY(2rem);
   opacity: 0;
+  transition-delay: 0;
 }
-.discover-section .card-container .loading-spinner {
+.discover-section .cards-container .loading-spinner {
   top: 10rem;
   visibility: visible;
-  pointer-events: auto;
 }
-.discover-section .card-container.popular .loading-spinner,
-.discover-section .card-container.trending .loading-spinner,
-.discover-section .card-container.top_rated .loading-spinner {
+.discover-section .cards-container.popular .loading-spinner,
+.discover-section .cards-container.trending .loading-spinner,
+.discover-section .cards-container.top_rated .loading-spinner {
   visibility: hidden;
-  pointer-events: none;
 }
-.discover-section .card-container.popular .card,
-.discover-section .card-container.trending .card,
-.discover-section .card-container.top_rated .card {
-  animation: transparency 0.8s forwards;
-}
-@keyframes transparency {
-  0% {
-    transform: translateY(2rem);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0rem);
-    opacity: 1;
-  }
+.discover-section .cards-container.popular .card,
+.discover-section .cards-container.trending .card,
+.discover-section .cards-container.top_rated .card {
+  transform: translateY(0rem);
+  opacity: 1;
+  -webkit-transition: var(--transition-three);
+  -moz-transition: var(--transition-three);
+  -o-transition: var(--transition-three);
+  transition: var(--transition-three);
 }
 .discover-section .container > .btn {
   width: min(20rem, 100%);
@@ -59,7 +53,7 @@
 }
 /* Media Queries Start */
 @media (hover: hover) {
-  .discover-section .card-container .card-poster {
+  .discover-section .cards-container .poster {
     height: 100%;
   }
   .discover-section .container > .btn:hover {
@@ -68,11 +62,8 @@
     box-shadow: 0 0 10px var(--accent-color);
   }
 }
-@media (max-width: 364px) {
-  .discover-section .card-container .card-poster:hover::before {
-    bottom: calc(100% - 4rem);
-  }
-  .discover-section .card-container .card .card-title {
+@media (max-width: 339px) {
+  .discover-section .cards-container .card .card-title {
     font-size: 1.2rem;
   }
 }

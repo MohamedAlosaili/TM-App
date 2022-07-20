@@ -1,3 +1,4 @@
+/* Transition Start */
 .section-all.active,
 .section-all > .container {
   -webkit-transition: var(--transition-three);
@@ -5,6 +6,7 @@
   -o-transition: var(--transition-three);
   transition: var(--transition-three);
 }
+/* Transition End */
 .section-all {
   position: absolute;
   top: 0;
@@ -53,45 +55,47 @@
   z-index: 50;
 }
 /* Cast Changes */
-.section-all .card-container.grid {
+.section-all .cards-container.grid {
   grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
 }
-.section-all .card-container .cast-poster img {
+.section-all .cards-container .cast-poster img {
   width: 100%;
 }
 /* Images Changes */
-.section-all .card-container.flex .imgs-title {
+.section-all .cards-container.flex .imgs-title {
   font-size: 1.5rem;
   color: var(--primary-txt-color);
   margin-bottom: 1.5rem;
 }
-.section-all .card-container.flex .imgs-title:nth-child(2) {
+.section-all .cards-container.flex .imgs-title:nth-child(2) {
   border-top: 0.15rem solid var(--secondary-txt-color);
   padding-top: 1.5rem;
 }
-.section-all .card-container.flex {
+.section-all .cards-container.flex {
+  padding: 0;
   flex-direction: column;
+  gap: 3rem;
 }
-.section-all .card-container.flex .posters-container,
-.section-all .card-container.flex .backdrops-container {
+.section-all .cards-container.flex .posters-container,
+.section-all .cards-container.flex .backdrops-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
   gap: 1.5rem;
 }
-.section-all .card-container.flex .poster-img,
-.section-all .card-container.flex .backdrop-img {
+.section-all .cards-container.flex .backdrops-container {
+  grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
+}
+.section-all .cards-container.flex .poster-img,
+.section-all .cards-container.flex .backdrop-img {
   width: 100%;
   height: 100%;
   border-radius: 0.5rem;
-}
-.section-all .card-container.flex .backdrops-container {
-  grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
 }
 .section-all .footer > .container {
   padding: 0;
 }
 @media (max-width: 639px) {
-  .section-all .card-container.flex .backdrops-container {
+  .section-all .cards-container.flex .backdrops-container {
     grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
   }
 }

@@ -18,7 +18,7 @@ export default class MoviePage extends MainClass {
             <div class="container">
                 <button class="btn" data-back-btn><i class="fa-solid fa-chevron-left"></i></button>
                 <h2 class="section-title" data-section-title></h2>
-                <div class="card-container" data-section-container>
+                <div class="cards-container" data-section-container>
                     
                 </div>
             </div>
@@ -32,20 +32,20 @@ export default class MoviePage extends MainClass {
         </section>
         ${this._movieHeaderSection(movieObj, type)}
         <section class="info-section" data-info-section>
-            <div class="container">
+            <div class="container flex-column">
                 <section class="overview section">
                     <h2 class="section-title">Overview</h2>
                     <p>${movieObj.overview}</p>
                 </section>
                 <section class="section">
                     <h2 class="section-title">Cast</h2>
-                    <div class="card-container flex">
+                    <div class="cards-container flex">
                         ${this._getCastCards(movieObj.credits.cast)}    
                     </div>
                 </section>
                 <section class="section">
                     <h2 class="section-title">Videos</h2>
-                    <div class="card-container flex">
+                    <div class="cards-container flex">
                         ${
                           this._getMovieVideos(movieObj.videos) ||
                           `
@@ -80,7 +80,7 @@ export default class MoviePage extends MainClass {
                           dataObj.moviePage.posters.length
                         }</span></button>
                     </nav>
-                    <div class="card-container flex" data-images-container>
+                    <div class="cards-container flex" data-images-container>
                         ${this._getMovieImages(
                           movieObj.images.backdrops,
                           "backdrops"
@@ -89,7 +89,7 @@ export default class MoviePage extends MainClass {
                 </section>
                 <section class="section">
                     <h2 class="section-title">Similar movies</h2>
-                    <div class="card-container flex">
+                    <div class="cards-container flex">
                         ${this._getSectionCards(movieObj.similar, type)}
                     </div>
                 </section>
@@ -115,7 +115,7 @@ export default class MoviePage extends MainClass {
 
   _movieHeaderSection(movieObj, type) {
     return `
-        <article class="landing movie-header" data-movie-header>
+        <article class="landing movie-landing" data-movie-header>
         <figure class="backdrop">
         ${
           movieObj.backdrop_path
@@ -260,7 +260,7 @@ export default class MoviePage extends MainClass {
 
   _getCastCards(castArr, shirnk = true) {
     let lotOfCards = false;
-    console.log(castArr);
+
     if (shirnk) {
       dataObj.moviePage.cast = [...castArr];
       if (castArr.length > 10) {
