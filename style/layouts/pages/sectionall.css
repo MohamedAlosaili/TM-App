@@ -60,6 +60,7 @@
 }
 .section-all .cards-container .cast-poster img {
   width: 100%;
+  border-radius: 0.5rem;
 }
 /* Images Changes */
 .section-all .cards-container.flex .imgs-title {
@@ -76,13 +77,10 @@
   flex-direction: column;
   gap: 3rem;
 }
-.section-all .cards-container.flex .posters-container,
-.section-all .cards-container.flex .backdrops-container {
-  display: grid;
+.section-all .posters .cards-container.grid {
   grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
-  gap: 1.5rem;
 }
-.section-all .cards-container.flex .backdrops-container {
+.section-all .backdrops .cards-container.grid {
   grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
 }
 .section-all .cards-container.flex .poster-img,
@@ -95,7 +93,7 @@
   padding: 0;
 }
 @media (max-width: 639px) {
-  .section-all .cards-container.flex .backdrops-container {
+  .section-all .backdrops .cards-container.grid {
     grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
   }
 }

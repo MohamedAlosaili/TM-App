@@ -30,6 +30,8 @@ async function fetchData(API_URL) {
 
 // Pages Functions
 export async function getHomePage() {
+  Home.renderLoader();
+
   const [trendDay, trendWeek, popularMovies, popularTV] = await Promise.all([
     fetchData(DAY_TREND),
     fetchData(WEEK_TREND),
@@ -47,9 +49,9 @@ export async function getHomePage() {
 }
 
 export async function getDiscoverPage(type = null) {
-  console.log(type);
+  Discover.renderLoader();
+
   !type ? dataObj.pageName : false;
-  console.log(type);
 
   const popular = await fetchData(POPULAR(type));
   const generList = await fetchData(GENRE_LIST(type));
@@ -63,10 +65,15 @@ export function getWatchlistPage() {
   Watchlist.renderLoader();
 
   const watchlistCards = JSON.parse(localStorage.getItem("watchlist"));
-  Watchlist.rendermainPageElement(watchlistCards);
+
+  setTimeout(() => {
+    Watchlist.rendermainPageElement(watchlistCards);
+  }, 500);
 }
 
 export async function getMoviePage(id) {
+  moviePage.renderLoader();
+
   const regex = /[a-zA-Z]+/;
   const type = dataObj.pageName.match(regex).join("");
 
@@ -86,6 +93,8 @@ export async function getMoviePage(id) {
 }
 
 export async function getSearchResult(query) {
+  SearchResult.renderLoader();
+
   const results = await fetchData(SEARCH(query));
 
   SearchResult.rendermainPageElement(results, query);
@@ -93,7 +102,6 @@ export async function getSearchResult(query) {
 
 export async function controlChangePages(pageName) {
   if (pageName !== dataObj.pageName) {
-    dataObj.classes[pageName].renderLoader();
     dataObj.pages[pageName](pageName);
 
     dataObj.pageName = pageName;

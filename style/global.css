@@ -21,7 +21,6 @@ html {
 }
 body {
   background: var(--primary-bg-color);
-  overflow-y: scroll;
 }
 ::-webkit-scrollbar-track {
   background-color: var(--primary-bg-color);

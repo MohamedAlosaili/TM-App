@@ -13,7 +13,7 @@ export default class MoviePage extends MainClass {
   navBtn;
 
   rendermainPageElement(movieObj, type) {
-    this._mainPage.innerHTML = `
+    this.mainPage.innerHTML = `
         <section class="section-all" data-section-all>
             <div class="container">
                 <button class="btn" data-back-btn><i class="fa-solid fa-chevron-left"></i></button>
@@ -49,15 +49,15 @@ export default class MoviePage extends MainClass {
                         ${
                           this._getMovieVideos(movieObj.videos) ||
                           `
-                               <div class="no-videos">
+                               <div class="no-content">
                                     <i class="icon fa-solid fa-video-slash"></i>
                                     <p class="text">
-                                        We don't find any videos for <span class="underline active">${
-                                          movieObj.title ??
-                                          movieObj.original_title ??
-                                          movieObj.name ??
-                                          movieObj.original_name
-                                        }</span><br> you can watch videos on youtube <a href="https://www.youtube.com/results?search_query=${
+                                    There are no videos for <span class="movie-name">${
+                                      movieObj.title ??
+                                      movieObj.original_title ??
+                                      movieObj.name ??
+                                      movieObj.original_name
+                                    }</span><br> watch on youtube <a href="https://www.youtube.com/results?search_query=${
                             movieObj.title ??
                             movieObj.original_title ??
                             movieObj.name ??
@@ -90,7 +90,20 @@ export default class MoviePage extends MainClass {
                 <section class="section">
                     <h2 class="section-title">Similar movies</h2>
                     <div class="cards-container flex">
-                        ${this._getSectionCards(movieObj.similar, type)}
+                        ${
+                          this._getSectionCards(movieObj.similar, type) ||
+                          `<div class="no-content">
+                        <i class="icon empty-cards"></i>
+                          <p class="text">
+                          There are no similar movies for <span class="movie-name">${
+                            dataObj.moviePage.movieObj.title ??
+                            dataObj.moviePage.movieObj.original_title ??
+                            dataObj.moviePage.movieObj.name ??
+                            dataObj.moviePage.movieObj.original_name
+                          }
+                          </p>
+                        </div>`
+                        }
                     </div>
                 </section>
             </div>
@@ -116,26 +129,29 @@ export default class MoviePage extends MainClass {
   _movieHeaderSection(movieObj, type) {
     return `
         <article class="landing movie-landing" data-movie-header>
+        
         <figure class="backdrop">
         ${
-          movieObj.backdrop_path
+          !movieObj.backdrop_path && !movieObj.poster_path
+            ? ""
+            : movieObj.backdrop_path
             ? `<img src="${BACKDROP_URL}${movieObj.backdrop_path}" alt="'${
                 movieObj.title ??
                 movieObj.original_title ??
                 movieObj.name ??
                 movieObj.original_name
               }' backdrop">
-            `
+          `
             : `
-            <img src="${BACKDROP_URL}${movieObj.poster_path}" alt="'${
+          <img src="${BACKDROP_URL}${movieObj.poster_path}" alt="'${
                 movieObj.title ??
                 movieObj.original_title ??
                 movieObj.name ??
                 movieObj.original_name
               }' backdrop">
-            `
+          `
         }
-        </figure>
+            </figure>}
         <div class="container" data-poster-parent>
             <figure class="poster">
             ${
@@ -204,7 +220,7 @@ export default class MoviePage extends MainClass {
                     </iframe>
                     `
                         : `
-                        <div class="trailer-frame no-videos">
+                        <div class="trailer-frame no-content">
                             <i class="icon fa-solid fa-video-slash"></i>
                             <p class="text">
                                 We don't find a trailer for <span class="movie-name">${
@@ -212,7 +228,7 @@ export default class MoviePage extends MainClass {
                                   movieObj.original_title ??
                                   movieObj.name ??
                                   movieObj.original_name
-                                }</span> you can watch videos on youtube <a href="https://www.youtube.com/results?search_query=${
+                                }</span> watch on youtube <a href="https://www.youtube.com/results?search_query=${
                             movieObj.title ??
                             movieObj.original_title ??
                             movieObj.name ??
@@ -260,6 +276,22 @@ export default class MoviePage extends MainClass {
 
   _getCastCards(castArr, shirnk = true) {
     let lotOfCards = false;
+
+    if (castArr.length === 0) {
+      return `
+      <div class="no-content">
+      <i class="icon empty-cards"></i>
+        <p class="text">
+        There are no cast for <span class="movie-name">${
+          dataObj.moviePage.movieObj.title ??
+          dataObj.moviePage.movieObj.original_title ??
+          dataObj.moviePage.movieObj.name ??
+          dataObj.moviePage.movieObj.original_name
+        }
+        </p>
+      </div>
+      `;
+    }
 
     if (shirnk) {
       dataObj.moviePage.cast = [...castArr];
@@ -343,10 +375,10 @@ export default class MoviePage extends MainClass {
       lotOfImgs = true;
     } else if (imgsCopy.length === 0) {
       return `
-      <div class="no-videos">
+      <div class="no-content">
       <i class="icon fa-solid fa-image"></i>
       <p class="text">
-      We don't find any ${type} for <span class="underline active">${
+      There are no ${type} for <span class="movie-name">${
         dataObj.moviePage.movieObj.title ??
         dataObj.moviePage.movieObj.original_title ??
         dataObj.moviePage.movieObj.name ??

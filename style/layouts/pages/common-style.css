@@ -8,6 +8,90 @@
   transition: var(--transition-three);
 }
 /* Transition End */
+/* No Content & no IMG Start */
+.no-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5rem;
+  width: 100%;
+  color: var(--primary-txt-color);
+  background-color: rgba(0 0 0 / 0.05);
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+.cards-container.grid .no-content {
+  position: absolute;
+  inset: 0;
+}
+.no-content .icon {
+  font-size: 4rem;
+}
+.no-content .icon.empty-cards {
+  position: relative;
+  min-height: 4rem;
+  aspect-ratio: 0.7;
+}
+.no-content .empty-cards::before,
+.no-content .empty-cards::after {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: var(--primary-txt-color);
+  border-radius: 0.5rem;
+  transform-origin: left bottom;
+  border: 0.2rem solid var(--primary-bg-color);
+}
+.no-content .empty-cards::after {
+  transform: translate(-1rem, 0.1rem) rotate(-30deg);
+  background-color: var(--accent-color);
+}
+.no-content .text {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  text-align: center;
+}
+.no-content .movie-name {
+  border-bottom: 0.15rem solid var(--accent-color);
+}
+.no-content .text a {
+  color: var(--accent-color);
+  font-weight: 600;
+}
+.no-content .btn {
+  display: block;
+  margin: 1rem auto;
+  font-weight: 500;
+  background-color: var(--accent-color);
+  color: var(--primary-txt-color);
+  box-shadow: 0 0 10px var(--accent-color);
+}
+/* No IMG */
+.no-img {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+  width: 100%;
+  aspect-ratio: 0.667;
+  background-color: var(--secondary-bg-color);
+  border-radius: 0.5rem;
+  margin-bottom: 0.8rem;
+  text-align: center;
+  color: var(--primary-txt-color);
+  line-height: 1.6;
+}
+.landing .no-img {
+  height: 24rem;
+}
+.no-img .icon {
+  font-size: 3rem;
+  color: var(--accent-color);
+}
+/* No Content & No IMG End */
 /* landing Poster Start */
 .landing {
   min-height: 100vh;
@@ -45,9 +129,6 @@
   box-shadow: 0 0 1.2rem var(--secondary-bg-color);
   width: 16rem;
   border-radius: 0.5rem;
-}
-.landing .poster .no-img {
-  height: 24rem;
 }
 .landing .post-info {
   display: flex;
@@ -204,6 +285,7 @@
 .cards-container.grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+  min-height: 20rem;
 }
 .cards-container .card {
   position: relative;
@@ -263,31 +345,6 @@
   border-radius: 0.5rem;
   margin-bottom: 0.5rem;
   z-index: 1;
-}
-.landing .poster .no-img,
-.cards-container .card .poster .no-img {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-  height: 18rem;
-  width: auto;
-  aspect-ratio: 2 / 3;
-  background-color: var(--secondary-bg-color);
-  border-radius: 0.5rem;
-  margin-bottom: 0.8rem;
-  text-align: center;
-  color: var(--primary-txt-color);
-  line-height: 1.6;
-}
-.cards-container.grid .card .poster .no-img {
-  height: 100%;
-}
-.landing .poster .no-img .icon,
-.cards-container .card .poster .no-img .icon {
-  font-size: 3rem;
-  color: var(--accent-color);
 }
 .cards-container .poster .card-title {
   padding: 0 0.5rem;

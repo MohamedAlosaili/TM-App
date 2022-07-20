@@ -56,16 +56,17 @@ class MovieSectionAll extends MoviePage {
   }
 
   _getImagesSection() {
+    dataObj.moviePage.posters = [];
     return `
       <section class="posters">
         <h3 class="imgs-title">Posters</h3>
-        <div class="posters-container">
+        <div class="cards-container grid">
           ${this.getAllImages(dataObj.moviePage.posters, "poster")}
         </div>
       </section>
       <section class="backdrops">
         <h3 class="imgs-title">Backdrops</h3>
-        <div class="backdrops-container">
+        <div class="cards-container grid">
           ${this.getAllImages(dataObj.moviePage.backdrops, "backdrop")}
         </div>
       </section>
@@ -73,8 +74,26 @@ class MovieSectionAll extends MoviePage {
   }
 
   getAllImages(arr, type) {
+    if (arr.length === 0) {
+      return `
+        <div class="no-content">
+          <i class="icon fa-solid fa-image"></i>
+            <p class="text">
+            There are no ${type} for <span class="movie-name">${
+        dataObj.moviePage.movieObj.title ??
+        dataObj.moviePage.movieObj.original_title ??
+        dataObj.moviePage.movieObj.name ??
+        dataObj.moviePage.movieObj.original_name
+      }
+            </p>
+        </div>
+      `;
+    }
+
     const imgContainer = document.createElement("div");
+
     const movie = dataObj.moviePage.movieObj;
+
     arr.forEach((item) => {
       const img = document.createElement("img");
       img.src =

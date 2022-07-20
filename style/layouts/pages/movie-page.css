@@ -62,33 +62,6 @@
   background-color: rgba(0 0 0 / 0.5);
   backdrop-filter: blur(10rem);
 }
-.no-videos {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 2.5rem;
-  width: 100%;
-  color: var(--primary-txt-color);
-  background-color: rgba(0 0 0 / 0.05);
-  border-radius: 0.5rem;
-}
-.no-videos .icon {
-  font-size: 4rem;
-}
-.no-videos .text {
-  font-size: 1.2rem;
-  line-height: 1.8;
-  padding: 1rem;
-  text-align: center;
-}
-.no-videos .movie-name {
-  border-bottom: 0.1rem solid var(--accent-color);
-}
-.no-videos .text a {
-  color: var(--accent-color);
-  font-weight: 600;
-}
 .movie-landing .trailer-container .btn {
   position: absolute;
   top: -0.5rem;
@@ -117,11 +90,14 @@
   padding: 1rem;
 }
 /* Cast Cards */
-.cards-container .cast-poster img {
+.section .cards-container .cast-poster img {
   width: 12rem;
   aspect-ratio: 0.667;
   border-radius: 0.5rem;
   cursor: pointer;
+}
+.section .cards-container .cast-poster .no-img {
+  width: 12rem;
 }
 .cards-container .cast-poster figcaption {
   color: var(--primary-txt-color);
@@ -206,13 +182,13 @@
   }
 }
 @media (max-width: 639px) {
-  .no-videos {
+  .no-content {
     gap: 1rem;
   }
-  .no-videos .icon {
+  .no-content .icon {
     font-size: 3rem;
   }
-  .no-videos .text {
+  .no-content .text {
     font-size: 1rem;
   }
 }

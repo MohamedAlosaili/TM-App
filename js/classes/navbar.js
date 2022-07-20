@@ -28,7 +28,7 @@ class Navbar {
           link.classList.remove("active", "shake")
         );
         e.currentTarget.classList.add("active", "shake");
-        this.mobileMenuState("remove", "scroll", "close");
+        this.mobileMenuState("remove", "auto", "close");
 
         // Deal with pages
         const pageName = link.dataset.page;
@@ -54,7 +54,7 @@ class Navbar {
         SearchResult.renderLoader();
         getSearchResult(searchInput.value);
 
-        this.mobileMenuState("remove", "scroll", "close");
+        this.mobileMenuState("remove", "auto", "close");
         dataObj.pageName = "search?q=";
         location.hash = `search?q=${searchInput.value}`;
         this.updateNavLinks();
@@ -67,7 +67,7 @@ class Navbar {
   _mobileMenuListener() {
     this._mobileMenuToggler.addEventListener("click", (e) => {
       if (this._mobileMenu.classList.contains("active"))
-        this.mobileMenuState("remove", "scroll", "close");
+        this.mobileMenuState("remove", "auto", "close");
       else this.mobileMenuState("add", "hidden", "open");
     });
   }

@@ -12,7 +12,7 @@ class Discover extends MainClass {
   loadMoreBtn;
 
   rendermainPageElement(movieObj, generList) {
-    this._mainPage.innerHTML = `
+    this.mainPage.innerHTML = `
             ${this._getHomeHeaderSection(movieObj, dataObj.pageName)}
             <section class="discover-section" id="${
               dataObj.pageName
@@ -37,13 +37,13 @@ class Discover extends MainClass {
             </section>
         `;
 
-    this.filterBtn = this._mainPage.querySelector("[data-filter]");
-    this.genreList = this._mainPage.querySelector("[data-genre-list]");
-    this.discoverNav = this._mainPage.querySelector("[data-discover-nav]");
-    this.cardContainer = this._mainPage.querySelector(
+    this.filterBtn = this.mainPage.querySelector("[data-filter]");
+    this.genreList = this.mainPage.querySelector("[data-genre-list]");
+    this.discoverNav = this.mainPage.querySelector("[data-discover-nav]");
+    this.cardContainer = this.mainPage.querySelector(
       "[data-discover-container]"
     );
-    this.loadMoreBtn = this._mainPage.querySelector("[data-load-more]");
+    this.loadMoreBtn = this.mainPage.querySelector("[data-load-more]");
 
     this._sectionNavListener();
     this.loadMoreListener();

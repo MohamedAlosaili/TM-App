@@ -56,8 +56,6 @@ const init = (function () {
   getBookmarks();
   Navbar.callClassFunctions();
   renderPage();
-
-  Home.renderLoader();
 })();
 
 function renderPage() {

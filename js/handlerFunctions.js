@@ -5,6 +5,7 @@ import { moviePage } from "./classes/moviePage.js";
 import MovieSectionAll from "./classes/movieSectionAll.js";
 import Navbar from "./classes/navbar.js";
 import {
+  getHomePage,
   addToWatchlist,
   removeFromWatchlist,
   getMoviePage,
@@ -13,8 +14,8 @@ import {
 } from "./functions.js";
 
 export function layerHandler() {
-  Navbar.mobileMenuState("remove", "scroll", "close");
-  console.log(dataObj.pageName);
+  Navbar.mobileMenuState("remove", "auto", "close");
+
   if (dataObj.pageName === "tv-" || dataObj.pageName === "movie-") {
     moviePage.trailerContainer.classList.remove("active");
     moviePage.trailerVideo ? (moviePage.trailerVideo.src = "") : false;
@@ -27,6 +28,7 @@ export function mainPageHandler(e) {
   if (e.target.closest("[data-expand-card]")) expandBtnHandler(e);
   if (e.target.closest("[data-moreten-btn]"))
     MovieSectionAll.getSectionAll(e.target.dataset.type);
+  if (e.target.closest("[data-back-home]")) backToHomePage();
 }
 
 function watchlistBtnHandler(e) {
@@ -51,7 +53,6 @@ function watchlistBtnHandler(e) {
 
     addToWatchlist(btn);
   }
-  console.log(e.target);
   btn.classList.toggle("active");
 }
 
@@ -68,6 +69,12 @@ function expandBtnHandler(e) {
   getMoviePage(id);
 
   Navbar.updateNavLinks();
+}
+
+function backToHomePage() {
+  dataObj.pageName = "home";
+  Navbar.updateNavLinks();
+  getHomePage();
 }
 
 export function moviePageHandler(e) {
