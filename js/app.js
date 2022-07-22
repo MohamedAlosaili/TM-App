@@ -4,6 +4,7 @@ import {
   getWatchlistPage,
   getMoviePage,
   getSearchResult,
+  getCastPage,
 } from "./functions.js";
 import { mainPageHandler } from "./handlerFunctions.js";
 import { moviePage } from "./classes/moviePage.js";
@@ -12,11 +13,10 @@ import Navbar from "./classes/navbar.js";
 import Home from "./classes/home.js";
 import Discover from "./classes/discover.js";
 import Watchlist from "./classes/watchlist.js";
+import CastPage from "./classes/castPage.js";
 
 export const dataObj = {
-  watchlist: {
-    results: [],
-  },
+  watchlist: [],
   discoverCurrentUrl: "",
   pageName: "",
   pageNum: 1,
@@ -28,6 +28,7 @@ export const dataObj = {
     "tv-": getMoviePage,
     watchlist: getWatchlistPage,
     "search?q=": getSearchResult,
+    "person-": getCastPage,
   },
   classes: {
     home: Home,
@@ -37,6 +38,7 @@ export const dataObj = {
     "movie-": moviePage,
     "tv-": moviePage,
     "search?q=": SearchResult,
+    "person-": CastPage,
   },
   moviePage: {
     movieObj: {},
@@ -68,7 +70,6 @@ function renderPage() {
   const pageRequest = urlHash.match(reqex).join("");
 
   let param = urlHash.slice(urlHash.indexOf(pageRequest.slice(-1)) + 1);
-  param ? (param = param.replace("%20", " ")) : false;
   if (!param) param = urlHash;
 
   if (dataObj.pages[pageRequest] && dataObj.classes[pageRequest]) {

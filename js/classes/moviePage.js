@@ -40,7 +40,7 @@ export default class MoviePage extends MainClass {
                 <section class="section">
                     <h2 class="section-title">Cast</h2>
                     <div class="cards-container flex">
-                        ${this._getCastCards(movieObj.credits.cast)}    
+                        ${this.getCastCards(movieObj.credits.cast)}    
                     </div>
                 </section>
                 <section class="section">
@@ -91,7 +91,10 @@ export default class MoviePage extends MainClass {
                     <h2 class="section-title">Similar movies</h2>
                     <div class="cards-container flex">
                         ${
-                          this._getSectionCards(movieObj.similar, type) ||
+                          this._getSectionCards(
+                            movieObj.similar.results,
+                            type
+                          ) ||
                           `<div class="no-content">
                         <i class="icon empty-cards"></i>
                           <p class="text">
@@ -151,7 +154,7 @@ export default class MoviePage extends MainClass {
               }' backdrop">
           `
         }
-            </figure>}
+            </figure>
         <div class="container" data-poster-parent>
             <figure class="poster">
             ${
@@ -272,74 +275,6 @@ export default class MoviePage extends MainClass {
       }
     }
     return trailerKey;
-  }
-
-  _getCastCards(castArr, shirnk = true) {
-    let lotOfCards = false;
-
-    if (castArr.length === 0) {
-      return `
-      <div class="no-content">
-      <i class="icon empty-cards"></i>
-        <p class="text">
-        There are no cast for <span class="movie-name">${
-          dataObj.moviePage.movieObj.title ??
-          dataObj.moviePage.movieObj.original_title ??
-          dataObj.moviePage.movieObj.name ??
-          dataObj.moviePage.movieObj.original_name
-        }
-        </p>
-      </div>
-      `;
-    }
-
-    if (shirnk) {
-      dataObj.moviePage.cast = [...castArr];
-      if (castArr.length > 10) {
-        lotOfCards = true;
-        castArr.length = 10;
-      }
-    }
-    const castContainer = document.createElement("div");
-    castArr.forEach((cast) => {
-      const card = document.createElement("div");
-      card.className = "card";
-
-      card.innerHTML = `
-            <figure class="cast-poster">
-                ${
-                  cast.profile_path
-                    ? `<img src="${POSTER_URL}${cast.profile_path}"
-                        alt="${cast.name ?? original_name}" loading="lazy">`
-                    : `
-                    <div class="no-img">
-                        <i class="icon fa-solid fa-file-image"></i>
-                        Image Not <br> Available
-                    </div>
-                    `
-                }
-                <figcaption>${cast.name ?? cast.original_name}</figcaption>
-                <p class="character">${cast.character}</p>
-            </figure>
-        `;
-      castContainer.append(card);
-    });
-    if (lotOfCards) {
-      const seeAllCards = document.createElement("div");
-      seeAllCards.className = "more cast btn";
-      seeAllCards.innerHTML = `
-            <p class="wraper" data-moreten-btn data-type="cast">
-                All Cast
-                <i class="icon fa-solid fa-chevron-right"></i>
-            </p>
-        `;
-
-      castContainer.append(seeAllCards);
-    }
-
-    const cards = castContainer.innerHTML;
-
-    return cards;
   }
 
   _getMovieVideos(videosObj) {

@@ -111,11 +111,11 @@ export default class MainClass {
   _getSectionCards(arrOfCards, type = null) {
     const cardContainer = document.createElement("div");
 
-    if (!arrOfCards || arrOfCards.results.length === 0) {
+    if (!arrOfCards || arrOfCards.length === 0) {
       return false;
     }
 
-    arrOfCards.results.forEach((card, idx) => {
+    arrOfCards.forEach((card, idx) => {
       if (card.media_type === "person") return;
 
       const cardEl = document.createElement("div");
@@ -151,6 +151,11 @@ export default class MainClass {
                   card.name ??
                   card.original_name
                 }</figcaption>
+                ${
+                  card.character
+                    ? `<p class="character">${card.character}</p>`
+                    : ""
+                }
             </figure>
             ${
               checkTheWatchlist(card.id)
@@ -172,6 +177,84 @@ export default class MainClass {
       cardContainer.append(cardEl);
     });
     const cards = cardContainer.innerHTML;
+    return cards;
+  }
+
+  getCastCards(castArr, shirnk = true) {
+    let lotOfCards = false;
+
+    if (castArr.length === 0) {
+      return `
+      <div class="no-content">
+      <i class="icon empty-cards"></i>
+        <p class="text">
+        There are no cast for <span class="movie-name">${
+          dataObj.moviePage.movieObj.title ??
+          dataObj.moviePage.movieObj.original_title ??
+          dataObj.moviePage.movieObj.name ??
+          dataObj.moviePage.movieObj.original_name
+        }
+        </p>
+      </div>
+      `;
+    }
+
+    if (shirnk) {
+      dataObj.moviePage.cast = [...castArr];
+      if (castArr.length > 10) {
+        lotOfCards = true;
+        castArr.length = 10;
+      }
+    }
+    const castContainer = document.createElement("div");
+    castArr.forEach((cast) => {
+      const card = document.createElement("div");
+      card.className = "card";
+
+      card.innerHTML = `
+            <figure class="cast-poster">
+                ${
+                  cast.profile_path
+                    ? `<button class="expand" id="${cast.id}" data-expand-cast>
+                          <img src="${POSTER_URL}${cast.profile_path}"
+                          alt="${cast.name ?? original_name}" loading="lazy">
+                       </button>`
+                    : `
+                    <button class="expand" id="${cast.id}" data-expand-cast>
+                    <div class="no-img">
+                        <i class="icon fa-solid fa-file-image"></i>
+                        Image Not <br> Available
+                    </div>
+                    </button>
+                    `
+                }
+                <button class="expand" id="${cast.id}" data-expand-cast>  
+                <figcaption>${cast.name ?? cast.original_name}</figcaption>
+                </button>
+                ${
+                  cast.character
+                    ? `<p class="character">${cast.character}</p>`
+                    : ""
+                }
+            </figure>
+        `;
+      castContainer.append(card);
+    });
+    if (lotOfCards) {
+      const seeAllCards = document.createElement("div");
+      seeAllCards.className = "more cast btn";
+      seeAllCards.innerHTML = `
+            <p class="wraper" data-moreten-btn data-type="cast">
+                All Cast
+                <i class="icon fa-solid fa-chevron-right"></i>
+            </p>
+        `;
+
+      castContainer.append(seeAllCards);
+    }
+
+    const cards = castContainer.innerHTML;
+
     return cards;
   }
 }

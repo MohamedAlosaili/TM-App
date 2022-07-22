@@ -1,14 +1,16 @@
 import { dataObj } from "./app.js";
+import CastPage from "./classes/castPage.js";
 import Discover from "./classes/discover.js";
 import { mainClass } from "./classes/mainClass.js";
 import { moviePage } from "./classes/moviePage.js";
 import MovieSectionAll from "./classes/movieSectionAll.js";
 import Navbar from "./classes/navbar.js";
 import {
-  getHomePage,
-  addToWatchlist,
   removeFromWatchlist,
+  addToWatchlist,
   getMoviePage,
+  getHomePage,
+  getCastPage,
   getNewDiscoverPageCards,
   getMoreCards,
 } from "./functions.js";
@@ -25,10 +27,12 @@ export function layerHandler() {
 
 export function mainPageHandler(e) {
   if (e.target.closest("[data-watchlist-btn]")) watchlistBtnHandler(e);
-  if (e.target.closest("[data-expand-card]")) expandBtnHandler(e);
-  if (e.target.closest("[data-moreten-btn]"))
+  else if (e.target.closest("[data-expand-card]")) expandBtnHandler(e);
+  else if (e.target.closest("[data-moreten-btn]"))
     MovieSectionAll.getSectionAll(e.target.dataset.type);
-  if (e.target.closest("[data-back-home]")) backToHomePage();
+  else if (e.target.closest("[data-back-home]")) backToHomePage();
+  else if (e.target.closest("[data-expand-cast]")) expandCastHandler(e);
+  else if (e.target.closest("[data-browse-imgs]")) openBrowseImgs();
 }
 
 function watchlistBtnHandler(e) {
@@ -59,8 +63,6 @@ function watchlistBtnHandler(e) {
 function expandBtnHandler(e) {
   const card = e.target.closest("[data-expand-card]");
 
-  moviePage.renderLoader();
-
   const id = card.id;
   const type = card.dataset.type;
 
@@ -75,6 +77,20 @@ function backToHomePage() {
   dataObj.pageName = "home";
   Navbar.updateNavLinks();
   getHomePage();
+}
+
+function expandCastHandler(e) {
+  const btn = e.target.closest("[data-expand-cast]");
+
+  location.hash = `person-${btn.id}`;
+  dataObj.pageName = "person-";
+  getCastPage(btn.id);
+
+  Navbar.updateNavLinks();
+}
+
+function openBrowseImgs() {
+  CastPage.browseContainer.parentElement.classList.add("open");
 }
 
 export function moviePageHandler(e) {
@@ -130,4 +146,34 @@ export function loadMoreHandler(e) {
 
   if (dataObj.pageNum === 500) Discover.loadMoreBtn.style.display = "none";
   Discover.loadMoreBtn.removeEventListener("click", loadMoreHandler);
+}
+
+export function leftSliderHandler() {
+  CastPage.rightSlider.classList.remove("not-allowed");
+  let num = CastPage.browseNum;
+  num--;
+
+  if (num === 0) CastPage.leftSlider.classList.add("not-allowed");
+  else if (num < 0) {
+    CastPage.leftSlider.classList.add("not-allowed");
+    return;
+  }
+
+  CastPage.browseNum = num;
+  CastPage.browseContainer.style.left = `-${num * 100}vw`;
+}
+export function rightSliderHandler() {
+  CastPage.leftSlider.classList.remove("not-allowed");
+  let num = CastPage.browseNum;
+  num++;
+
+  if (num === CastPage.browseContainer.children.length - 1)
+    CastPage.rightSlider.classList.add("not-allowed");
+  else if (num >= CastPage.browseContainer.children.length) {
+    CastPage.rightSlider.classList.add("not-allowed");
+    return;
+  }
+
+  CastPage.browseNum = num;
+  CastPage.browseContainer.style.left = `-${num * 100}vw`;
 }

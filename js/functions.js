@@ -13,6 +13,7 @@ import Discover from "./classes/discover.js";
 import Watchlist from "./classes/watchlist.js";
 import { moviePage } from "./classes/moviePage.js";
 import SearchResult from "./classes/searchResult.js";
+import CastPage from "./classes/castPage.js";
 
 async function fetchData(API_URL) {
   try {
@@ -93,11 +94,30 @@ export async function getMoviePage(id) {
 }
 
 export async function getSearchResult(query) {
+  query = query.replaceAll("%20", " ");
+
   SearchResult.renderLoader();
 
   const results = await fetchData(SEARCH(query));
 
   SearchResult.rendermainPageElement(results, query);
+}
+
+export async function getCastPage(id) {
+  CastPage.renderLoader();
+
+  const personObj = await fetchData(
+    FULL_DETAILS(
+      "person",
+      id,
+      "&append_to_response=combined_credits,images,external_ids"
+    )
+  );
+  const popularPeople = await fetchData(POPULAR("person"));
+
+  console.log(popularPeople);
+  console.log(personObj);
+  CastPage.rendermainPageElement(personObj, popularPeople);
 }
 
 export async function controlChangePages(pageName) {
@@ -132,7 +152,7 @@ export async function getMoreCards() {
   Discover.loadMoreListener();
   Discover.clearLoadMore();
   Discover.cardContainer.innerHTML += Discover._getSectionCards(
-    newCards,
+    newCards.results,
     dataObj.pageName
   );
 }
@@ -153,12 +173,12 @@ export function addToWatchlist(btn) {
   };
 
   let exist = false;
-  dataObj.watchlist.results.forEach((item) => {
+  dataObj.watchlist.forEach((item) => {
     if (item.id === watchlistObj.id) exist = true;
   });
 
   if (!exist) {
-    dataObj.watchlist.results.push(watchlistObj);
+    dataObj.watchlist.push(watchlistObj);
     localStorage.setItem("watchlist", JSON.stringify(dataObj.watchlist));
   }
 }
@@ -176,7 +196,7 @@ export function removeFromWatchlist(id) {
 
 export function checkTheWatchlist(id) {
   let checkResult = false;
-  dataObj.watchlist.results.forEach((item) => {
+  dataObj.watchlist.forEach((item) => {
     if (`${item.id}` === `${id}`) checkResult = true;
   });
 

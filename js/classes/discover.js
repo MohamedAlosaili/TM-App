@@ -30,7 +30,10 @@ class Discover extends MainClass {
                         </nav>
                     </header>
                     <div class="cards-container grid popular" data-discover-container>    
-                        ${this._getSectionCards(movieObj, dataObj.pageName)}
+                        ${this._getSectionCards(
+                          movieObj.results,
+                          dataObj.pageName
+                        )}
                     </div>
                     <button class="btn" data-load-more>Load More</button>
                 </div>
@@ -61,7 +64,7 @@ class Discover extends MainClass {
       300
     );
     this.cardContainer.innerHTML = this._getSectionCards(
-      pageData,
+      pageData.results,
       dataObj.pageName
     );
   }

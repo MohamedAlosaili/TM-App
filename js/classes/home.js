@@ -13,25 +13,25 @@ class Home extends mainClass {
             }/first_section" data-popular-section>
                 <h2 class="section-title">Today's Trend</h2>
                 <div class="cards-container flex">
-                    ${this._getSectionCards(trendDay)}
+                    ${this._getSectionCards(trendDay.results)}
                 </div>
             </section>
             <section class="section">
                 <h2 class="section-title">This week trend</h2>
                 <div class="cards-container flex">
-                    ${this._getSectionCards(trendWeek)}
+                    ${this._getSectionCards(trendWeek.results)}
                 </div>
             </section>
             <section class="section">
                 <h2 class="section-title">Popular movies</h2>
                 <div class="cards-container flex">
-                    ${this._getSectionCards(popularMovies, "movie")}
+                    ${this._getSectionCards(popularMovies.results, "movie")}
                 </div>
             </section>
             <section class="section">
                 <h2 class="section-title">Popular TV shows</h2>
                 <div class="cards-container flex">
-                    ${this._getSectionCards(popularTV, "tv")}
+                    ${this._getSectionCards(popularTV.results, "tv")}
                 </div>
             </section>
         </div>    

@@ -1,0 +1,282 @@
+/* Transition Start */
+.cast-page .landing .poster-side .social-accounts a,
+.cast-page .landing .person-info .biography,
+.cast-page .landing .person-info .biography .collapse-btn,
+.cast-page .landing .person-info .biography .collapse-btn .icon,
+.cast-page .browse-imgs,
+.cast-page .browse-imgs .browse-container {
+  -webkit-transition: var(--transition-three);
+  -moz-transition: var(--transition-three);
+  -o-transition: var(--transition-three);
+  transition: var(--transition-three);
+}
+/* Transition End */
+.cast-page {
+  position: relative;
+  padding-top: 10rem;
+}
+.cast-page:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 6.5rem;
+  width: 100%;
+  background-color: var(--secondary-bg-color);
+}
+/* Header Start */
+.cast-page .landing {
+  display: flex;
+  gap: 3rem;
+  min-height: auto;
+}
+/* Poster Side Start */
+.cast-page .landing .poster-side {
+  width: min(25rem, 100%);
+}
+.cast-page .landing .poster img {
+  width: 100%;
+  height: auto;
+}
+.cast-page .landing .poster-side .social-accounts {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.cast-page .landing .poster-side .social-accounts a {
+  font-size: 3rem;
+}
+/* Poster Side End */
+/* Person Info Start */
+.cast-page .landing .person-info {
+  flex: 1;
+}
+.cast-page .landing .person-info .name {
+  color: var(--primary-txt-color);
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+.cast-page .landing .person-info .personal-wrapper {
+  padding: 1rem;
+}
+.cast-page .landing .person-info .info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  color: var(--primary-txt-color);
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+}
+.cast-page .landing .person-info .info strong {
+  font-weight: bold;
+  color: var(--accent-color);
+}
+.cast-page .landing .person-info .info .known-item:not(:last-child) {
+  padding-right: 0.5rem;
+  border-right: 0.15rem solid var(--secondary-txt-color);
+}
+.cast-page .landing .person-info .biography {
+  position: relative;
+  color: var(--primary-txt-color);
+  line-height: 2;
+  overflow: hidden;
+  padding: 1rem;
+}
+.cast-page .landing .person-info .biography.collapse {
+  max-height: 13rem;
+}
+.cast-page .landing .person-info .biography.show {
+  max-height: none;
+}
+.cast-page .landing .person-info .biography .collapse-btn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: none;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1rem;
+  line-height: 2;
+  padding: 0 1rem;
+  color: var(--accent-color);
+  box-shadow: 0 0 20px 10px rgba(30 41 46 / 0.9);
+  background-color: var(--primary-bg-color);
+  margin-top: 0.5rem;
+  cursor: pointer;
+}
+.cast-page .landing .person-info .biography.collapse .collapse-btn {
+  display: flex;
+}
+.cast-page .landing .person-info .biography.collapse .collapse-btn .icon {
+  transform: translateX(-0.5rem);
+}
+.cast-page .landing .person-info .biography.show .collapse-btn {
+  position: relative;
+  box-shadow: 0 0 20px 10px transparent;
+  padding: 0 0;
+}
+/* Person Info End */
+/* Header End */
+/* Cast Images Start */
+/* Imgs Container */
+.cast-page .imgs-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+  gap: 1rem;
+  padding: 2rem 1rem 0;
+}
+.cast-page .imgs-container .cast-img {
+  width: 100%;
+  aspect-ratio: 1;
+  cursor: pointer;
+}
+.cast-page .imgs-container .cast-img:nth-child(n + 6) {
+  display: none;
+}
+.cast-page .imgs-container .cast-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+.cast-page .imgs-container .more {
+  display: none;
+}
+.cast-page .imgs-container .cast-img:nth-child(n + 7) ~ .more {
+  display: block;
+}
+.cast-page .imgs-container .more .wraper {
+  width: 100%;
+  aspect-ratio: 1;
+}
+/* Browse Container */
+.cast-page .browse-imgs {
+  position: fixed;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  background-color: var(--primary-bg-color);
+  z-index: 100;
+}
+.cast-page .browse-imgs.open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+.cast-page .browse-imgs .browse-container {
+  position: absolute;
+  height: 100%;
+  display: flex;
+  overflow: hidden;
+}
+.cast-page .browse-imgs .cast-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+.cast-page .browse-imgs .cast-img img {
+  width: min(30rem, 100%);
+  aspect-ratio: 0.667;
+  border-radius: 0.5rem;
+}
+.cast-page .browse-imgs .btn {
+  height: 2.5rem;
+  width: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+.cast-page .browse-imgs .slide {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 1rem;
+  background-color: var(--secondary-bg-color);
+}
+.cast-page .browse-imgs .slide.not-allowed {
+  pointer-events: none;
+}
+.cast-page .browse-imgs .slide.not-allowed .icon {
+  color: var(--secondary-txt-color);
+}
+.cast-page .browse-imgs .slide.right {
+  left: auto;
+  right: 1rem;
+}
+.cast-page .browse-imgs .btn .icon {
+  color: var(--accent-color);
+}
+.cast-page .browse-imgs .close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background-color: var(--secondary-bg-color);
+}
+/* Cast Images End */
+/* Media Queries Start */
+@media (hover: hover) {
+  .cast-page .landing .poster-side .social-accounts a {
+    color: rgba(255 255 255 / 0.2);
+  }
+  .cast-page .landing .poster-side .social-accounts a.facebook:hover {
+    color: #4267b2;
+  }
+  .cast-page .landing .poster-side .social-accounts a.twitter:hover {
+    color: #00acee;
+  }
+  .cast-page .landing .poster-side .social-accounts a.instagram:hover {
+    color: #5851db;
+  }
+  .cast-page .landing .poster-side .social-accounts a.imdb:hover {
+    color: #f3ce13;
+  }
+  .cast-page .landing .person-info .biography .collapse-btn:hover {
+    gap: 1rem;
+  }
+  .cast-page .landing .person-info .biography .collapse-btn:hover .icon {
+    transform: translateX(0) rotate(90deg);
+  }
+  .cast-page .landing .person-info .biography.show .collapse-btn:hover .icon {
+    transform: translateX(-0.5rem) rotate(0);
+  }
+  .cast-page .cards-container .expand-btn:hover + .poster .card-title {
+    bottom: 2rem;
+  }
+  .cast-page .cards-container .expand-btn:hover + .poster .character {
+    bottom: 0.5rem;
+  }
+}
+@media (hover: none) {
+  .cast-page .landing .poster-side .social-accounts a.facebook {
+    color: #4267b2;
+  }
+  .cast-page .landing .poster-side .social-accounts a.twitter {
+    color: #00acee;
+  }
+  .cast-page .landing .poster-side .social-accounts a.instagram {
+    color: #3f729b;
+  }
+  .cast-page .landing .poster-side .social-accounts a.imdb {
+    color: #f3ce13;
+  }
+}
+@media (min-width: 1024px) {
+  .cast-page .landing .person-info .section-title {
+    font-size: 1.4rem;
+  }
+}
+@media (max-width: 1023px) {
+  .cast-page .landing {
+    align-items: center;
+    flex-direction: column;
+  }
+}
+/* Media Queries End */

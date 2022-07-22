@@ -8,7 +8,7 @@ class SearchResult extends MainClass {
             <h2 class="section-title"><span>Result of:</span> ${query}</h2>
             <div class="cards-container grid">
                 ${
-                  this._getSectionCards(resultCards) ||
+                  this._getSectionCards(resultCards.results) ||
                   `
                     <div class="no-content">
                       <i class="icon empty-cards"></i>

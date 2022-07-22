@@ -180,7 +180,7 @@ body {
 }
 .scroll-to-top {
   position: fixed;
-  bottom: 2rem;
+  bottom: 4rem;
   right: 2rem;
   height: 3rem;
   width: 3rem;

@@ -49,28 +49,34 @@ class MovieSectionAll extends MoviePage {
   _getSectionContent(sectionObj, type) {
     this.sectionContainer.innerHTML = "";
     if (type === "cast") {
-      return this._getCastCards(sectionObj, false);
+      return this.getCastCards(sectionObj, false);
     } else {
       return this._getImagesSection();
     }
   }
 
   _getImagesSection() {
-    dataObj.moviePage.posters = [];
     return `
-      <section class="posters">
-        <h3 class="imgs-title">Posters</h3>
-        <div class="cards-container grid">
-          ${this.getAllImages(dataObj.moviePage.posters, "poster")}
-        </div>
-      </section>
-      <section class="backdrops">
+      ${
+        dataObj.moviePage.posters.length !== 0
+          ? `<section class="posters">
+          <h3 class="imgs-title">Posters</h3>
+          <div class="cards-container grid">
+            ${this.getAllImages(dataObj.moviePage.posters, "poster")}
+          </div>
+        </section>`
+          : ""
+      }
+      ${
+        dataObj.moviePage.backdrops.length !== 0
+          ? `<section class="backdrops">
         <h3 class="imgs-title">Backdrops</h3>
         <div class="cards-container grid">
           ${this.getAllImages(dataObj.moviePage.backdrops, "backdrop")}
         </div>
-      </section>
-    `;
+      </section>`
+          : ""
+      }`;
   }
 
   getAllImages(arr, type) {
@@ -118,9 +124,10 @@ class MovieSectionAll extends MoviePage {
 
   sectionAllBackListener() {
     this.sectionAllBackBtn.addEventListener("click", () => {
-      this.infoSection.style.display = "block";
-      this.headerSection.style.display = "block";
-
+      setTimeout(() => {
+        this.infoSection.style.display = "block";
+        this.headerSection.style.display = "block";
+      }, 300);
       this.sectionAll.classList.remove("active");
     });
   }
