@@ -38,6 +38,9 @@
   width: 100%;
   height: auto;
 }
+.cast-page .landing .no-img {
+  height: auto;
+}
 .cast-page .landing .poster-side .social-accounts {
   display: flex;
   justify-content: center;
@@ -122,10 +125,10 @@
 /* Cast Images Start */
 /* Imgs Container */
 .cast-page .imgs-container {
-  display: grid;
   grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
   gap: 1rem;
   padding: 2rem 1rem 0;
+  align-items: start;
 }
 .cast-page .imgs-container .cast-img {
   width: 100%;
@@ -137,7 +140,7 @@
 }
 .cast-page .imgs-container .cast-img img {
   width: 100%;
-  height: 100%;
+  aspect-ratio: 1;
   object-fit: cover;
   border-radius: 0.5rem;
 }
@@ -147,7 +150,7 @@
 .cast-page .imgs-container .cast-img:nth-child(n + 7) ~ .more {
   display: block;
 }
-.cast-page .imgs-container .more .wraper {
+.cast-page .imgs-container .more .wrapper {
   width: 100%;
   aspect-ratio: 1;
 }
@@ -247,8 +250,12 @@
   .cast-page .landing .person-info .biography.show .collapse-btn:hover .icon {
     transform: translateX(-0.5rem) rotate(0);
   }
+  /* .cards-container .poster .card-title,
+  .cards-container .poster .character {
+    position: relative;
+  } */
   .cast-page .cards-container .expand-btn:hover + .poster .card-title {
-    bottom: 2rem;
+    bottom: 4rem;
   }
   .cast-page .cards-container .expand-btn:hover + .poster .character {
     bottom: 0.5rem;

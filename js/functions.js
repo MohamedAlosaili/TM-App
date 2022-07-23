@@ -100,7 +100,21 @@ export async function getSearchResult(query) {
 
   const results = await fetchData(SEARCH(query));
 
-  SearchResult.rendermainPageElement(results, query);
+  separateTheResults(results);
+  SearchResult.rendermainPageElement(query);
+}
+
+function separateTheResults(results) {
+  dataObj.searchResults.person = [];
+  dataObj.searchResults.movies = [];
+
+  results.results.forEach((item) => {
+    if (item.media_type === "person") {
+      dataObj.searchResults.person.push(item);
+    } else {
+      dataObj.searchResults.movies.push(item);
+    }
+  });
 }
 
 export async function getCastPage(id) {

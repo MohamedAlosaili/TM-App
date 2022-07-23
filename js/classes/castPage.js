@@ -19,9 +19,14 @@ class CastPage extends MainClass {
                     <header class="landing">
                         <div class="poster-side">
                             <figure class="poster">
-                                <img src="${POSTER_URL}${
-      personObj.profile_path
-    }" alt="${personObj.name}">
+                                ${
+                                  personObj.profile_path
+                                    ? `<img src="${POSTER_URL}${personObj.profile_path}" alt="${personObj.name}">`
+                                    : ` <div class="no-img">
+                                      <i class="icon fa-solid fa-file-image"></i>
+                                      Image Not <br> Available
+                                    </div>`
+                                }
                             </figure>   
                             <ul class="social-accounts">
                                 ${this._getCastAccounts(personObj.external_ids)}
@@ -35,10 +40,10 @@ class CastPage extends MainClass {
                                     <h2 class="section-title">Personal info</h2>  
                                     <div class="personal-wrapper">
                                       <p class="info"><strong>Known for: </strong>${
-                                        personObj.known_for_department
+                                        personObj.known_for_department ?? "-"
                                       }</p>
                                       <p class="info"><strong>Date of birth: </strong>${
-                                        personObj.birthday
+                                        personObj.birthday ?? "-"
                                       }</p>
                                       ${
                                         personObj.deathday
@@ -64,7 +69,8 @@ class CastPage extends MainClass {
                             <section>
                                 <h2 class="section-title">Biography</h2>            
                                 <p class="biography" data-biography>${
-                                  personObj.biography
+                                  personObj.biography ||
+                                  "Biography not available"
                                 }
                                       <button class="collapse-btn" data-collapse-btn>Show more<i class="icon fa-solid fa-chevron-right"></i></button>    
                                   </p>
@@ -77,13 +83,13 @@ class CastPage extends MainClass {
                                 ? "Image"
                                 : "Images"
                             }</h2>    
-                            <div class="imgs-container cards-container">
+                            <div class="imgs-container cards-container grid">
                                 ${this._getCastImages(
                                   personObj.images.profiles,
                                   personObj.name
                                 )}
-                                <button class="more btn" data-browse-imgs>
-                                      <p class="wraper">
+                                <button class="more btn" data-browse-imgs data-idx="0">
+                                      <p class="wrapper">
                                           All Images
                                           <i class="icon fa-solid fa-chevron-right"></i>
                                       </p>
@@ -180,6 +186,10 @@ class CastPage extends MainClass {
   }
 
   _calculateAge(birthday, deathday) {
+    if (!birthday) {
+      return "-";
+    }
+
     const DOB = new Date(birthday);
 
     let lastDate;
@@ -196,10 +206,12 @@ class CastPage extends MainClass {
   _gnederType(num) {
     if (num === 1) return "Female";
     else if (num === 2) return "Male";
-    else return "Non-binary";
+    else if (num === 3) return "Non-binary";
+    else return "-";
   }
 
   _knownAsList(knownList) {
+    if (knownList.length === 0) return "-";
     const list = document.createElement("p");
 
     knownList.forEach((item) => {
@@ -236,7 +248,7 @@ class CastPage extends MainClass {
         `;
     }
 
-    imgs.forEach((img) => {
+    imgs.forEach((img, idx) => {
       const card = document.createElement("div");
 
       !browse ? (card.className = "cast-img") : false;
@@ -252,7 +264,7 @@ class CastPage extends MainClass {
             : `
                 <img src="${POSTER_URL + img.file_path}" alt="${
                 name ?? "Unknown"
-              }" data-browse-imgs>
+              }" data-browse-imgs data-idx="${idx}">
                 `
         }
       `;

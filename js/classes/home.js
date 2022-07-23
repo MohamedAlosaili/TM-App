@@ -6,7 +6,7 @@ class Home extends mainClass {
     const { trendDay, trendWeek, popularMovies, popularTV } = homeObj;
 
     this.mainPage.innerHTML = `
-        ${this._getHomeHeaderSection(trendDay)}
+        ${this.getHeaderSection(trendDay)}
         <div class="container flex-column">
             <section class="section" id="${
               dataObj.pageName

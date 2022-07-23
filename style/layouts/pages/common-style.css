@@ -3,7 +3,7 @@
 .section-nav .nav-back,
 .section-nav .btn,
 .section-nav .btn .num,
-.cards-container .more .wraper,
+.cards-container .more .wrapper,
 .cards-container .more .icon {
   -webkit-transition: var(--transition-three);
   -moz-transition: var(--transition-three);
@@ -13,8 +13,7 @@
 .cards-container .expand-btn .text,
 .cards-container .poster::before,
 .cards-container .poster::after,
-.cards-container .poster .card-title,
-.cards-container .expand-btn:hover + .poster .character {
+.cards-container .poster .wrapper {
   -webkit-transition: var(--transition-five);
   -moz-transition: var(--transition-five);
   -o-transition: var(--transition-five);
@@ -23,8 +22,7 @@
 .cards-container .expand-btn:hover .icon,
 .cards-container .expand-btn:hover .text,
 .cards-container .expand-btn:hover + .poster::after,
-.cards-container .expand-btn:hover + .poster .card-title,
-.cards-container .expand-btn:hover + .poster .character {
+.cards-container .expand-btn:hover + .poster .wrapper {
   -webkit-transition-delay: var(--transition-five);
   -moz-transition-delay: var(--transition-five);
   -o-transition-delay: var(--transition-five);
@@ -124,7 +122,7 @@
 .cards-container .more {
   padding: 0;
 }
-.cards-container .more .wraper {
+.cards-container .more .wrapper {
   width: 12rem;
   height: auto;
   aspect-ratio: 0.667;
@@ -176,9 +174,14 @@
   padding-bottom: 5rem;
 }
 .landing .poster img {
-  box-shadow: 0 0 1.2rem var(--secondary-bg-color);
   width: 16rem;
   border-radius: 0.5rem;
+  -webkit-animation: skeleton-loading 1s linear infinite alternate-reverse;
+  -moz-animation: skeleton-loading 1s linear infinite alternate-reverse;
+  animation: skeleton-loading 1s linear infinite alternate-reverse;
+  -webkit-box-shadow: 0 0 1.2rem var(--secondary-bg-color);
+  -moz-box-shadow: 0 0 1.2rem var(--secondary-bg-color);
+  box-shadow: 0 0 1.2rem var(--secondary-bg-color);
 }
 .landing .post-info {
   display: flex;
@@ -387,23 +390,29 @@
   width: 100%;
   border-radius: 0.5rem;
   margin-bottom: 0.5rem;
+  -webkit-animation: skeleton-loading 1s linear infinite alternate-reverse;
+  -moz-animation: skeleton-loading 1s linear infinite alternate-reverse;
+  animation: skeleton-loading 1s linear infinite alternate-reverse;
+  -webkit-box-shadow: 0 0 1rem var(--secondary-bg-color);
+  -moz-box-shadow: 0 0 1rem var(--secondary-bg-color);
+  box-shadow: 0 0 1rem var(--secondary-bg-color);
 }
 .cards-container.flex .card .poster img {
+  display: block;
   width: 12rem;
   border-radius: 0.5rem;
   margin-bottom: 0.5rem;
   z-index: 1;
 }
-.cards-container .poster .card-title {
+.cards-container .poster .wrapper {
   padding: 0 0.5rem;
-  color: var(--primary-txt-color);
   z-index: 3;
 }
+.cards-container .poster .card-title {
+  color: var(--primary-txt-color);
+}
 .cards-container .poster .character {
-  padding-left: 0.5rem;
   color: var(--secondary-txt-color);
-  margin-top: 0.5rem;
-  z-index: 3;
 }
 .cards-container .card .watchlist-btn {
   position: absolute;
@@ -423,12 +432,20 @@
   display: block;
   width: 100%;
   margin-bottom: 0.5rem;
+  text-align: left;
   cursor: pointer;
 }
 .cards-container .cast-poster img {
+  display: block;
   width: 12rem;
   aspect-ratio: 0.667;
   border-radius: 0.5rem;
+  -webkit-animation: skeleton-loading 1s linear infinite alternate-reverse;
+  -moz-animation: skeleton-loading 1s linear infinite alternate-reverse;
+  animation: skeleton-loading 1s linear infinite alternate-reverse;
+  -webkit-box-shadow: 0 0 1rem var(--secondary-bg-color);
+  -moz-box-shadow: 0 0 1rem var(--secondary-bg-color);
+  box-shadow: 0 0 1rem var(--secondary-bg-color);
 }
 .cards-container .cast-poster figcaption {
   color: var(--primary-txt-color);
@@ -482,6 +499,9 @@
   }
   .cards-container .poster {
     overflow: hidden;
+    -webkit-box-shadow: 0 0 1rem var(--secondary-bg-color);
+    -moz-box-shadow: 0 0 1rem var(--secondary-bg-color);
+    box-shadow: 0 0 1rem var(--secondary-bg-color);
   }
   .cards-container .poster::before {
     content: "";
@@ -519,18 +539,17 @@
   .cards-container .expand-btn:hover + .poster::after {
     height: 100%;
   }
-  .cards-container .poster .card-title,
-  .cards-container .poster .character {
+  .cards-container .poster .wrapper {
     position: absolute;
     bottom: -100%;
   }
-  .cards-container .expand-btn:hover + .poster .card-title {
+  .cards-container .expand-btn:hover + .poster .wrapper {
     bottom: 0.5rem;
   }
-  .cards-container .more .wraper:hover {
+  .cards-container .more .wrapper:hover {
     color: var(--accent-color);
   }
-  .cards-container .more .wraper:hover .icon {
+  .cards-container .more .wrapper:hover .icon {
     color: var(--accent-color);
     transform: translateX(0.5rem);
   }
@@ -586,6 +605,30 @@
   }
   100% {
     transform: translate(-50%, 0.4rem);
+  }
+}
+@-webkit-keyframes skeleton-loading {
+  0% {
+    background-color: rgba(0 0 0 / 0.6);
+  }
+  100% {
+    background-color: rgba(0 0 0 / 0.2);
+  }
+}
+@-moz-keyframes skeleton-loading {
+  0% {
+    background-color: rgba(0 0 0 / 0.6);
+  }
+  100% {
+    background-color: rgba(0 0 0 / 0.2);
+  }
+}
+@keyframes skeleton-loading {
+  0% {
+    background-color: rgba(0 0 0 / 0.6);
+  }
+  100% {
+    background-color: rgba(0 0 0 / 0.2);
   }
 }
 /* Animation End */

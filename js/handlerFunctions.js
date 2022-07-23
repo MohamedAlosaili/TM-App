@@ -5,15 +5,34 @@ import { mainClass } from "./classes/mainClass.js";
 import { moviePage } from "./classes/moviePage.js";
 import MovieSectionAll from "./classes/movieSectionAll.js";
 import Navbar from "./classes/navbar.js";
+import SearchResult from "./classes/searchResult.js";
 import {
+  getHomePage,
+  getNewDiscoverPageCards,
+  getMoreCards,
   removeFromWatchlist,
   addToWatchlist,
   getMoviePage,
-  getHomePage,
+  getSearchResult,
   getCastPage,
-  getNewDiscoverPageCards,
-  getMoreCards,
 } from "./functions.js";
+
+export function searchFromHandler(e) {
+  e.preventDefault();
+  const value = Navbar.$searchInput.value;
+
+  if (value) {
+    SearchResult.renderLoader();
+    getSearchResult(value);
+
+    Navbar.mobileMenuState("remove", "auto", "close");
+    dataObj.pageName = "search?q=";
+    location.hash = `search?q=${value}`;
+    Navbar.updateNavLinks();
+    Navbar.$searchInput.value = "";
+    Navbar.$searchInput.blur();
+  }
+}
 
 export function layerHandler() {
   Navbar.mobileMenuState("remove", "auto", "close");
@@ -32,7 +51,7 @@ export function mainPageHandler(e) {
     MovieSectionAll.getSectionAll(e.target.dataset.type);
   else if (e.target.closest("[data-back-home]")) backToHomePage();
   else if (e.target.closest("[data-expand-cast]")) expandCastHandler(e);
-  else if (e.target.closest("[data-browse-imgs]")) openBrowseImgs();
+  else if (e.target.closest("[data-browse-imgs]")) openBrowseImgs(e);
 }
 
 function watchlistBtnHandler(e) {
@@ -89,7 +108,21 @@ function expandCastHandler(e) {
   Navbar.updateNavLinks();
 }
 
-function openBrowseImgs() {
+function openBrowseImgs(e) {
+  const img = e.target.closest("[data-browse-imgs]");
+  const idx = +img.dataset.idx;
+
+  if (idx === 0) CastPage.leftSlider.classList.add("not-allowed");
+  else if (idx === CastPage.browseContainer.children.length - 1)
+    CastPage.rightSlider.classList.add("not-allowed");
+  else {
+    CastPage.leftSlider.classList.remove("not-allowed");
+    CastPage.rightSlider.classList.remove("not-allowed");
+  }
+
+  CastPage.browseNum = idx;
+
+  CastPage.browseContainer.style.left = `-${idx * 100}vw`;
   CastPage.browseContainer.parentElement.classList.add("open");
 }
 

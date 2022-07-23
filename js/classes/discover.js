@@ -13,7 +13,7 @@ class Discover extends MainClass {
 
   rendermainPageElement(movieObj, generList) {
     this.mainPage.innerHTML = `
-            ${this._getHomeHeaderSection(movieObj, dataObj.pageName)}
+            ${this.getHeaderSection(movieObj, dataObj.pageName)}
             <section class="discover-section" id="${
               dataObj.pageName
             }/first_section">

@@ -1,3 +1,4 @@
+/* Layer on Nav Start */
 .search-result,
 .watchlist-page {
   position: relative;
@@ -18,6 +19,16 @@
   display: flex;
   flex-direction: column;
   gap: 3rem;
+}
+/* Layer on Nav End */
+/* Section Title Changes */
+.search-result .section-title {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.search-result .flex-column .section-title {
+  font-size: 1.4rem;
 }
 .search-result .section-title span {
   color: var(--accent-color);
@@ -44,7 +55,16 @@
   border-right: 0.19rem solid var(--primary-txt-color);
   border-bottom: 0.19rem solid var(--primary-txt-color);
 }
+/* Search Containers */
+.search-result .cards-container.grid {
+  padding: 2rem 1rem 1rem;
+}
+.search-result .cards-container .cast-poster figcaption {
+  font-size: 1rem;
+}
+/* Images Changes */
 .search-result .cards-container .poster img,
+.search-result .cards-container .cast-poster img,
 .watchlist-page .cards-container .poster img {
   width: 100%;
 }

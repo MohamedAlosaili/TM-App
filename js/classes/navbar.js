@@ -1,20 +1,20 @@
 import { dataObj } from "../app.js";
-import { controlChangePages, getSearchResult } from "../functions.js";
-import { layerHandler } from "../handlerFunctions.js";
-import SearchResult from "./searchResult.js";
+import { controlChangePages } from "../functions.js";
+import { layerHandler, searchFromHandler } from "../handlerFunctions.js";
 import { mainClass } from "../classes/mainClass.js";
 
 class Navbar {
   _navbar = document.querySelector(".nav-bar");
   _navLinks = document.querySelectorAll("[data-page]");
   _searchFrom = document.querySelector("[data-search-form]");
+  $searchInput = document.querySelector("[data-search-input]");
   _mobileMenuToggler = document.querySelector("[data-mobile-toggler]");
   _mobileMenu = document.querySelector("[data-mobile-menu]");
   _footerYear = document.querySelector("[data-copyright-year]");
 
   callClassFunctions() {
     this._navLinksListener();
-    this._searchFromListener();
+    this._searchFromListener(searchFromHandler);
     this._mobileMenuListener();
     this._setFooterYear();
     mainClass.layerListener(layerHandler);
@@ -45,23 +45,8 @@ class Navbar {
     });
   }
 
-  _searchFromListener() {
-    const searchInput = document.querySelector("[data-search-input]");
-    this._searchFrom.addEventListener("submit", (e) => {
-      e.preventDefault();
-
-      if (searchInput.value) {
-        SearchResult.renderLoader();
-        getSearchResult(searchInput.value);
-
-        this.mobileMenuState("remove", "auto", "close");
-        dataObj.pageName = "search?q=";
-        location.hash = `search?q=${searchInput.value}`;
-        this.updateNavLinks();
-        searchInput.value = "";
-        searchInput.blur();
-      }
-    });
+  _searchFromListener(handler) {
+    this._searchFrom.addEventListener("submit", handler);
   }
 
   _mobileMenuListener() {

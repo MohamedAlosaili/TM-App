@@ -29,17 +29,31 @@ export default class MainClass {
     this.mainPage.addEventListener("click", handler);
   }
 
-  _getHomeHeaderSection(arrOfMovies, type = null) {
+  getHeaderSection(arrOfMovies, type = null) {
     const result = arrOfMovies.results[0];
     return `
         <article class="landing">
             <figure class="backdrop">
-                <img src="${BACKDROP_URL}${result.backdrop_path}" alt="'${
-      result.title ??
-      result.original_title ??
-      result.name ??
-      result.original_name
-    }' backdrop">
+              ${
+                !result.backdrop_path && !result.poster_path
+                  ? ""
+                  : result.backdrop_path
+                  ? `<img src="${BACKDROP_URL + result.backdrop_path}" alt="'${
+                      result.title ??
+                      result.original_title ??
+                      result.name ??
+                      result.original_name
+                    }' backdrop">
+                `
+                  : `
+                <img src="${BACKDROP_URL + result.poster_path}" alt="'${
+                      result.title ??
+                      result.original_title ??
+                      result.name ??
+                      result.original_name
+                    }' backdrop">
+                `
+              }
             </figure>
             <div class="container" data-poster-parent>
             <figure class="poster">
@@ -116,8 +130,6 @@ export default class MainClass {
     }
 
     arrOfCards.forEach((card, idx) => {
-      if (card.media_type === "person") return;
-
       const cardEl = document.createElement("div");
       cardEl.className = "card";
       cardEl.dataset.posterParent = "";
@@ -145,17 +157,19 @@ export default class MainClass {
                         Image Not <br> Available
                     </div>`
                 }
-                <figcaption class="card-title">${
-                  card.title ??
-                  card.original_title ??
-                  card.name ??
-                  card.original_name
-                }</figcaption>
-                ${
-                  card.character
-                    ? `<p class="character">${card.character}</p>`
-                    : ""
-                }
+                <div class="wrapper">
+                  <figcaption class="card-title">${
+                    card.title ??
+                    card.original_title ??
+                    card.name ??
+                    card.original_name
+                  }</figcaption>
+                  ${
+                    card.character
+                      ? `<p class="character">${card.character}</p>`
+                      : ""
+                  }
+                </div>
             </figure>
             ${
               checkTheWatchlist(card.id)
@@ -183,23 +197,22 @@ export default class MainClass {
   getCastCards(castArr, shirnk = true) {
     let lotOfCards = false;
 
-    if (castArr.length === 0) {
-      return `
-      <div class="no-content">
-      <i class="icon empty-cards"></i>
-        <p class="text">
-        There are no cast for <span class="movie-name">${
-          dataObj.moviePage.movieObj.title ??
-          dataObj.moviePage.movieObj.original_title ??
-          dataObj.moviePage.movieObj.name ??
-          dataObj.moviePage.movieObj.original_name
-        }
-        </p>
-      </div>
-      `;
-    }
-
     if (shirnk) {
+      if (castArr.length === 0) {
+        return `
+        <div class="no-content">
+        <i class="icon empty-cards"></i>
+          <p class="text">
+          There are no cast for <span class="movie-name">${
+            dataObj.moviePage.result.title ??
+            dataObj.moviePage.result.original_title ??
+            dataObj.moviePage.result.name ??
+            dataObj.moviePage.result.original_name
+          }
+          </p>
+        </div>
+        `;
+      }
       dataObj.moviePage.cast = [...castArr];
       if (castArr.length > 10) {
         lotOfCards = true;
@@ -244,7 +257,7 @@ export default class MainClass {
       const seeAllCards = document.createElement("div");
       seeAllCards.className = "more cast btn";
       seeAllCards.innerHTML = `
-            <p class="wraper" data-moreten-btn data-type="cast">
+            <p class="wrapper" data-moreten-btn data-type="cast">
                 All Cast
                 <i class="icon fa-solid fa-chevron-right"></i>
             </p>

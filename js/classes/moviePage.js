@@ -345,7 +345,7 @@ export default class MoviePage extends MainClass {
       const seeAllCards = document.createElement("div");
       seeAllCards.className = "more imgs btn";
       seeAllCards.innerHTML = `
-                  <p class="wraper" data-moreten-btn data-type="images">
+                  <p class="wrapper" data-moreten-btn data-type="images">
                       All ${type}
                       <i class="icon fa-solid fa-chevron-right"></i>
                   </p>

@@ -46,6 +46,10 @@ export const dataObj = {
     backdrops: [],
     posters: [],
   },
+  searchResults: {
+    person: [],
+    movies: [],
+  },
 };
 
 function getBookmarks() {
