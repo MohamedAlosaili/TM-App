@@ -1,5 +1,4 @@
 import {
-  GENRE_LIST,
   DAY_TREND,
   WEEK_TREND,
   FULL_DETAILS,
@@ -14,14 +13,18 @@ import Watchlist from "./classes/watchlist.js";
 import { moviePage } from "./classes/moviePage.js";
 import SearchResult from "./classes/searchResult.js";
 import CastPage from "./classes/castPage.js";
+import Error from "./classes/errorHandler.js";
 
 async function fetchData(API_URL) {
   try {
     const req = await fetch(API_URL);
 
-    if (!req.ok) throw err;
+    const res = await req.json();
 
-    const res = req.json();
+    if (!req.ok) {
+      Error.renderError(req.status, res.status_message);
+      throw res.status_message;
+    }
 
     return res;
   } catch (err) {
@@ -55,11 +58,10 @@ export async function getDiscoverPage(type = null) {
   !type ? dataObj.pageName : false;
 
   const popular = await fetchData(POPULAR(type));
-  const generList = await fetchData(GENRE_LIST(type));
 
   dataObj.discoverCurrentUrl = POPULAR(type);
 
-  Discover.rendermainPageElement(popular, generList);
+  Discover.rendermainPageElement(popular);
 }
 
 export function getWatchlistPage() {
@@ -120,17 +122,17 @@ function separateTheResults(results) {
 export async function getCastPage(id) {
   CastPage.renderLoader();
 
-  const personObj = await fetchData(
-    FULL_DETAILS(
-      "person",
-      id,
-      "&append_to_response=combined_credits,images,external_ids"
-    )
-  );
-  const popularPeople = await fetchData(POPULAR("person"));
+  const [personObj, popularPeople] = await Promise.all([
+    fetchData(
+      FULL_DETAILS(
+        "person",
+        id,
+        "&append_to_response=combined_credits,images,external_ids"
+      )
+    ),
+    fetchData(POPULAR("person")),
+  ]);
 
-  console.log(popularPeople);
-  console.log(personObj);
   CastPage.rendermainPageElement(personObj, popularPeople);
 }
 
@@ -165,7 +167,7 @@ export async function getMoreCards() {
   );
   Discover.loadMoreListener();
   Discover.clearLoadMore();
-  Discover.cardContainer.innerHTML += Discover._getSectionCards(
+  Discover.cardContainer.innerHTML += Discover.getSectionCards(
     newCards.results,
     dataObj.pageName
   );
@@ -199,11 +201,11 @@ export function addToWatchlist(btn) {
 
 export function removeFromWatchlist(id) {
   let removedIdx;
-  dataObj.watchlist.results.forEach((item, idx) => {
+  dataObj.watchlist.forEach((item, idx) => {
     if (`${item.id}` === `${id}`) removedIdx = idx;
   });
 
-  dataObj.watchlist.results.splice(removedIdx, 1);
+  dataObj.watchlist.splice(removedIdx, 1);
 
   localStorage.setItem("watchlist", JSON.stringify(dataObj.watchlist));
 }

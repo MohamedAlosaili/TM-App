@@ -222,6 +222,34 @@ body {
   margin-top: -0.2rem;
 }
 /* Footer End */
+/* Errors Start */
+.error {
+  position: absolute;
+  top: 10rem;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+.error .error-message {
+  font-size: 1.2rem;
+  color: var(--secondary-txt-color);
+}
+.error .error-message:first-of-type {
+  color: var(--primary-txt-color);
+  margin-bottom: 2rem;
+  font-size: 1.6rem;
+}
+.error .error-code {
+  color: var(--accent-color);
+  font-size: 10rem;
+  z-index: -1;
+}
+.error .btn {
+  background-color: var(--accent-color);
+  color: var(--primary-txt-color);
+  margin-top: 2rem;
+}
+/* Errors End */
 /* Media Queries Start */
 @media (max-width: 639px) {
   html {

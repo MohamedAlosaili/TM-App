@@ -3,7 +3,7 @@ import MainClass from "./mainClass.js";
 
 class SearchResult extends MainClass {
   rendermainPageElement(query) {
-    this.mainPage.innerHTML = `
+    this.$mainPage.innerHTML = `
         <section class="search-result">
         <div class="container">
             <h2 class="section-title"><span>Result of:</span> ${query}</h2>
@@ -12,7 +12,7 @@ class SearchResult extends MainClass {
                   <h3 class="section-title">Movies / TV</h3>
                   <div class="cards-container grid">
                   ${
-                    this._getSectionCards(dataObj.searchResults.movies) ||
+                    this.getSectionCards(dataObj.searchResults.movies) ||
                     `
                       <div class="no-content">
                         <i class="icon empty-cards"></i>

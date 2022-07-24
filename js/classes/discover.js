@@ -11,8 +11,8 @@ class Discover extends MainClass {
   discoverNav;
   loadMoreBtn;
 
-  rendermainPageElement(movieObj, generList) {
-    this.mainPage.innerHTML = `
+  rendermainPageElement(movieObj) {
+    this.$mainPage.innerHTML = `
             ${this.getHeaderSection(movieObj, dataObj.pageName)}
             <section class="discover-section" id="${
               dataObj.pageName
@@ -30,7 +30,7 @@ class Discover extends MainClass {
                         </nav>
                     </header>
                     <div class="cards-container grid popular" data-discover-container>    
-                        ${this._getSectionCards(
+                        ${this.getSectionCards(
                           movieObj.results,
                           dataObj.pageName
                         )}
@@ -40,13 +40,11 @@ class Discover extends MainClass {
             </section>
         `;
 
-    this.filterBtn = this.mainPage.querySelector("[data-filter]");
-    this.genreList = this.mainPage.querySelector("[data-genre-list]");
-    this.discoverNav = this.mainPage.querySelector("[data-discover-nav]");
-    this.cardContainer = this.mainPage.querySelector(
-      "[data-discover-container]"
-    );
-    this.loadMoreBtn = this.mainPage.querySelector("[data-load-more]");
+    this.filterBtn = document.querySelector("[data-filter]");
+    this.genreList = document.querySelector("[data-genre-list]");
+    this.discoverNav = document.querySelector("[data-discover-nav]");
+    this.cardContainer = document.querySelector("[data-discover-container]");
+    this.loadMoreBtn = document.querySelector("[data-load-more]");
 
     this._sectionNavListener();
     this.loadMoreListener();
@@ -63,7 +61,7 @@ class Discover extends MainClass {
         (this.cardContainer.className = `cards-container grid ${this.discoverPage}`),
       300
     );
-    this.cardContainer.innerHTML = this._getSectionCards(
+    this.cardContainer.innerHTML = this.getSectionCards(
       pageData.results,
       dataObj.pageName
     );

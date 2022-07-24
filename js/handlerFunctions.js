@@ -93,7 +93,9 @@ function expandBtnHandler(e) {
 }
 
 function backToHomePage() {
+  location.hash = "home";
   dataObj.pageName = "home";
+
   Navbar.updateNavLinks();
   getHomePage();
 }
@@ -195,6 +197,7 @@ export function leftSliderHandler() {
   CastPage.browseNum = num;
   CastPage.browseContainer.style.left = `-${num * 100}vw`;
 }
+
 export function rightSliderHandler() {
   CastPage.leftSlider.classList.remove("not-allowed");
   let num = CastPage.browseNum;

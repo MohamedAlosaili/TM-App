@@ -14,6 +14,8 @@ import Home from "./classes/home.js";
 import Discover from "./classes/discover.js";
 import Watchlist from "./classes/watchlist.js";
 import CastPage from "./classes/castPage.js";
+import Error from "./classes/errorHandler.js";
+import { mainClass } from "./classes/mainClass.js";
 
 export const dataObj = {
   watchlist: [],
@@ -60,8 +62,12 @@ function getBookmarks() {
 
 const init = (function () {
   getBookmarks();
+
   Navbar.callClassFunctions();
+  mainClass.mainPageListener(mainPageHandler);
+
   renderPage();
+  scrollToTop();
 })();
 
 function renderPage() {
@@ -81,24 +87,21 @@ function renderPage() {
     dataObj.pages[pageRequest](param);
 
     Navbar.updateNavLinks();
-
-    dataObj.classes[pageRequest].mainPageListener(mainPageHandler);
-  } else wrongPageRequested();
+  } else
+    Error.renderError(404, "The resource you requested could not be found.");
 }
 
-const scrollTopBtn = document.querySelector("[data-scroll-top]");
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 500) scrollTopBtn.classList.add("active");
-  else scrollTopBtn.classList.remove("active");
-});
-
-scrollTopBtn.addEventListener("click", () => {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth",
+function scrollToTop() {
+  const scrollTopBtn = document.querySelector("[data-scroll-top]");
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 500) scrollTopBtn.classList.add("active");
+    else scrollTopBtn.classList.remove("active");
   });
-});
 
-function wrongPageRequested() {
-  console.log("wrong page");
+  scrollTopBtn.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  });
 }

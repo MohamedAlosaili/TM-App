@@ -5,13 +5,13 @@ import Navbar from "./navbar.js";
 
 class Watchlist extends MainClass {
   rendermainPageElement(watchlistCards) {
-    this.mainPage.innerHTML = `
+    this.$mainPage.innerHTML = `
         <section class="watchlist-page">
             <div class="container">
                 <h2 class="section-title">WatchList<span class="icon"></span></h2> 
                 <div class="cards-container grid">
                     ${
-                      this._getSectionCards(watchlistCards) ||
+                      this.getSectionCards(watchlistCards) ||
                       `
                       <div class="no-content">
                         <i class="icon empty-cards"></i>

@@ -13,7 +13,7 @@ export default class MoviePage extends MainClass {
   navBtn;
 
   rendermainPageElement(movieObj, type) {
-    this.mainPage.innerHTML = `
+    this.$mainPage.innerHTML = `
         <section class="section-all" data-section-all>
             <div class="container">
                 <button class="btn" data-back-btn><i class="fa-solid fa-chevron-left"></i></button>
@@ -91,7 +91,7 @@ export default class MoviePage extends MainClass {
                     <h2 class="section-title">Similar movies</h2>
                     <div class="cards-container flex">
                         ${
-                          this._getSectionCards(
+                          this.getSectionCards(
                             movieObj.similar.results,
                             type
                           ) ||

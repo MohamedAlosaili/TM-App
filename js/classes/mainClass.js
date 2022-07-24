@@ -3,10 +3,10 @@ import { checkTheWatchlist } from "../functions.js";
 import { dataObj } from "../app.js";
 
 export default class MainClass {
-  mainPage = document.querySelector("[data-main-page]");
-  _layer = document.querySelector("[data-layer]");
+  $mainPage = document.querySelector("[data-main-page]");
+  $layer = document.querySelector("[data-layer]");
 
-  renderLoader(parent = this.mainPage, layer = true) {
+  renderLoader(parent = this.$mainPage, layer = true) {
     parent.innerHTML = `
     <div class="loading-spinner">
         <span class="load-out"></span>
@@ -17,16 +17,16 @@ export default class MainClass {
   }
 
   renderLayer(type, zIndex = 5) {
-    this._layer.classList[type]("active");
-    this._layer.style.zIndex = zIndex;
+    this.$layer.classList[type]("active");
+    this.$layer.style.zIndex = zIndex;
   }
 
   layerListener(handler) {
-    this._layer.addEventListener("click", handler);
+    this.$layer.addEventListener("click", handler);
   }
 
   mainPageListener(handler) {
-    this.mainPage.addEventListener("click", handler);
+    this.$mainPage.addEventListener("click", handler);
   }
 
   getHeaderSection(arrOfMovies, type = null) {
@@ -122,7 +122,7 @@ export default class MainClass {
     `;
   }
 
-  _getSectionCards(arrOfCards, type = null) {
+  getSectionCards(arrOfCards, type = null) {
     const cardContainer = document.createElement("div");
 
     if (!arrOfCards || arrOfCards.length === 0) {

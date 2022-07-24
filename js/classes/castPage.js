@@ -13,7 +13,7 @@ class CastPage extends MainClass {
   browseNum = 0;
 
   rendermainPageElement(personObj, popularPerople) {
-    this.mainPage.innerHTML = `
+    this.$mainPage.innerHTML = `
             <section class="cast-page">
                 <div class="container flex-column">
                     <header class="landing">
@@ -120,7 +120,7 @@ class CastPage extends MainClass {
                     <section>
                             <h2 class="section-title">Known for</h2>
                             <div class="cards-container flex">
-                                ${this._getSectionCards(
+                                ${this.getSectionCards(
                                   personObj.combined_credits.cast
                                 )}          
                             </div>
