@@ -1,6 +1,10 @@
 import { dataObj } from "../app.js";
-import { controlChangePages } from "../functions.js";
-import { layerHandler, searchFromHandler } from "../handlerFunctions.js";
+import {
+  layerHandler,
+  navLinksHandler,
+  searchFromHandler,
+  mobileMenuHandler,
+} from "../handlerFunctions.js";
 import { mainClass } from "../classes/mainClass.js";
 
 class Navbar {
@@ -14,7 +18,7 @@ class Navbar {
 
   callClassFunctions() {
     this._navLinksListener();
-    this._searchFromListener(searchFromHandler);
+    this._searchFromListener();
     this._mobileMenuListener();
     this._setFooterYear();
     mainClass.layerListener(layerHandler);
@@ -22,18 +26,7 @@ class Navbar {
 
   _navLinksListener() {
     this.$navLinks.forEach((link) => {
-      link.addEventListener("click", (e) => {
-        // Deal with links
-        this.$navLinks.forEach((link) =>
-          link.classList.remove("active", "shake")
-        );
-        e.currentTarget.classList.add("active", "shake");
-        this.mobileMenuState("remove", "auto", "close");
-
-        // Deal with pages
-        const pageName = link.dataset.page;
-        controlChangePages(pageName);
-      });
+      link.addEventListener("click", navLinksHandler);
     });
   }
 
@@ -45,16 +38,12 @@ class Navbar {
     });
   }
 
-  _searchFromListener(handler) {
-    this.$searchFrom.addEventListener("submit", handler);
+  _searchFromListener() {
+    this.$searchFrom.addEventListener("submit", searchFromHandler);
   }
 
   _mobileMenuListener() {
-    this.$mobileMenuToggler.addEventListener("click", (e) => {
-      if (this.$mobileMenu.classList.contains("active"))
-        this.mobileMenuState("remove", "auto", "close");
-      else this.mobileMenuState("add", "hidden", "open");
-    });
+    this.$mobileMenuToggler.addEventListener("click", mobileMenuHandler);
   }
 
   mobileMenuState(classType, overflow, toggler) {

@@ -1,53 +1,57 @@
+import MainClass from "./mainClass.js";
 import { dataObj } from "../app.js";
 import { BACKDROP_URL, POSTER_URL } from "../config.js";
-import MoviePage from "./moviePage.js";
 
-class MovieSectionAll extends MoviePage {
-  infoSection;
-  headerSection;
-  sectionAll;
-  sectionAllBackBtn;
-  sectionTitle;
-  cardContainer;
+class MovieSectionAll extends MainClass {
+  $infoSection;
+  $headerSection;
+  $sectionAll;
+  $sectionAllBackBtn;
+  $sectionTitle;
+  $sectionContainer;
 
   getSectionAll(type) {
-    this.infoSection = document.querySelector("[data-info-section]");
-    this.headerSection = document.querySelector("[data-movie-header]");
+    this.$infoSection = document.querySelector("[data-info-section]");
+    this.$headerSection = document.querySelector("[data-movie-header]");
     setTimeout(() => {
-      this.infoSection.style.display = "none";
-      this.headerSection.style.display = "none";
+      this.$infoSection.style.display = "none";
+      this.$headerSection.style.display = "none";
     }, 300);
 
-    this.sectionAll = document.querySelector("[data-section-all]");
-    this.sectionAll.classList.add("active");
+    this.$sectionAll = document.querySelector("[data-section-all]");
+    this.$sectionAll.classList.add("active");
     window.scrollTo({ top: 0, behavior: "smooth" });
     const obj = dataObj.moviePage[type] ?? null;
 
-    this.sectionAllBackBtn = document.querySelector("[data-back-btn]");
-    this.sectionTitle = document.querySelector("[data-section-title]");
-    this.sectionContainer = document.querySelector("[data-section-container]");
+    this.$sectionAllBackBtn = document.querySelector("[data-back-btn]");
+    this.$sectionTitle = document.querySelector("[data-section-title]");
+    this.$sectionContainer = document.querySelector("[data-section-container]");
 
     this.rendermainPageElement(obj, type);
   }
 
   rendermainPageElement(sectionObj, type) {
-    this.sectionTitle.innerHTML = `All ${type}`;
+    this.$sectionTitle.innerHTML = `All ${type}`;
 
     if (type === "cast") {
-      this.sectionContainer.classList.add("grid");
-      this.sectionContainer.classList.remove("flex");
+      this.$sectionContainer.classList.add("grid");
+      this.$sectionContainer.classList.remove("flex");
     } else {
-      this.sectionContainer.classList.remove("grid");
-      this.sectionContainer.classList.add("flex");
+      this.$sectionContainer.classList.remove("grid");
+      this.$sectionContainer.classList.add("flex");
     }
 
-    this.sectionContainer.innerHTML = this._getSectionContent(sectionObj, type);
+    this.$sectionContainer.innerHTML = this._getSectionContent(
+      sectionObj,
+      type
+    );
 
-    this.sectionAllBackListener();
+    this._sectionAllBackListener();
   }
 
   _getSectionContent(sectionObj, type) {
-    this.sectionContainer.innerHTML = "";
+    this.$sectionContainer.innerHTML = "";
+
     if (type === "cast") {
       return this.getCastCards(sectionObj, false);
     } else {
@@ -107,7 +111,7 @@ class MovieSectionAll extends MoviePage {
           ? `${POSTER_URL}${item.file_path}`
           : `${BACKDROP_URL}${item.file_path}`;
 
-      img.className = `${type}-img`;
+      img.className = `${type}s-img`;
       img.setAttribute("loading", "lazy");
       img.alt =
         movie.title ??
@@ -118,17 +122,16 @@ class MovieSectionAll extends MoviePage {
       imgContainer.append(img);
     });
 
-    const imgs = imgContainer.innerHTML;
-    return imgs;
+    return imgContainer.innerHTML;
   }
 
-  sectionAllBackListener() {
-    this.sectionAllBackBtn.addEventListener("click", () => {
+  _sectionAllBackListener() {
+    this.$sectionAllBackBtn.addEventListener("click", () => {
       setTimeout(() => {
-        this.infoSection.style.display = "block";
-        this.headerSection.style.display = "block";
+        this.$infoSection.style.display = "block";
+        this.$headerSection.style.display = "block";
       }, 300);
-      this.sectionAll.classList.remove("active");
+      this.$sectionAll.classList.remove("active");
     });
   }
 }

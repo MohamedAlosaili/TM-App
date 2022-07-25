@@ -7,7 +7,7 @@ import {
   getCastPage,
 } from "./functions.js";
 import { mainPageHandler } from "./handlerFunctions.js";
-import { moviePage } from "./classes/moviePage.js";
+import MoviePage from "./classes/moviePage.js";
 import SearchResult from "./classes/searchResult.js";
 import Navbar from "./classes/navbar.js";
 import Home from "./classes/home.js";
@@ -37,8 +37,8 @@ export const dataObj = {
     movie: Discover,
     tv: Discover,
     watchlist: Watchlist,
-    "movie-": moviePage,
-    "tv-": moviePage,
+    "movie-": MoviePage,
+    "tv-": MoviePage,
     "search?q=": SearchResult,
     "person-": CastPage,
   },
@@ -68,6 +68,7 @@ const init = (function () {
 
   renderPage();
   scrollToTop();
+  hashChange();
 })();
 
 function renderPage() {
@@ -87,8 +88,10 @@ function renderPage() {
     dataObj.pages[pageRequest](param);
 
     Navbar.updateNavLinks();
-  } else
+  } else {
+    Navbar.updateNavLinks();
     Error.renderError(404, "The resource you requested could not be found.");
+  }
 }
 
 function scrollToTop() {

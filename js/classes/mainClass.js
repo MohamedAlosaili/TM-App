@@ -143,9 +143,17 @@ export default class MainClass {
             <figure class="poster">
                 ${
                   card.poster_path || card.profile_path
-                    ? `<img src="${POSTER_URL}${
-                        card.poster_path ?? card.profile_path
-                      }"
+                    ? card.poster_path.startsWith("http")
+                      ? `<img src="${card.poster_path ?? card.profile_path}"
+                      alt="'${
+                        card.title ??
+                        card.original_title ??
+                        card.name ??
+                        card.original_name
+                      }' poster" loading="lazy" data-poster>`
+                      : `<img src="${POSTER_URL}${
+                          card.poster_path ?? card.profile_path
+                        }"
                         alt="'${
                           card.title ??
                           card.original_title ??
@@ -204,10 +212,10 @@ export default class MainClass {
         <i class="icon empty-cards"></i>
           <p class="text">
           There are no cast for <span class="movie-name">${
-            dataObj.moviePage.result.title ??
-            dataObj.moviePage.result.original_title ??
-            dataObj.moviePage.result.name ??
-            dataObj.moviePage.result.original_name
+            dataObj.moviePage.movieObj.title ??
+            dataObj.moviePage.movieObj.original_title ??
+            dataObj.moviePage.movieObj.name ??
+            dataObj.moviePage.movieObj.original_name
           }
           </p>
         </div>

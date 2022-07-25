@@ -5,7 +5,7 @@ class SearchResult extends MainClass {
   rendermainPageElement(query) {
     this.$mainPage.innerHTML = `
         <section class="search-result">
-        <div class="container">
+        <div class="container flex-column">
             <h2 class="section-title"><span>Result of:</span> ${query}</h2>
             <div class="flex-column">
                 <section>

@@ -2,15 +2,15 @@ import MainClass from "./mainClass.js";
 import { BACKDROP_URL, POSTER_URL, VIDEO_URL } from "../config.js";
 import { checkTheWatchlist } from "../functions.js";
 import { dataObj } from "../app.js";
-import { moviePageHandler } from "../handlerFunctions.js";
+import { moviePageHandler, movieNavHandler } from "../handlerFunctions.js";
 
-export default class MoviePage extends MainClass {
-  _movieHeader;
-  trailerContainer;
-  trailerVideo;
+class MoviePage extends MainClass {
+  $movieHeader;
+  $trailerContainer;
+  $trailerVideo;
   trailerUrl;
-  cardContainer;
-  navBtn;
+  $cardContainer;
+  $navBtns;
 
   rendermainPageElement(movieObj, type) {
     this.$mainPage.innerHTML = `
@@ -73,15 +73,15 @@ export default class MoviePage extends MainClass {
                     <h2 class="section-title">Images</h2>
                     <nav class="section-nav movie-nav">
                         <div class="nav-back" data-nav-back></div>
-                        <button class="btn active" data-image-type="backdrops">Backdrops <span class="num">${
+                        <button class="btn active" data-image-type="backdrops" data-idx="0">Backdrops <span class="num">${
                           dataObj.moviePage.backdrops.length
                         }</span></button>
-                        <button class="btn" data-image-type="posters">Posters <span class="num">${
+                        <button class="btn" data-image-type="posters"data-idx="1">Posters <span class="num">${
                           dataObj.moviePage.posters.length
                         }</span></button>
                     </nav>
                     <div class="cards-container flex" data-images-container>
-                        ${this._getMovieImages(
+                        ${this.getMovieImages(
                           movieObj.images.backdrops,
                           "backdrops"
                         )}
@@ -113,17 +113,14 @@ export default class MoviePage extends MainClass {
         </section>
         `;
 
-    this._movieHeader = document.querySelector("[data-movie-header]");
+    this.$movieHeader = document.querySelector("[data-movie-header]");
 
-    this.trailerContainer = document.querySelector("[data-trailer-container]");
-    this.trailerVideo = document.querySelector("[data-trailer-video]");
-    this.trailerUrl = this.trailerVideo?.src;
+    this.$trailerContainer = document.querySelector("[data-trailer-container]");
+    this.$trailerVideo = document.querySelector("[data-trailer-video]");
+    this.trailerUrl = this.$trailerVideo?.src;
 
-    console.log(dataObj.moviePage.backdrops);
-    console.log(dataObj.moviePage.posters);
-
-    this.cardContainer = document.querySelector("[data-images-container]");
-    this.navBtn = document.querySelectorAll("[data-image-type]");
+    this.$cardContainer = document.querySelector("[data-images-container]");
+    this.$navBtns = document.querySelectorAll("[data-image-type]");
 
     this._movieHeaderListener(moviePageHandler);
     this._sectionNavListener();
@@ -261,8 +258,7 @@ export default class MoviePage extends MainClass {
       genreList.append(genreItem);
     });
 
-    const genreItems = genreList.innerHTML;
-    return genreItems;
+    return genreList.innerHTML;
   }
 
   _getFirstTrailerKey(movieObj) {
@@ -295,12 +291,10 @@ export default class MoviePage extends MainClass {
       videosContainer.append(videoEl);
     });
 
-    const videos = videosContainer.innerHTML;
-
-    return videos;
+    return videosContainer.innerHTML;
   }
 
-  _getMovieImages(imgsArr, type) {
+  getMovieImages(imgsArr, type) {
     let lotOfImgs = false;
 
     const imgsCopy = [...imgsArr];
@@ -340,7 +334,6 @@ export default class MoviePage extends MainClass {
       imagesContainer.append(imgEl);
     });
 
-    console.log(lotOfImgs);
     if (lotOfImgs) {
       const seeAllCards = document.createElement("div");
       seeAllCards.className = "more imgs btn";
@@ -354,39 +347,18 @@ export default class MoviePage extends MainClass {
       imagesContainer.append(seeAllCards);
     }
 
-    const imgs = imagesContainer.innerHTML;
-
-    return imgs;
+    return imagesContainer.innerHTML;
   }
 
   _movieHeaderListener(handler) {
-    this._movieHeader.addEventListener("click", handler);
+    this.$movieHeader.addEventListener("click", handler);
   }
 
   _sectionNavListener() {
-    const navBack = document.querySelector("[data-nav-back]");
-
-    this.navBtn.forEach((btn, idx) => {
-      btn.addEventListener("click", () => {
-        this.navBtn.forEach((btn) => btn.classList.remove("active"));
-        btn.classList.add("active");
-
-        const type = btn.dataset.imageType;
-        this.cardContainer.innerHTML = this._getMovieImages(
-          dataObj.moviePage[type],
-          type
-        );
-
-        const parentWidth =
-          parseInt(
-            getComputedStyle(btn.parentElement).getPropertyValue("width")
-          ) / 2;
-        navBack.style.left = `${idx * parentWidth}px`;
-      });
+    this.$navBtns.forEach((btn) => {
+      btn.addEventListener("click", movieNavHandler);
     });
   }
 }
 
-const moviePage = new MoviePage();
-
-export { moviePage };
+export default new MoviePage();

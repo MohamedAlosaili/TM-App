@@ -10,7 +10,7 @@ import { dataObj } from "./app.js";
 import Home from "./classes/home.js";
 import Discover from "./classes/discover.js";
 import Watchlist from "./classes/watchlist.js";
-import { moviePage } from "./classes/moviePage.js";
+import MoviePage from "./classes/moviePage.js";
 import SearchResult from "./classes/searchResult.js";
 import CastPage from "./classes/castPage.js";
 import Error from "./classes/errorHandler.js";
@@ -28,6 +28,7 @@ async function fetchData(API_URL) {
 
     return res;
   } catch (err) {
+    Error.renderError(req.status, res.status_message);
     throw err;
   }
 }
@@ -75,7 +76,7 @@ export function getWatchlistPage() {
 }
 
 export async function getMoviePage(id) {
-  moviePage.renderLoader();
+  MoviePage.renderLoader();
 
   const regex = /[a-zA-Z]+/;
   const type = dataObj.pageName.match(regex).join("");
@@ -92,7 +93,7 @@ export async function getMoviePage(id) {
   dataObj.moviePage.backdrops = [...movieObj.images.backdrops];
   dataObj.moviePage.posters = [...movieObj.images.posters];
 
-  moviePage.rendermainPageElement(movieObj, type);
+  MoviePage.rendermainPageElement(movieObj, type);
 }
 
 export async function getSearchResult(query) {
@@ -167,7 +168,7 @@ export async function getMoreCards() {
   );
   Discover.loadMoreListener();
   Discover.clearLoadMore();
-  Discover.cardContainer.innerHTML += Discover.getSectionCards(
+  Discover.$cardContainer.innerHTML += Discover.getSectionCards(
     newCards.results,
     dataObj.pageName
   );

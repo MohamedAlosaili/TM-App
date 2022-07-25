@@ -143,6 +143,9 @@
   aspect-ratio: 1;
   object-fit: cover;
   border-radius: 0.5rem;
+  -webkit-animation: skeleton-loading 1s linear infinite alternate-reverse;
+  -moz-animation: skeleton-loading 1s linear infinite alternate-reverse;
+  animation: skeleton-loading 1s linear infinite alternate-reverse;
 }
 .cast-page .imgs-container .more {
   display: none;
@@ -287,3 +290,29 @@
   }
 }
 /* Media Queries End */
+/* Animation Start */
+@-webkit-keyframes skeleton-loading {
+  0% {
+    background-color: rgba(0 0 0 / 0.5);
+  }
+  100% {
+    background-color: rgba(0 0 0 / 0.3);
+  }
+}
+@-moz-keyframes skeleton-loading {
+  0% {
+    background-color: rgba(0 0 0 / 0.5);
+  }
+  100% {
+    background-color: rgba(0 0 0 / 0.3);
+  }
+}
+@keyframes skeleton-loading {
+  0% {
+    background-color: rgba(0 0 0 / 0.5);
+  }
+  100% {
+    background-color: rgba(0 0 0 / 0.3);
+  }
+}
+/* Animation End */

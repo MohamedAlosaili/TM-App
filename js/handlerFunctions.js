@@ -2,7 +2,7 @@ import { dataObj } from "./app.js";
 import CastPage from "./classes/castPage.js";
 import Discover from "./classes/discover.js";
 import { mainClass } from "./classes/mainClass.js";
-import { moviePage } from "./classes/moviePage.js";
+import MoviePage from "./classes/moviePage.js";
 import MovieSectionAll from "./classes/movieSectionAll.js";
 import Navbar from "./classes/navbar.js";
 import SearchResult from "./classes/searchResult.js";
@@ -15,7 +15,29 @@ import {
   getMoviePage,
   getSearchResult,
   getCastPage,
+  controlChangePages,
 } from "./functions.js";
+
+export function layerHandler() {
+  Navbar.mobileMenuState("remove", "auto", "close");
+
+  if (dataObj.pageName === "tv-" || dataObj.pageName === "movie-") {
+    MoviePage.$trailerContainer.classList.remove("active");
+    MoviePage.$trailerVideo ? (MoviePage.$trailerVideo.src = "") : false;
+    mainClass.renderLayer("remove");
+  }
+}
+
+export function navLinksHandler(e) {
+  // Deal with links
+  Navbar.$navLinks.forEach((link) => link.classList.remove("active", "shake"));
+  e.currentTarget.classList.add("active", "shake");
+  Navbar.mobileMenuState("remove", "auto", "close");
+
+  // Deal with pages
+  const pageName = e.currentTarget.dataset.page;
+  controlChangePages(pageName);
+}
 
 export function searchFromHandler(e) {
   e.preventDefault();
@@ -34,13 +56,11 @@ export function searchFromHandler(e) {
   }
 }
 
-export function layerHandler() {
-  Navbar.mobileMenuState("remove", "auto", "close");
-
-  if (dataObj.pageName === "tv-" || dataObj.pageName === "movie-") {
-    moviePage.trailerContainer.classList.remove("active");
-    moviePage.trailerVideo ? (moviePage.trailerVideo.src = "") : false;
-    mainClass.renderLayer("remove");
+export function mobileMenuHandler() {
+  if (Navbar.$mobileMenu.classList.contains("active")) {
+    Navbar.mobileMenuState("remove", "auto", "close");
+  } else {
+    Navbar.mobileMenuState("add", "hidden", "open");
   }
 }
 
@@ -114,10 +134,13 @@ function openBrowseImgs(e) {
   const img = e.target.closest("[data-browse-imgs]");
   const idx = +img.dataset.idx;
 
-  if (idx === 0) CastPage.leftSlider.classList.add("not-allowed");
-  else if (idx === CastPage.browseContainer.children.length - 1)
+  if (idx === 0) {
+    CastPage.leftSlider.classList.add("not-allowed");
+    CastPage.rightSlider.classList.remove("not-allowed");
+  } else if (idx === CastPage.browseContainer.children.length - 1) {
     CastPage.rightSlider.classList.add("not-allowed");
-  else {
+    CastPage.leftSlider.classList.remove("not-allowed");
+  } else {
     CastPage.leftSlider.classList.remove("not-allowed");
     CastPage.rightSlider.classList.remove("not-allowed");
   }
@@ -130,38 +153,38 @@ function openBrowseImgs(e) {
 
 export function moviePageHandler(e) {
   if (e.target.closest("[data-trailer-btn]")) {
-    moviePage.trailerContainer.classList.add("active");
-    moviePage.trailerVideo
-      ? (moviePage.trailerVideo.src = moviePage.trailerUrl)
+    MoviePage.$trailerContainer.classList.add("active");
+    MoviePage.$trailerVideo
+      ? (MoviePage.$trailerVideo.src = MoviePage.trailerUrl)
       : false;
     mainClass.renderLayer("add", 10);
   }
   if (e.target.closest("[data-close-trailer]")) {
-    moviePage.trailerContainer.classList.remove("active");
-    moviePage.trailerVideo ? (moviePage.trailerVideo.src = "") : false;
+    MoviePage.$trailerContainer.classList.remove("active");
+    MoviePage.$trailerVideo ? (MoviePage.$trailerVideo.src = "") : false;
     mainClass.renderLayer("remove");
   }
 }
 
 export function sectionNavHandler(e) {
-  Discover.loadMoreBtn.style.display = "block";
+  Discover.$loadMoreBtn.style.display = "block";
   dataObj.pageNum = 1;
 
-  const navBack = document.querySelector("[data-nav-back]");
+  const $navBack = document.querySelector("[data-nav-back]");
   const btn = e.target.closest("[data-discover-page]");
   const idx = btn.dataset.idx;
 
-  Discover.cardContainer.className = "cards-container grid";
+  Discover.$cardContainer.className = "cards-container grid";
   const loader = document.createElement("div");
   loader.className = "loading-spinner";
   loader.innerHTML = `
           <span class="load-out"></span>
           <span class="load-in"></span>
         `;
-  Discover.cardContainer.append(loader);
+  Discover.$cardContainer.append(loader);
 
-  for (let i = 1; i < Discover.discoverNav.children.length; i++)
-    Discover.discoverNav.children[i].classList.remove("active");
+  for (let i = 1; i < Discover.$discoverNav.children.length; i++)
+    Discover.$discoverNav.children[i].classList.remove("active");
   btn.classList.add("active");
 
   Discover.discoverPage = btn.dataset.discoverPage;
@@ -169,9 +192,9 @@ export function sectionNavHandler(e) {
 
   const parentWidth =
     parseInt(getComputedStyle(btn.parentElement).getPropertyValue("width")) / 3;
-  navBack.style.left = `${idx * parentWidth}px`;
+  $navBack.style.left = `${idx * parentWidth}px`;
 
-  Discover.discoverNav.removeEventListener("click", sectionNavHandler);
+  Discover.$discoverNav.removeEventListener("click", sectionNavHandler);
 }
 
 export function loadMoreHandler(e) {
@@ -179,8 +202,27 @@ export function loadMoreHandler(e) {
 
   getMoreCards();
 
-  if (dataObj.pageNum === 500) Discover.loadMoreBtn.style.display = "none";
-  Discover.loadMoreBtn.removeEventListener("click", loadMoreHandler);
+  if (dataObj.pageNum === 500) Discover.$loadMoreBtn.style.display = "none";
+  Discover.$loadMoreBtn.removeEventListener("click", loadMoreHandler);
+}
+
+export function movieNavHandler(e) {
+  const $navBack = document.querySelector("[data-nav-back]");
+  const btn = e.target.closest("[data-image-type]");
+  const type = btn.dataset.imageType;
+  const idx = btn.dataset.idx;
+
+  MoviePage.$navBtns.forEach((btn) => btn.classList.remove("active"));
+  btn.classList.add("active");
+
+  MoviePage.$cardContainer.innerHTML = MoviePage.getMovieImages(
+    dataObj.moviePage[type],
+    type
+  );
+
+  const parentWidth =
+    parseInt(getComputedStyle(btn.parentElement).getPropertyValue("width")) / 2;
+  $navBack.style.left = `${idx * parentWidth}px`;
 }
 
 export function leftSliderHandler() {

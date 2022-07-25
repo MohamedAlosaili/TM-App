@@ -1,13 +1,10 @@
 import MainClass from "./mainClass.js";
-import { getHomePage } from "../functions.js";
-import { dataObj } from "../app.js";
-import Navbar from "./navbar.js";
 
 class Watchlist extends MainClass {
   rendermainPageElement(watchlistCards) {
     this.$mainPage.innerHTML = `
         <section class="watchlist-page">
-            <div class="container">
+            <div class="container flex-column">
                 <h2 class="section-title">WatchList<span class="icon"></span></h2> 
                 <div class="cards-container grid">
                     ${

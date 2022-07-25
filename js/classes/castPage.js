@@ -106,7 +106,7 @@ class CastPage extends MainClass {
                                 ${
                                   personObj.images.profiles.length > 1
                                     ? `
-                                        <button class="btn slide left not-allowed" data-left-slide><i class="icon fa-solid fa-chevron-left"></i></button>    
+                                        <button class="btn slide left" data-left-slide><i class="icon fa-solid fa-chevron-left"></i></button>    
                                         <button class="btn slide right" data-right-slide><i class="icon fa-solid fa-chevron-right"></i></button>
                                     `
                                     : `

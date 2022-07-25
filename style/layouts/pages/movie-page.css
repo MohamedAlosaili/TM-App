@@ -105,10 +105,10 @@
   height: 25rem;
   border-radius: 0.5rem;
 }
-.cards-container .poster-img {
+.cards-container .posters-img {
   aspect-ratio: 0.667;
 }
-.cards-container .backdrop-img {
+.cards-container .backdrops-img {
   aspect-ratio: 1.778;
 }
 /* Media Queries Start */

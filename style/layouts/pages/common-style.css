@@ -386,14 +386,10 @@
   z-index: 1;
 }
 .cards-container .card .poster img {
-  display: block;
   height: 100%;
   width: 100%;
   border-radius: 0.5rem;
   margin-bottom: 0.5rem;
-  -webkit-animation: skeleton-loading 1s linear infinite alternate-reverse;
-  -moz-animation: skeleton-loading 1s linear infinite alternate-reverse;
-  animation: skeleton-loading 1s linear infinite alternate-reverse;
   -webkit-box-shadow: 0 0 1rem var(--secondary-bg-color);
   -moz-box-shadow: 0 0 1rem var(--secondary-bg-color);
   box-shadow: 0 0 1rem var(--secondary-bg-color);
@@ -436,13 +432,9 @@
   cursor: pointer;
 }
 .cards-container .cast-poster img {
-  display: block;
   width: 12rem;
   aspect-ratio: 0.667;
   border-radius: 0.5rem;
-  -webkit-animation: skeleton-loading 1s linear infinite alternate-reverse;
-  -moz-animation: skeleton-loading 1s linear infinite alternate-reverse;
-  animation: skeleton-loading 1s linear infinite alternate-reverse;
   -webkit-box-shadow: 0 0 1rem var(--secondary-bg-color);
   -moz-box-shadow: 0 0 1rem var(--secondary-bg-color);
   box-shadow: 0 0 1rem var(--secondary-bg-color);
@@ -605,30 +597,6 @@
   }
   100% {
     transform: translate(-50%, 0.4rem);
-  }
-}
-@-webkit-keyframes skeleton-loading {
-  0% {
-    background-color: rgba(0 0 0 / 0.5);
-  }
-  100% {
-    background-color: rgba(0 0 0 / 0.3);
-  }
-}
-@-moz-keyframes skeleton-loading {
-  0% {
-    background-color: rgba(0 0 0 / 0.5);
-  }
-  100% {
-    background-color: rgba(0 0 0 / 0.3);
-  }
-}
-@keyframes skeleton-loading {
-  0% {
-    background-color: rgba(0 0 0 / 0.5);
-  }
-  100% {
-    background-color: rgba(0 0 0 / 0.3);
   }
 }
 /* Animation End */

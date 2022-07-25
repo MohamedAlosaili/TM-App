@@ -107,27 +107,7 @@ body {
     var(--primary-txt-color);
   animation: turn-left 1s infinite linear;
 }
-@keyframes turn-right {
-  0% {
-    transform: translate(-50%, -50%) rotate(0);
-  }
-  100% {
-    transform: translate(-50%, -50%) rotate(1turn);
-  }
-}
-@keyframes turn-left {
-  0% {
-    transform: translate(-50%, -50%) rotate(0);
-  }
-  100% {
-    transform: translate(-50%, -50%) rotate(-1turn);
-  }
-}
-.flex-column {
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
-}
+/* Main Page */
 .page-section {
   min-height: calc(100vh - 4rem - 1px);
 }
@@ -141,6 +121,18 @@ body {
 .page-section .container {
   padding-bottom: 3rem;
 }
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+.page-section img {
+  display: block;
+  -webkit-animation: skeleton-loading 1s linear infinite alternate-reverse;
+  -moz-animation: skeleton-loading 1s linear infinite alternate-reverse;
+  animation: skeleton-loading 1s linear infinite alternate-reverse;
+}
+/* Buttons */
 .btn {
   padding: 0.5rem 1rem;
   border-radius: 3rem;
@@ -178,6 +170,7 @@ body {
 .underline.active::before {
   width: 100%;
 }
+/* Scroll To Top */
 .scroll-to-top {
   position: fixed;
   bottom: 4rem;
@@ -224,10 +217,8 @@ body {
 /* Footer End */
 /* Errors Start */
 .error {
-  position: absolute;
-  top: 10rem;
-  left: 50%;
-  transform: translateX(-50%);
+  flex: 1;
+  padding-top: 10rem;
   text-align: center;
 }
 .error .error-message {
@@ -287,3 +278,77 @@ body {
   }
 }
 /* Media Queries End */
+/* Animation Start */
+@-webkit-keyframes turn-right {
+  0% {
+    transform: translate(-50%, -50%) rotate(0);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(1turn);
+  }
+}
+@-moz-keyframes turn-right {
+  0% {
+    transform: translate(-50%, -50%) rotate(0);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(1turn);
+  }
+}
+@keyframes turn-right {
+  0% {
+    transform: translate(-50%, -50%) rotate(0);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(1turn);
+  }
+}
+@-webkit-keyframes turn-left {
+  0% {
+    transform: translate(-50%, -50%) rotate(0);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(-1turn);
+  }
+}
+@-moz-keyframes turn-left {
+  0% {
+    transform: translate(-50%, -50%) rotate(0);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(-1turn);
+  }
+}
+@keyframes turn-left {
+  0% {
+    transform: translate(-50%, -50%) rotate(0);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(-1turn);
+  }
+}
+@-webkit-keyframes skeleton-loading {
+  0% {
+    background-color: rgba(0 0 0 / 0.5);
+  }
+  100% {
+    background-color: rgba(0 0 0 / 0.3);
+  }
+}
+@-moz-keyframes skeleton-loading {
+  0% {
+    background-color: rgba(0 0 0 / 0.5);
+  }
+  100% {
+    background-color: rgba(0 0 0 / 0.3);
+  }
+}
+@keyframes skeleton-loading {
+  0% {
+    background-color: rgba(0 0 0 / 0.5);
+  }
+  100% {
+    background-color: rgba(0 0 0 / 0.3);
+  }
+}
+/* Animation End */

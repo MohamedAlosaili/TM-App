@@ -3,13 +3,10 @@ import { dataObj } from "../app.js";
 import { sectionNavHandler, loadMoreHandler } from "../handlerFunctions.js";
 
 class Discover extends MainClass {
-  pageName;
-  filterBtn;
-  genreList;
-  cardContainer;
+  $discoverNav;
+  $cardContainer;
   discoverPage;
-  discoverNav;
-  loadMoreBtn;
+  $loadMoreBtn;
 
   rendermainPageElement(movieObj) {
     this.$mainPage.innerHTML = `
@@ -40,39 +37,37 @@ class Discover extends MainClass {
             </section>
         `;
 
-    this.filterBtn = document.querySelector("[data-filter]");
-    this.genreList = document.querySelector("[data-genre-list]");
-    this.discoverNav = document.querySelector("[data-discover-nav]");
-    this.cardContainer = document.querySelector("[data-discover-container]");
-    this.loadMoreBtn = document.querySelector("[data-load-more]");
+    this.$discoverNav = document.querySelector("[data-discover-nav]");
+    this.$cardContainer = document.querySelector("[data-discover-container]");
+    this.$loadMoreBtn = document.querySelector("[data-load-more]");
 
     this._sectionNavListener();
     this.loadMoreListener();
   }
 
   _sectionNavListener() {
-    this.discoverNav.addEventListener("click", sectionNavHandler);
+    this.$discoverNav.addEventListener("click", sectionNavHandler);
   }
 
   getNewDiscoverPage(pageData) {
     this._sectionNavListener();
     setTimeout(
       () =>
-        (this.cardContainer.className = `cards-container grid ${this.discoverPage}`),
+        (this.$cardContainer.className = `cards-container grid ${this.discoverPage}`),
       300
     );
-    this.cardContainer.innerHTML = this.getSectionCards(
+    this.$cardContainer.innerHTML = this.getSectionCards(
       pageData.results,
       dataObj.pageName
     );
   }
 
   loadMoreListener() {
-    this.loadMoreBtn.addEventListener("click", loadMoreHandler);
+    this.$loadMoreBtn.addEventListener("click", loadMoreHandler);
   }
 
   clearLoadMore() {
-    this.loadMoreBtn.innerHTML = "Load More";
+    this.$loadMoreBtn.innerHTML = "Load More";
   }
 }
 

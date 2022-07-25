@@ -1,24 +1,23 @@
 /* Layer on Nav Start */
 .search-result,
 .watchlist-page {
+  margin-top: 10rem;
   position: relative;
 }
 .search-result::before,
 .watchlist-page::before {
   content: "";
   position: absolute;
+  top: -10rem;
+  left: 0;
   height: 6.5rem;
   width: 100%;
   background-color: var(--third-bg-color);
   -webkit-backdrop-filter: blur(1rem);
   backdrop-filter: blur(1rem);
 }
-.search-result .container,
-.watchlist-page .container {
-  padding-top: 10rem;
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
+.search-result .container > .flex-column {
+  padding: 0 1rem;
 }
 /* Layer on Nav End */
 /* Section Title Changes */
