@@ -68,20 +68,20 @@ const init = (function () {
 
   renderPage();
   scrollToTop();
-  hashChange();
+  handlingNavigation();
 })();
 
 function renderPage() {
-  let urlHash = location.hash.slice(1);
-  if (urlHash === "") urlHash = "home";
-  if (urlHash.endsWith("/first_section"))
-    urlHash = urlHash.slice(0, urlHash.indexOf("/first_section"));
+  let path = location.hash.slice(1);
+  if (path === "") path = "home";
+  if (path.endsWith("/first_section"))
+    path = path.slice(0, path.indexOf("/first_section"));
 
   const reqex = /^[a-zA-Z]+([?q=]+|-|)/g;
-  const pageRequest = urlHash.match(reqex).join("");
+  const pageRequest = path.match(reqex).join("");
 
-  let param = urlHash.slice(urlHash.indexOf(pageRequest.slice(-1)) + 1);
-  if (!param) param = urlHash;
+  let param = path.slice(path.indexOf(pageRequest.slice(-1)) + 1);
+  if (!param) param = path;
 
   if (dataObj.pages[pageRequest] && dataObj.classes[pageRequest]) {
     dataObj.pageName = pageRequest;
@@ -106,5 +106,18 @@ function scrollToTop() {
       top: 0,
       behavior: "smooth",
     });
+  });
+}
+
+function handlingNavigation() {
+  document.addEventListener("mouseover", () => {
+    window.onInnerDoc = true;
+  });
+  document.addEventListener("mouseleave", () => {
+    window.onInnerDoc = false;
+  });
+  window.addEventListener("hashchange", () => {
+    if (window.onInnerDoc) window.onInnerDoc = false;
+    else location.reload();
   });
 }
