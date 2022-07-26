@@ -36,10 +36,9 @@
 }
 .cast-page .landing .poster img {
   width: 100%;
-  height: auto;
 }
 .cast-page .landing .no-img {
-  height: auto;
+  width: 100%;
 }
 .cast-page .landing .poster-side .social-accounts {
   display: flex;
@@ -55,6 +54,7 @@
 /* Person Info Start */
 .cast-page .landing .person-info {
   flex: 1;
+  width: 100%;
 }
 .cast-page .landing .person-info .name {
   color: var(--primary-txt-color);
@@ -85,10 +85,10 @@
   color: var(--primary-txt-color);
   line-height: 2;
   overflow: hidden;
-  padding: 1rem;
+  margin: 1rem;
 }
 .cast-page .landing .person-info .biography.collapse {
-  max-height: 13rem;
+  max-height: 12rem;
 }
 .cast-page .landing .person-info .biography.show {
   max-height: none;
@@ -111,9 +111,6 @@
 }
 .cast-page .landing .person-info .biography.collapse .collapse-btn {
   display: flex;
-}
-.cast-page .landing .person-info .biography.collapse .collapse-btn .icon {
-  transform: translateX(-0.5rem);
 }
 .cast-page .landing .person-info .biography.show .collapse-btn {
   position: relative;
@@ -247,6 +244,9 @@
   .cast-page .landing .person-info .biography .collapse-btn:hover {
     gap: 1rem;
   }
+  .cast-page .landing .person-info .biography.collapse .collapse-btn .icon {
+    transform: translateX(-0.5rem);
+  }
   .cast-page .landing .person-info .biography .collapse-btn:hover .icon {
     transform: translateX(0) rotate(90deg);
   }
@@ -276,6 +276,12 @@
   }
   .cast-page .landing .poster-side .social-accounts a.imdb {
     color: #f3ce13;
+  }
+  .cast-page .landing .person-info .biography .collapse-btn .icon {
+    transform: translateX(-0.5rem) rotate(90deg);
+  }
+  .cast-page .landing .person-info .biography.show .collapse-btn .icon {
+    transform: translateX(-0.5rem) rotate(0);
   }
 }
 @media (min-width: 1024px) {

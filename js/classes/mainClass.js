@@ -133,7 +133,7 @@ export default class MainClass {
       const cardEl = document.createElement("div");
       cardEl.className = "card";
       cardEl.dataset.posterParent = "";
-      cardEl.style.transitionDelay = `${idx * 50}ms`;
+      cardEl.style.cssText = `--i: ${idx}`;
       cardEl.innerHTML = `
             <button class="expand-btn" id="${card.id}" title="${
         card.title ?? card.original_title ?? card.name ?? card.original_name
@@ -198,8 +198,8 @@ export default class MainClass {
 
       cardContainer.append(cardEl);
     });
-    const cards = cardContainer.innerHTML;
-    return cards;
+
+    return cardContainer.innerHTML;
   }
 
   getCastCards(castArr, shirnk = true) {
@@ -274,9 +274,7 @@ export default class MainClass {
       castContainer.append(seeAllCards);
     }
 
-    const cards = castContainer.innerHTML;
-
-    return cards;
+    return castContainer.innerHTML;
   }
 }
 

@@ -1,11 +1,11 @@
 import { dataObj } from "./app.js";
-import CastPage from "./classes/castPage.js";
-import Discover from "./classes/discover.js";
 import { mainClass } from "./classes/mainClass.js";
+import Navbar from "./classes/navbar.js";
+import Discover from "./classes/discover.js";
+import SearchResult from "./classes/searchResult.js";
 import MoviePage from "./classes/moviePage.js";
 import MovieSectionAll from "./classes/movieSectionAll.js";
-import Navbar from "./classes/navbar.js";
-import SearchResult from "./classes/searchResult.js";
+import CastPage from "./classes/castPage.js";
 import {
   getHomePage,
   getNewDiscoverPageCards,
@@ -135,20 +135,20 @@ function openBrowseImgs(e) {
   const idx = +img.dataset.idx;
 
   if (idx === 0) {
-    CastPage.leftSlider.classList.add("not-allowed");
-    CastPage.rightSlider.classList.remove("not-allowed");
-  } else if (idx === CastPage.browseContainer.children.length - 1) {
-    CastPage.rightSlider.classList.add("not-allowed");
-    CastPage.leftSlider.classList.remove("not-allowed");
+    CastPage.$leftSlider.classList.add("not-allowed");
+    CastPage.$rightSlider.classList.remove("not-allowed");
+  } else if (idx === CastPage.$browseContainer.children.length - 1) {
+    CastPage.$rightSlider.classList.add("not-allowed");
+    CastPage.$leftSlider.classList.remove("not-allowed");
   } else {
-    CastPage.leftSlider.classList.remove("not-allowed");
-    CastPage.rightSlider.classList.remove("not-allowed");
+    CastPage.$leftSlider.classList.remove("not-allowed");
+    CastPage.$rightSlider.classList.remove("not-allowed");
   }
 
   CastPage.browseNum = idx;
 
-  CastPage.browseContainer.style.left = `-${idx * 100}vw`;
-  CastPage.browseContainer.parentElement.classList.add("open");
+  CastPage.$browseContainer.style.left = `-${idx * 100}vw`;
+  CastPage.$browseContainer.parentElement.classList.add("open");
 }
 
 export function moviePageHandler(e) {
@@ -181,7 +181,7 @@ export function sectionNavHandler(e) {
           <span class="load-out"></span>
           <span class="load-in"></span>
         `;
-  Discover.$cardContainer.append(loader);
+  Discover.$cardContainer.prepend(loader);
 
   for (let i = 1; i < Discover.$discoverNav.children.length; i++)
     Discover.$discoverNav.children[i].classList.remove("active");
@@ -225,33 +225,43 @@ export function movieNavHandler(e) {
   $navBack.style.left = `${idx * parentWidth}px`;
 }
 
+export function collapseBtnHandler(e) {
+  e.target.parentElement.classList.toggle("show");
+  e.target.classList.toggle("active");
+  if (e.target.classList.contains("active")) {
+    CastPage.$collapseBtn.innerHTML = `Show less<i class="icon fa-solid fa-chevron-up">`;
+  } else {
+    CastPage.$collapseBtn.innerHTML = `Show more<i class="icon fa-solid fa-chevron-right">`;
+  }
+}
+
 export function leftSliderHandler() {
-  CastPage.rightSlider.classList.remove("not-allowed");
+  CastPage.$rightSlider.classList.remove("not-allowed");
   let num = CastPage.browseNum;
   num--;
 
-  if (num === 0) CastPage.leftSlider.classList.add("not-allowed");
+  if (num === 0) CastPage.$leftSlider.classList.add("not-allowed");
   else if (num < 0) {
-    CastPage.leftSlider.classList.add("not-allowed");
+    CastPage.$leftSlider.classList.add("not-allowed");
     return;
   }
 
   CastPage.browseNum = num;
-  CastPage.browseContainer.style.left = `-${num * 100}vw`;
+  CastPage.$browseContainer.style.left = `-${num * 100}vw`;
 }
 
 export function rightSliderHandler() {
-  CastPage.leftSlider.classList.remove("not-allowed");
+  CastPage.$leftSlider.classList.remove("not-allowed");
   let num = CastPage.browseNum;
   num++;
 
-  if (num === CastPage.browseContainer.children.length - 1)
-    CastPage.rightSlider.classList.add("not-allowed");
-  else if (num >= CastPage.browseContainer.children.length) {
-    CastPage.rightSlider.classList.add("not-allowed");
+  if (num === CastPage.$browseContainer.children.length - 1)
+    CastPage.$rightSlider.classList.add("not-allowed");
+  else if (num >= CastPage.$browseContainer.children.length) {
+    CastPage.$rightSlider.classList.add("not-allowed");
     return;
   }
 
   CastPage.browseNum = num;
-  CastPage.browseContainer.style.left = `-${num * 100}vw`;
+  CastPage.$browseContainer.style.left = `-${num * 100}vw`;
 }

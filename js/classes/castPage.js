@@ -1,15 +1,12 @@
-import { POSTER_URL } from "../config.js";
+import { POSTER_URL, BACKDROP_URL } from "../config.js";
 import MainClass from "./mainClass.js";
-import { leftSliderHandler, rightSliderHandler } from "../handlerFunctions.js";
+import {
+  collapseBtnHandler,
+  leftSliderHandler,
+  rightSliderHandler,
+} from "../handlerFunctions.js";
 
 class CastPage extends MainClass {
-  biography;
-  collapseBtn;
-  browseContainer;
-  leftSlider;
-  rightSlider;
-  closeBrowse;
-
   browseNum = 0;
 
   rendermainPageElement(personObj, popularPerople) {
@@ -21,7 +18,7 @@ class CastPage extends MainClass {
                             <figure class="poster">
                                 ${
                                   personObj.profile_path
-                                    ? `<img src="${POSTER_URL}${personObj.profile_path}" alt="${personObj.name}">`
+                                    ? `<img src="${BACKDROP_URL}${personObj.profile_path}" alt="${personObj.name}">`
                                     : ` <div class="no-img">
                                       <i class="icon fa-solid fa-file-image"></i>
                                       Image Not <br> Available
@@ -138,16 +135,16 @@ class CastPage extends MainClass {
             </section>
         `;
 
-    this.biography = document.querySelector("[data-biography]");
-    this.collapseBtn = document.querySelector("[data-collapse-btn]");
-    this.browseContainer = document.querySelector("[data-browse-container]");
-    this.leftSlider = document.querySelector("[data-left-slide]");
-    this.rightSlider = document.querySelector("[data-right-slide]");
-    this.closeBrose = document.querySelector("[data-close-slider]");
+    this.$biography = document.querySelector("[data-biography]");
+    this.$collapseBtn = document.querySelector("[data-collapse-btn]");
+    this.$browseContainer = document.querySelector("[data-browse-container]");
+    this.$leftSlider = document.querySelector("[data-left-slide]");
+    this.$rightSlider = document.querySelector("[data-right-slide]");
+    this.$closeBrowse = document.querySelector("[data-close-slider]");
 
     this.collapseBtnListener();
     this.checkBiographyLong();
-    this.browseImgsBtnListener(leftSliderHandler, rightSliderHandler);
+    this.browseImgsBtnListener();
   }
 
   _getCastAccounts(idObj) {
@@ -223,13 +220,12 @@ class CastPage extends MainClass {
       list.append(span);
     });
 
-    console.log(list);
     return list.innerHTML;
   }
 
   checkBiographyLong() {
-    if (this.biography.clientHeight > 173)
-      this.biography.classList.add("collapse");
+    if (this.$biography.clientHeight > 192)
+      this.$biography.classList.add("collapse");
   }
 
   _getCastImages(imgs, name, browse = false) {
@@ -257,7 +253,7 @@ class CastPage extends MainClass {
         ${
           browse
             ? `<div class="cast-img">
-                <img src="${POSTER_URL + img.file_path}" alt="${
+                <img src="${BACKDROP_URL + img.file_path}" alt="${
                 name ?? "Unknown"
               }" >
             </div>`
@@ -276,22 +272,14 @@ class CastPage extends MainClass {
   }
 
   collapseBtnListener() {
-    this.collapseBtn.addEventListener("click", (e) => {
-      e.target.parentElement.classList.toggle("show");
-      e.target.classList.toggle("active");
-      if (e.target.classList.contains("active")) {
-        this.collapseBtn.innerHTML = `Show less<i class="icon fa-solid fa-chevron-up">`;
-      } else {
-        this.collapseBtn.innerHTML = `Show more<i class="icon fa-solid fa-chevron-right">`;
-      }
-    });
+    this.$collapseBtn.addEventListener("click", collapseBtnHandler);
   }
 
-  browseImgsBtnListener(leftHandler, rightHandler) {
-    this.leftSlider.addEventListener("click", leftHandler);
-    this.rightSlider.addEventListener("click", rightHandler);
-    this.closeBrose.addEventListener("click", () => {
-      this.browseContainer.parentElement.classList.remove("open");
+  browseImgsBtnListener() {
+    this.$leftSlider.addEventListener("click", leftSliderHandler);
+    this.$rightSlider.addEventListener("click", rightSliderHandler);
+    this.$closeBrowse.addEventListener("click", () => {
+      this.$browseContainer.parentElement.classList.remove("open");
     });
   }
 }

@@ -9,8 +9,8 @@ import {
 import { dataObj } from "./app.js";
 import Home from "./classes/home.js";
 import Discover from "./classes/discover.js";
-import Watchlist from "./classes/watchlist.js";
 import MoviePage from "./classes/moviePage.js";
+import Watchlist from "./classes/watchlist.js";
 import SearchResult from "./classes/searchResult.js";
 import CastPage from "./classes/castPage.js";
 import Error from "./classes/errorHandler.js";
@@ -55,8 +55,6 @@ export async function getHomePage() {
 
 export async function getDiscoverPage(type = null) {
   Discover.renderLoader();
-
-  !type ? dataObj.pageName : false;
 
   const popular = await fetchData(POPULAR(type));
 

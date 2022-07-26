@@ -219,7 +219,6 @@
   .nav-bar .nav-list {
     flex-direction: column;
     justify-content: flex-start;
-    flex: auto;
   }
   .nav-bar .nav-list .nav-link {
     flex-direction: row;

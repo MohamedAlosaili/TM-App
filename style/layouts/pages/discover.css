@@ -10,26 +10,33 @@
 .discover-section .cards-container .card {
   transform: translateY(2rem);
   opacity: 0;
-  transition-delay: 0;
+  -webkit-transition: 0;
+  -moz-transition: 0;
+  -o-transition: 0;
+  transition: 0;
 }
 .discover-section .cards-container .loading-spinner {
   top: 10rem;
   visibility: visible;
+  pointer-events: auto;
+  opacity: 1;
 }
 .discover-section .cards-container.popular .loading-spinner,
 .discover-section .cards-container.trending .loading-spinner,
 .discover-section .cards-container.top_rated .loading-spinner {
   visibility: hidden;
+  pointer-events: none;
+  opacity: 0;
 }
 .discover-section .cards-container.popular .card,
 .discover-section .cards-container.trending .card,
 .discover-section .cards-container.top_rated .card {
   transform: translateY(0rem);
   opacity: 1;
-  -webkit-transition: var(--transition-three);
-  -moz-transition: var(--transition-three);
-  -o-transition: var(--transition-three);
-  transition: var(--transition-three);
+  -webkit-transition: var(--transition-three) calc(var(--i) * 50ms);
+  -moz-transition: var(--transition-three) calc(var(--i) * 50ms);
+  -o-transition: var(--transition-three) calc(var(--i) * 50ms);
+  transition: var(--transition-three) calc(var(--i) * 50ms);
 }
 .discover-section .container > .btn {
   width: min(20rem, 100%);

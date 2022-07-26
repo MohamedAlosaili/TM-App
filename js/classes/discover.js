@@ -51,11 +51,13 @@ class Discover extends MainClass {
 
   getNewDiscoverPage(pageData) {
     this._sectionNavListener();
+
     setTimeout(
       () =>
         (this.$cardContainer.className = `cards-container grid ${this.discoverPage}`),
       300
     );
+
     this.$cardContainer.innerHTML = this.getSectionCards(
       pageData.results,
       dataObj.pageName

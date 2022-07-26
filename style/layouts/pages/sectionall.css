@@ -15,7 +15,7 @@
   min-height: calc(100% - 4rem);
   background-color: var(--primary-bg-color);
   padding-top: 10rem;
-  z-index: 4;
+  z-index: 9;
   -webkit-transition: var(--transition-three) var(--transition-five);
   -moz-transition: var(--transition-three) var(--transition-five);
   -o-transition: var(--transition-three) var(--transition-five);

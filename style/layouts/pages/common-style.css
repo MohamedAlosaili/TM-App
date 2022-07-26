@@ -111,7 +111,7 @@
   width: 12rem;
 }
 .landing .no-img {
-  height: 24rem;
+  width: 16rem;
 }
 .no-img .icon {
   font-size: 3rem;
@@ -124,7 +124,6 @@
 }
 .cards-container .more .wrapper {
   width: 12rem;
-  height: auto;
   aspect-ratio: 0.667;
   display: flex;
   justify-content: center;
@@ -176,9 +175,7 @@
 .landing .poster img {
   width: 16rem;
   border-radius: 0.5rem;
-  -webkit-animation: skeleton-loading 1s linear infinite alternate-reverse;
-  -moz-animation: skeleton-loading 1s linear infinite alternate-reverse;
-  animation: skeleton-loading 1s linear infinite alternate-reverse;
+  aspect-ratio: 0.667;
   -webkit-box-shadow: 0 0 1.2rem var(--secondary-bg-color);
   -moz-box-shadow: 0 0 1.2rem var(--secondary-bg-color);
   box-shadow: 0 0 1.2rem var(--secondary-bg-color);
@@ -457,10 +454,9 @@
     gap: 1.5rem;
     text-align: center;
   }
+  .landing .no-img,
   .landing .poster img {
-    height: 18rem;
-    width: auto;
-    aspect-ratio: 0.667;
+    width: 12rem;
   }
   .landing .rate {
     margin: auto;

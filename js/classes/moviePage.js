@@ -35,7 +35,7 @@ class MoviePage extends MainClass {
             <div class="container flex-column">
                 <section class="overview section">
                     <h2 class="section-title">Overview</h2>
-                    <p>${movieObj.overview}</p>
+                    <p>${movieObj.overview ?? "Overview not available"}</p>
                 </section>
                 <section class="section">
                     <h2 class="section-title">Cast</h2>
@@ -46,27 +46,7 @@ class MoviePage extends MainClass {
                 <section class="section">
                     <h2 class="section-title">Videos</h2>
                     <div class="cards-container flex">
-                        ${
-                          this._getMovieVideos(movieObj.videos) ||
-                          `
-                               <div class="no-content">
-                                    <i class="icon fa-solid fa-video-slash"></i>
-                                    <p class="text">
-                                    There are no videos for <span class="movie-name">${
-                                      movieObj.title ??
-                                      movieObj.original_title ??
-                                      movieObj.name ??
-                                      movieObj.original_name
-                                    }</span><br> watch on youtube <a href="https://www.youtube.com/results?search_query=${
-                            movieObj.title ??
-                            movieObj.original_title ??
-                            movieObj.name ??
-                            movieObj.original_name
-                          }" target="_blank">Click</a>
-                                    </p>
-                                </div> 
-                            `
-                        }
+                        ${this._getMovieVideos(movieObj.videos)}
                     </div>
                 </section>
                 <section class="section">
@@ -122,7 +102,7 @@ class MoviePage extends MainClass {
     this.$cardContainer = document.querySelector("[data-images-container]");
     this.$navBtns = document.querySelectorAll("[data-image-type]");
 
-    this._movieHeaderListener(moviePageHandler);
+    this._movieHeaderListener();
     this._sectionNavListener();
   }
 
@@ -197,7 +177,7 @@ class MoviePage extends MainClass {
                       type === `movie` ? `Duration` : `Episode Time`
                     }:</span> ${
       movieObj.runtime ?? movieObj.episode_run_time
-    }min</h3>
+    } min</h3>
                 </div>
                 <div class="button">
                     <button class="btn more-btn" data-trailer-btn><i class="icon fa-solid fa-play"></i> Watch
@@ -274,6 +254,28 @@ class MoviePage extends MainClass {
   }
 
   _getMovieVideos(videosObj) {
+    if (videosObj.results.length === 0) {
+      const movieObj = dataObj.moviePage.movieObj;
+      return `
+      <div class="no-content">
+        <i class="icon fa-solid fa-video-slash"></i>
+        <p class="text">
+          There are no videos for <span class="movie-name">${
+            movieObj.title ??
+            movieObj.original_title ??
+            movieObj.name ??
+            movieObj.original_name
+          }</span><br> watch on youtube <a href="https://www.youtube.com/results?search_query=${
+        movieObj.title ??
+        movieObj.original_title ??
+        movieObj.name ??
+        movieObj.original_name
+      }" target="_blank">Click</a>      
+        </p>
+      </div> 
+      `;
+    }
+
     const videosContainer = document.createElement("div");
 
     videosObj.results.forEach((video) => {
@@ -350,8 +352,8 @@ class MoviePage extends MainClass {
     return imagesContainer.innerHTML;
   }
 
-  _movieHeaderListener(handler) {
-    this.$movieHeader.addEventListener("click", handler);
+  _movieHeaderListener() {
+    this.$movieHeader.addEventListener("click", moviePageHandler);
   }
 
   _sectionNavListener() {
