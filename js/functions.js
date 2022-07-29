@@ -1,5 +1,4 @@
 import {
-  API_KEY,
   DAY_TREND,
   WEEK_TREND,
   FULL_DETAILS,
