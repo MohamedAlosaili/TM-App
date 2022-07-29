@@ -378,6 +378,7 @@
 }
 .cards-container .card .poster {
   position: relative;
+  height: 100%;
   border-radius: 0.5rem;
   z-index: 1;
 }
