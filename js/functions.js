@@ -1,4 +1,5 @@
 import {
+  API_KEY,
   DAY_TREND,
   WEEK_TREND,
   FULL_DETAILS,
@@ -15,12 +16,19 @@ import SearchResult from "./classes/searchResult.js";
 import CastPage from "./classes/castPage.js";
 import Error from "./classes/errorHandler.js";
 
-async function fetchData(API_URL) {
+async function fetchData(mainRequest, extra = "") {
+  const serverless = `/.netlify/functions/fetch-data`;
+  const options = {
+    method: "POST",
+    body: JSON.stringify({
+      mainRequest: mainRequest,
+      extra: extra,
+    }),
+  };
   try {
-    const req = await fetch(API_URL);
+    const req = await fetch(serverless, options);
 
     const res = await req.json();
-
     if (!req.ok) {
       Error.renderError(req.status, res.status_message);
       throw res.status_message;
@@ -28,7 +36,7 @@ async function fetchData(API_URL) {
 
     return res;
   } catch (err) {
-    Error.renderError(req.status, res.status_message);
+    Error.renderError(err.status, err.status_message);
     throw err;
   }
 }
@@ -80,11 +88,8 @@ export async function getMoviePage(id) {
   const type = dataObj.pageName.match(regex).join("");
 
   const movieObj = await fetchData(
-    FULL_DETAILS(
-      type,
-      id,
-      "&include_image_language=en,null&append_to_response=videos,credits,images,similar"
-    )
+    FULL_DETAILS(type, id),
+    "&include_image_language=en,null&append_to_response=videos,credits,images,similar"
   );
 
   dataObj.moviePage.movieObj = movieObj;
@@ -99,7 +104,7 @@ export async function getSearchResult(query) {
 
   SearchResult.renderLoader();
 
-  const results = await fetchData(SEARCH(query));
+  const results = await fetchData(SEARCH, `&query=${query}&page=1`);
 
   separateTheResults(results);
   SearchResult.rendermainPageElement(query);
@@ -123,11 +128,8 @@ export async function getCastPage(id) {
 
   const [personObj, popularPeople] = await Promise.all([
     fetchData(
-      FULL_DETAILS(
-        "person",
-        id,
-        "&append_to_response=combined_credits,images,external_ids"
-      )
+      FULL_DETAILS("person", id),
+      "&append_to_response=combined_credits,images,external_ids"
     ),
     fetchData(POPULAR("person")),
   ]);
@@ -162,7 +164,8 @@ export async function getMoreCards() {
   dataObj.pageNum += 1;
 
   const newCards = await fetchData(
-    `${dataObj.discoverCurrentUrl}&page=${dataObj.pageNum}`
+    `${dataObj.discoverCurrentUrl}`,
+    `&page=${dataObj.pageNum}`
   );
   Discover.loadMoreListener();
   Discover.clearLoadMore();

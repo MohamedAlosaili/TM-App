@@ -255,12 +255,12 @@ class CastPage extends MainClass {
             ? `<div class="cast-img">
                 <img src="${BACKDROP_URL + img.file_path}" alt="${
                 name ?? "Unknown"
-              }" >
+              }" loading="lazy">
             </div>`
             : `
                 <img src="${POSTER_URL + img.file_path}" alt="${
                 name ?? "Unknown"
-              }" data-browse-imgs data-idx="${idx}">
+              }" data-browse-imgs data-idx="${idx}" loading="lazy">
                 `
         }
       `;

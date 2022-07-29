@@ -454,10 +454,6 @@
     gap: 1.5rem;
     text-align: center;
   }
-  .landing .no-img,
-  .landing .poster img {
-    width: 12rem;
-  }
   .landing .rate {
     margin: auto;
   }
@@ -468,6 +464,12 @@
 @media (max-width: 639px) {
   .cards-container.grid {
     grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+  }
+}
+@media (max-width: 375px) {
+  .landing .no-img,
+  .landing .poster img {
+    width: 12rem;
   }
 }
 @media (hover: hover) {

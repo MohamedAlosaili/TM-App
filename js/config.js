@@ -1,6 +1,3 @@
-import KEY from "./key.js";
-
-const API_KEY = KEY;
 const API_URL = `https://api.themoviedb.org/3/`;
 
 // Images
@@ -11,20 +8,16 @@ const BACKDROP_URL = "https://image.tmdb.org/t/p/w1280";
 const VIDEO_URL = "https://www.youtube.com/embed/";
 
 // Main Requests
-const DAY_TREND = `${API_URL}trending/all/day?api_key=${API_KEY}&language=en-US`;
-const WEEK_TREND = `${API_URL}trending/all/week?api_key=${API_KEY}&language=en-US`;
-const FULL_DETAILS = (type, id, extraDetails = "") =>
-  `${API_URL}${type}/${id}?api_key=${API_KEY}&language=en-US${extraDetails}`;
+const DAY_TREND = `${API_URL}trending/all/day`;
+const WEEK_TREND = `${API_URL}trending/all/week`;
+const FULL_DETAILS = (type, id) => `${API_URL}${type}/${id}`;
 
 // Movies & TV Show
-const POPULAR = (type) =>
-  `${API_URL}${type}/popular?api_key=${API_KEY}&language=en-US`;
+const POPULAR = (type) => `${API_URL}${type}/popular`;
 
-const CUSTOM_REQUEST = (type) =>
-  `${API_URL}${type}?api_key=${API_KEY}&language=en-US`;
+const CUSTOM_REQUEST = (type) => `${API_URL}${type}`;
 
-const SEARCH = (query) => `
-${API_URL}search/multi?api_key=${API_KEY}&language=en-US&query=${query}&page=1`;
+const SEARCH = `${API_URL}search/multi`;
 
 export {
   POSTER_URL,
