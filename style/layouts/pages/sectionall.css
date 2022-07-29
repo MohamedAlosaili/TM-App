@@ -86,7 +86,6 @@
 .section-all .cards-container.flex .posters-img,
 .section-all .cards-container.flex .backdrops-img {
   width: 100%;
-  height: 100%;
   border-radius: 0.5rem;
 }
 .section-all .footer > .container {

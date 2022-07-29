@@ -379,12 +379,11 @@
 .cards-container .card .poster {
   position: relative;
   border-radius: 0.5rem;
-  aspect-ratio: 2 / 3;
   z-index: 1;
 }
 .cards-container .card .poster img {
-  height: 100%;
   width: 100%;
+  aspect-ratio: 0.667 / 1;
   border-radius: 0.5rem;
   margin-bottom: 0.5rem;
   -webkit-box-shadow: 0 0 1rem var(--secondary-bg-color);
