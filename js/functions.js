@@ -29,13 +29,13 @@ async function fetchData(mainRequest, extra = "") {
 
     const res = await req.json();
     if (!req.ok) {
-      Error.renderError(req.status, res.status_message);
-      throw res.status_message;
+      Error.renderError(req.status, req.statusText);
+      throw req.statusText;
     }
 
     return res;
   } catch (err) {
-    Error.renderError(err.status, err.status_message);
+    Error.renderError(500, err);
     throw err;
   }
 }

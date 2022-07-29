@@ -1,6 +1,6 @@
 const axios = require("axios");
 
-const API_KEY = process.env;
+const { API_KEY } = process.env;
 
 const handler = async (event) => {
   const { mainRequest, extra } = JSON.parse(event.body);
