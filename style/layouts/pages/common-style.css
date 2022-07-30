@@ -99,19 +99,13 @@
   align-items: center;
   gap: 0.8rem;
   width: 100%;
-  aspect-ratio: 0.667;
+  height: 100%;
   background-color: var(--secondary-bg-color);
   border-radius: 0.5rem;
   margin-bottom: 0.8rem;
   text-align: center;
   color: var(--primary-txt-color);
   line-height: 1.6;
-}
-.cards-container.flex .no-img {
-  width: 12rem;
-}
-.landing .no-img {
-  width: 16rem;
 }
 .no-img .icon {
   font-size: 3rem;
@@ -172,13 +166,16 @@
   padding-top: 6.5rem;
   padding-bottom: 5rem;
 }
-.landing .poster img {
+.landing .poster .img-wrapper {
   width: 16rem;
   height: calc(16rem / 0.667);
-  border-radius: 0.5rem;
   -webkit-box-shadow: 0 0 1.2rem var(--secondary-bg-color);
   -moz-box-shadow: 0 0 1.2rem var(--secondary-bg-color);
   box-shadow: 0 0 1.2rem var(--secondary-bg-color);
+}
+.landing .poster img {
+  height: 100%;
+  width: 100%;
 }
 .landing .post-info {
   display: flex;
@@ -379,23 +376,22 @@
 .cards-container .card .poster {
   position: relative;
   border-radius: 0.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
   z-index: 1;
 }
-.cards-container .card .poster img {
+.cards-container .card .img-wrapper {
   width: 100%;
   aspect-ratio: 0.667 / 1;
-  border-radius: 0.5rem;
   margin-bottom: 0.5rem;
   -webkit-box-shadow: 0 0 1rem var(--secondary-bg-color);
   -moz-box-shadow: 0 0 1rem var(--secondary-bg-color);
   box-shadow: 0 0 1rem var(--secondary-bg-color);
 }
-.cards-container.flex .card .poster img {
+.cards-container.flex .card .img-wrapper {
   width: 12rem;
-  z-index: 1;
+}
+.cards-container .card img {
+  height: 100%;
+  width: 100%;
 }
 .cards-container .poster .wrapper {
   padding: 0 0.5rem;
@@ -424,17 +420,9 @@
 .cards-container .card .expand {
   display: block;
   width: 100%;
-  margin-bottom: 0.5rem;
+  height: 100%;
   text-align: left;
   cursor: pointer;
-}
-.cards-container .cast-poster img {
-  width: 12rem;
-  aspect-ratio: 0.667;
-  border-radius: 0.5rem;
-  -webkit-box-shadow: 0 0 1rem var(--secondary-bg-color);
-  -moz-box-shadow: 0 0 1rem var(--secondary-bg-color);
-  box-shadow: 0 0 1rem var(--secondary-bg-color);
 }
 .cards-container .cast-poster figcaption {
   color: var(--primary-txt-color);
@@ -467,15 +455,14 @@
   }
 }
 @media (max-width: 375px) {
-  .landing .no-img,
-  .landing .poster img {
+  .landing .poster .img-wrapper {
     width: 12rem;
     height: calc(12rem / 0.667);
   }
 }
 @media (hover: hover) {
   /* This Media Target Only Devices Can Hover On Elements */
-  .cards-container .expand-btn:hover .icon,
+  /* .cards-container .expand-btn:hover .icon,
   .cards-container .expand-btn:hover .text {
     opacity: 1;
     transform: translateY(-2rem);
@@ -543,7 +530,7 @@
   .cards-container .more .wrapper:hover .icon {
     color: var(--accent-color);
     transform: translateX(0.5rem);
-  }
+  } */
 }
 /* Media Queries End */
 /* Animation Start */

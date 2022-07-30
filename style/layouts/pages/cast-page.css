@@ -34,13 +34,10 @@
 .cast-page .landing .poster-side {
   width: min(25rem, 100%);
 }
-.cast-page .landing .poster {
+.cast-page .landing .img-wrapper {
   width: 100%;
+  height: auto;
   aspect-ratio: 0.667;
-}
-.cast-page .landing .poster img {
-  width: 100%;
-  height: 100%;
 }
 .cast-page .landing .no-img {
   width: 100%;
@@ -133,32 +130,24 @@
   align-items: start;
 }
 .cast-page .imgs-container .cast-img {
-  width: 100%;
-  aspect-ratio: 1;
   cursor: pointer;
 }
 .cast-page .imgs-container .cast-img:nth-child(n + 6) {
   display: none;
 }
+.cast-page .imgs-container .cast-img .img-wrapper {
+  width: 12rem;
+  height: calc(12rem / 0.667);
+}
 .cast-page .imgs-container .cast-img img {
+  height: 100%;
   width: 100%;
-  aspect-ratio: 1;
-  object-fit: cover;
-  border-radius: 0.5rem;
-  -webkit-animation: skeleton-loading 1s linear infinite alternate-reverse;
-  -moz-animation: skeleton-loading 1s linear infinite alternate-reverse;
-  animation: skeleton-loading 1s linear infinite alternate-reverse;
 }
 .cast-page .imgs-container .more {
   display: none;
 }
 .cast-page .imgs-container .cast-img:nth-child(n + 7) ~ .more {
   display: block;
-}
-.cast-page .imgs-container .more .wrapper {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 1;
 }
 /* Browse Container */
 .cast-page .browse-imgs {
@@ -191,8 +180,8 @@
   width: 100vw;
 }
 .cast-page .browse-imgs .cast-img img {
-  width: min(30rem, 100%);
-  aspect-ratio: 0.667;
+  width: min(30rem, 100vw);
+  height: min(calc(30rem / 0.667), calc(100vw / 0.667));
   border-radius: 0.5rem;
 }
 .cast-page .browse-imgs .btn {
@@ -302,29 +291,3 @@
   }
 }
 /* Media Queries End */
-/* Animation Start */
-@-webkit-keyframes skeleton-loading {
-  0% {
-    background-color: rgba(0 0 0 / 0.5);
-  }
-  100% {
-    background-color: rgba(0 0 0 / 0.3);
-  }
-}
-@-moz-keyframes skeleton-loading {
-  0% {
-    background-color: rgba(0 0 0 / 0.5);
-  }
-  100% {
-    background-color: rgba(0 0 0 / 0.3);
-  }
-}
-@keyframes skeleton-loading {
-  0% {
-    background-color: rgba(0 0 0 / 0.5);
-  }
-  100% {
-    background-color: rgba(0 0 0 / 0.3);
-  }
-}
-/* Animation End */

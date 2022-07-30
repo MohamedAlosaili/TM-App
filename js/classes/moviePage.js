@@ -115,7 +115,8 @@ class MoviePage extends MainClass {
           !movieObj.backdrop_path && !movieObj.poster_path
             ? ""
             : movieObj.backdrop_path
-            ? `<img src="${BACKDROP_URL}${movieObj.backdrop_path}" alt="'${
+            ? `
+            <img src="${BACKDROP_URL}${movieObj.backdrop_path}" alt="'${
                 movieObj.title ??
                 movieObj.original_title ??
                 movieObj.name ??
@@ -134,9 +135,11 @@ class MoviePage extends MainClass {
             </figure>
         <div class="container" data-poster-parent>
             <figure class="poster">
+            <div class="img-wrapper">
             ${
               movieObj.poster_path
-                ? `<img src="${POSTER_URL}${
+                ? `
+                <img src="${POSTER_URL}${
                     movieObj.poster_path
                   }" data-poster alt="'${
                     movieObj.title ??
@@ -149,6 +152,7 @@ class MoviePage extends MainClass {
                       Image Not <br> Available
                     </div>`
             }
+            </div>
             </figure>
             <section class="post-info">
                 <h2 class="post-title">${

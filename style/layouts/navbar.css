@@ -204,6 +204,7 @@
     backdrop-filter: blur(1rem);
     padding: 2rem 1rem;
     z-index: 1;
+    transition: var(--transition-five);
   }
   .nav-bar .sidbar-menu::before {
     content: "";
@@ -215,6 +216,9 @@
   }
   .nav-bar .sidbar-menu.active {
     left: 0;
+  }
+  .nav-bar .sidbar-menu .search-form {
+    margin-bottom: 3rem;
   }
   .nav-bar .nav-list {
     flex-direction: column;

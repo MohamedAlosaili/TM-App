@@ -57,6 +57,7 @@ export default class MainClass {
             </figure>
             <div class="container" data-poster-parent>
             <figure class="poster">
+              <div class="img-wrapper">
                ${
                  result.poster_path
                    ? `
@@ -74,6 +75,7 @@ export default class MainClass {
                    Image Not <br> Available
                </div>`
                }
+               </div>
             </figure>
             <section class="post-info">
                 <h2 class="post-title">${
@@ -141,10 +143,12 @@ export default class MainClass {
             <p class="text">Expand</p>
       </button>
             <figure class="poster">
+              <div class="img-wrapper">
                 ${
                   card.poster_path || card.profile_path
                     ? card.poster_path.startsWith("http")
-                      ? `<img src="${card.poster_path ?? card.profile_path}"
+                      ? ` 
+                      <img src="${card.poster_path ?? card.profile_path}"
                       alt="'${
                         card.title ??
                         card.original_title ??
@@ -159,12 +163,14 @@ export default class MainClass {
                           card.original_title ??
                           card.name ??
                           card.original_name
-                        }' poster" loading="lazy" data-poster>`
-                    : `<div class="no-img">
+                        }' poster" loading="lazy" data-poster></div>`
+                    : `
+                    <div class="no-img">
                         <i class="icon fa-solid fa-file-image"></i>
                         Image Not <br> Available
                     </div>`
                 }
+                </div>
                 <div class="wrapper">
                   <figcaption class="card-title">${
                     card.title ??
@@ -234,21 +240,22 @@ export default class MainClass {
 
       card.innerHTML = `
             <figure class="cast-poster">
+                <div class="img-wrapper">
+                  <button class="expand" id="${cast.id}" data-expand-cast>
                 ${
                   cast.profile_path
-                    ? `<button class="expand" id="${cast.id}" data-expand-cast>
-                          <img src="${POSTER_URL}${cast.profile_path}"
+                    ? `<img src="${POSTER_URL}${cast.profile_path}"
                           alt="${cast.name ?? original_name}" loading="lazy">
-                       </button>`
+                       `
                     : `
-                    <button class="expand" id="${cast.id}" data-expand-cast>
                     <div class="no-img">
                         <i class="icon fa-solid fa-file-image"></i>
                         Image Not <br> Available
                     </div>
-                    </button>
                     `
                 }
+                  </button>
+                </div
                 <button class="expand" id="${cast.id}" data-expand-cast>  
                 <figcaption>${cast.name ?? cast.original_name}</figcaption>
                 </button>
