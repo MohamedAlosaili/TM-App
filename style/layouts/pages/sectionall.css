@@ -58,10 +58,6 @@
 .section-all .cards-container.grid {
   grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
 }
-.section-all .cards-container .cast-poster img {
-  width: 100%;
-  border-radius: 0.5rem;
-}
 /* Images Changes */
 .section-all .cards-container.flex .imgs-title {
   font-size: 1.5rem;
@@ -86,7 +82,6 @@
 .section-all .cards-container.flex .posters-img,
 .section-all .cards-container.flex .backdrops-img {
   width: 100%;
-  border-radius: 0.5rem;
 }
 .section-all .footer > .container {
   padding: 0;

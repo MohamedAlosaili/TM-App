@@ -57,7 +57,6 @@ export default class MainClass {
             </figure>
             <div class="container" data-poster-parent>
             <figure class="poster">
-              <div class="img-wrapper">
                ${
                  result.poster_path
                    ? `
@@ -75,7 +74,6 @@ export default class MainClass {
                    Image Not <br> Available
                </div>`
                }
-               </div>
             </figure>
             <section class="post-info">
                 <h2 class="post-title">${
@@ -143,7 +141,6 @@ export default class MainClass {
             <p class="text">Expand</p>
       </button>
             <figure class="poster">
-              <div class="img-wrapper">
                 ${
                   card.poster_path || card.profile_path
                     ? card.poster_path.startsWith("http")
@@ -170,7 +167,6 @@ export default class MainClass {
                         Image Not <br> Available
                     </div>`
                 }
-                </div>
                 <div class="wrapper">
                   <figcaption class="card-title">${
                     card.title ??
@@ -240,7 +236,6 @@ export default class MainClass {
 
       card.innerHTML = `
             <figure class="cast-poster">
-                <div class="img-wrapper">
                   <button class="expand" id="${cast.id}" data-expand-cast>
                 ${
                   cast.profile_path
@@ -255,7 +250,6 @@ export default class MainClass {
                     `
                 }
                   </button>
-                </div
                 <button class="expand" id="${cast.id}" data-expand-cast>  
                 <figcaption>${cast.name ?? cast.original_name}</figcaption>
                 </button>

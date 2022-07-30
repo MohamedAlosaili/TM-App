@@ -135,7 +135,6 @@ class MoviePage extends MainClass {
             </figure>
         <div class="container" data-poster-parent>
             <figure class="poster">
-            <div class="img-wrapper">
             ${
               movieObj.poster_path
                 ? `
@@ -152,7 +151,6 @@ class MoviePage extends MainClass {
                       Image Not <br> Available
                     </div>`
             }
-            </div>
             </figure>
             <section class="post-info">
                 <h2 class="post-title">${

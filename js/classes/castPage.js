@@ -16,7 +16,6 @@ class CastPage extends MainClass {
                     <header class="landing">
                         <div class="poster-side">
                             <figure class="poster">
-                            <div class="img-wrapper">
                                 ${
                                   personObj.profile_path
                                     ? `<img src="${BACKDROP_URL}${personObj.profile_path}" alt="${personObj.name}">`
@@ -25,7 +24,6 @@ class CastPage extends MainClass {
                                       Image Not <br> Available
                                     </div>`
                                 }
-                                </div>
                             </figure>   
                             <ul class="social-accounts">
                                 ${this._getCastAccounts(personObj.external_ids)}
@@ -260,11 +258,9 @@ class CastPage extends MainClass {
               }" loading="lazy">
             </div>`
             : `
-            <div class="img-wrapper">
                 <img src="${POSTER_URL + img.file_path}" alt="${
                 name ?? "Unknown"
               }" data-browse-imgs data-idx="${idx}" loading="lazy">
-              </div>
                 `
         }
       `;
