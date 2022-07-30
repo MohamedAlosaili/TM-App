@@ -39,8 +39,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -45%);
-  width: min(100%, 60rem);
-  aspect-ratio: 267 / 160;
+  width: min(100vw, 60rem);
+  height: min(calc(100vw * 0.6), calc(60rem * 0.6));
   visibility: hidden;
   pointer-events: none;
   opacity: 0;
@@ -88,11 +88,11 @@
 }
 .info-section .cards-container .more.imgs .wrapper {
   height: 25rem;
-  width: auto;
+  width: calc(25rem * 0.667);
 }
 .info-section .cards-container .video-card {
   width: 25rem;
-  aspect-ratio: 267 / 160;
+  height: calc(25rem * 0.6);
 }
 .info-section .cards-container .trailer-container .trailer-frame {
   width: 100%;

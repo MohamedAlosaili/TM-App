@@ -1,4 +1,5 @@
 key.js
 .env
+.netlify
 .vscode
 node_modules

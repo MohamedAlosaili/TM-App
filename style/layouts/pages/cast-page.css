@@ -34,8 +34,13 @@
 .cast-page .landing .poster-side {
   width: min(25rem, 100%);
 }
+.cast-page .landing .poster {
+  width: 100%;
+  aspect-ratio: 0.667;
+}
 .cast-page .landing .poster img {
   width: 100%;
+  height: 100%;
 }
 .cast-page .landing .no-img {
   width: 100%;
@@ -152,6 +157,7 @@
 }
 .cast-page .imgs-container .more .wrapper {
   width: 100%;
+  height: auto;
   aspect-ratio: 1;
 }
 /* Browse Container */

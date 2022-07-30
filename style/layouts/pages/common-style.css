@@ -124,7 +124,7 @@
 }
 .cards-container .more .wrapper {
   width: 12rem;
-  aspect-ratio: 0.667;
+  height: calc(12rem / 0.667);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -174,8 +174,8 @@
 }
 .landing .poster img {
   width: 16rem;
+  height: calc(16rem / 0.667);
   border-radius: 0.5rem;
-  aspect-ratio: 0.667;
   -webkit-box-shadow: 0 0 1.2rem var(--secondary-bg-color);
   -moz-box-shadow: 0 0 1.2rem var(--secondary-bg-color);
   box-shadow: 0 0 1.2rem var(--secondary-bg-color);
@@ -378,8 +378,10 @@
 }
 .cards-container .card .poster {
   position: relative;
-  height: 100%;
   border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
   z-index: 1;
 }
 .cards-container .card .poster img {
@@ -393,8 +395,6 @@
 }
 .cards-container.flex .card .poster img {
   width: 12rem;
-  border-radius: 0.5rem;
-  margin-bottom: 0.5rem;
   z-index: 1;
 }
 .cards-container .poster .wrapper {
@@ -470,6 +470,7 @@
   .landing .no-img,
   .landing .poster img {
     width: 12rem;
+    height: calc(12rem / 0.667);
   }
 }
 @media (hover: hover) {
