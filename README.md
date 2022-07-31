@@ -32,4 +32,4 @@
 I'll be happy to receive feedback:
 
 * :dove: [Twitter](https://twitter.com/M0hamed85)
-* :email: [Email: mohamed.alosaili@gmail.com](mohamed.alosaili@gmail.com)
+* :email: [Email](mohamed.alosaili@gmail.com)

@@ -1,12 +1,3 @@
-/* Transition Start */
-.section-all.active,
-.section-all > .container {
-  -webkit-transition: var(--transition-three);
-  -moz-transition: var(--transition-three);
-  -o-transition: var(--transition-three);
-  transition: var(--transition-three);
-}
-/* Transition End */
 .section-all {
   position: absolute;
   top: 0;
@@ -16,13 +7,11 @@
   background-color: var(--primary-bg-color);
   padding-top: 10rem;
   z-index: 9;
-  -webkit-transition: var(--transition-three) var(--transition-five);
-  -moz-transition: var(--transition-three) var(--transition-five);
-  -o-transition: var(--transition-three) var(--transition-five);
   transition: var(--transition-three) var(--transition-five);
 }
 .section-all.active {
   left: 0;
+  transition: var(--transition-three);
 }
 .section-all > .container {
   display: flex;
@@ -31,13 +20,11 @@
   gap: 3rem;
   opacity: 0;
   transform: translateY(-5rem);
+  transition: var(--transition-three);
 }
 .section-all.active > .container {
   opacity: 1;
   transform: translateY(0);
-  -webkit-transition: var(--transition-three) var(--transition-five);
-  -moz-transition: var(--transition-three) var(--transition-five);
-  -o-transition: var(--transition-three) var(--transition-five);
   transition: var(--transition-three) var(--transition-five);
 }
 .section-all .btn {

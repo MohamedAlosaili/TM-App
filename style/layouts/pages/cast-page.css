@@ -33,6 +33,14 @@
 /* Poster Side Start */
 .cast-page .landing .poster-side {
   width: min(25rem, 100%);
+  display: flex;
+  flex-direction: column;
+}
+.cast-page .landing .poster {
+  flex: 37.5rem;
+}
+.cast-page .landing .no-img {
+  height: 100%;
 }
 .cast-page .landing img {
   width: 100%;
