@@ -6,7 +6,7 @@ class Watchlist extends MainClass {
         <section class="watchlist-page">
             <div class="container flex-column">
                 <h2 class="section-title">WatchList<span class="icon"></span></h2> 
-                <div class="cards-container grid">
+                <div class="cards-container wrap">
                     ${
                       this.getSectionCards(watchlistCards) ||
                       `

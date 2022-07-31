@@ -1,7 +1,6 @@
 /* Transition Start */
 .nav-bar::before,
 .nav-bar .icon,
-.nav-bar .sidbar-menu,
 .nav-bar .nav-list .nav-link,
 .nav-bar .nav-list .nav-link::after,
 .nav-bar .search-form,
@@ -194,7 +193,8 @@
   .nav-bar .sidbar-menu {
     position: absolute;
     top: 100%;
-    left: -100%;
+    left: 0;
+    transform: translateX(-100%);
     height: calc(100vh - 100%);
     flex-direction: column-reverse;
     align-items: flex-start;
@@ -204,18 +204,10 @@
     backdrop-filter: blur(1rem);
     padding: 2rem 1rem;
     z-index: 1;
-    transition: var(--transition-five);
-  }
-  .nav-bar .sidbar-menu::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-color: transparent;
-    filter: blur(2rem);
-    z-index: -1;
+    transition: var(--transition-three);
   }
   .nav-bar .sidbar-menu.active {
-    left: 0;
+    transform: translateX(0);
   }
   .nav-bar .sidbar-menu .search-form {
     margin-bottom: 3rem;

@@ -214,6 +214,7 @@ body {
   height: 1.5rem;
   width: 1.5rem;
   margin-top: -0.2rem;
+  animation-play-state: paused;
 }
 /* Footer End */
 /* Errors Start */

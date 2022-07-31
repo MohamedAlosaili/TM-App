@@ -41,12 +41,9 @@
   border-radius: 0.5rem;
   padding: 1rem;
 }
+.cards-container.wrap .no-content,
 .cards-container.flex .no-content {
   background-color: rgba(0 0 0 / 0.05);
-}
-.cards-container.grid .no-content {
-  position: absolute;
-  inset: 0;
 }
 .no-content .icon {
   font-size: 4rem;
@@ -106,9 +103,12 @@
   text-align: center;
   color: var(--primary-txt-color);
   line-height: 1.6;
+  position: relative;
 }
+.cards-container.wrap .no-img,
 .cards-container.flex .no-img {
   width: 12rem;
+  height: calc(12rem / 0.667);
 }
 .landing .no-img {
   width: 16rem;
@@ -319,22 +319,21 @@
 /* Section Title End */
 /* Cards Container Start */
 .cards-container {
+  display: flex;
   width: 100%;
   gap: 1.5rem;
   position: relative;
+  min-height: 21.5rem;
 }
 .cards-container.flex {
-  display: flex;
-  min-height: 21.5rem;
   overflow-x: scroll;
   scrollbar-color: var(--secondary-bg-color) transparent;
   scrollbar-width: thin;
   padding: 2rem 1rem 1rem;
 }
-.cards-container.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
-  min-height: 20rem;
+.cards-container.wrap {
+  flex-wrap: wrap;
+  align-items: flex-start;
 }
 /* Cards Container End */
 /* Card Start */
@@ -388,11 +387,13 @@
   -moz-box-shadow: 0 0 1rem var(--secondary-bg-color);
   box-shadow: 0 0 1rem var(--secondary-bg-color);
 }
+.cards-container.wrap .card img,
 .cards-container.flex .card img {
   width: 12rem;
   height: calc(12rem / 0.667);
 }
 .cards-container .poster .wrapper {
+  max-width: 12rem;
   padding: 0 0.5rem;
   z-index: 3;
 }
@@ -448,11 +449,6 @@
     justify-content: center;
   }
 }
-@media (max-width: 639px) {
-  .cards-container.grid {
-    grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
-  }
-}
 @media (max-width: 375px) {
   .landing .poster .img-wrapper {
     width: 12rem;
@@ -461,7 +457,7 @@
 }
 @media (hover: hover) {
   /* This Media Target Only Devices Can Hover On Elements */
-  /* .cards-container .expand-btn:hover .icon,
+  .cards-container .expand-btn:hover .icon,
   .cards-container .expand-btn:hover .text {
     opacity: 1;
     transform: translateY(-2rem);
@@ -516,6 +512,10 @@
   .cards-container .expand-btn:hover + .poster::after {
     height: 100%;
   }
+  .cards-container .poster img,
+  .cards-container .poster .no-img {
+    margin-bottom: 0;
+  }
   .cards-container .poster .wrapper {
     position: absolute;
     bottom: -100%;
@@ -529,7 +529,7 @@
   .cards-container .more .wrapper:hover .icon {
     color: var(--accent-color);
     transform: translateX(0.5rem);
-  } */
+  }
 }
 /* Media Queries End */
 /* Animation Start */

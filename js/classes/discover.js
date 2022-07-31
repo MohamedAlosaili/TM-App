@@ -26,7 +26,7 @@ class Discover extends MainClass {
                             <button class="btn" data-discover-page="top_rated" data-idx="2">Top Rated</button>
                         </nav>
                     </header>
-                    <div class="cards-container grid popular" data-discover-container>    
+                    <div class="cards-container wrap popular" data-discover-container>    
                         ${this.getSectionCards(
                           movieObj.results,
                           dataObj.pageName
@@ -54,7 +54,7 @@ class Discover extends MainClass {
 
     setTimeout(
       () =>
-        (this.$cardContainer.className = `cards-container grid ${this.discoverPage}`),
+        (this.$cardContainer.className = `cards-container wrap ${this.discoverPage}`),
       300
     );
 

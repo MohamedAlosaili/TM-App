@@ -54,11 +54,12 @@
   color: var(--primary-txt-color);
   z-index: 50;
 }
-/* Cast Changes */
-.section-all .cards-container.grid {
-  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
-}
 /* Images Changes */
+.section-all .cards-container.flex {
+  padding: 0;
+  flex-direction: column;
+  gap: 3rem;
+}
 .section-all .cards-container.flex .imgs-title {
   font-size: 1.5rem;
   color: var(--primary-txt-color);
@@ -68,26 +69,32 @@
   border-top: 0.15rem solid var(--secondary-txt-color);
   padding-top: 1.5rem;
 }
-.section-all .cards-container.flex {
-  padding: 0;
-  flex-direction: column;
-  gap: 3rem;
+.section-all .cards-container.wrap {
+  justify-content: center;
 }
-.section-all .posters .cards-container.grid {
-  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+.section-all .cards-container figcaption,
+.section-all .cards-container .character {
+  max-width: 12rem;
 }
-.section-all .backdrops .cards-container.grid {
-  grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
+.section-all .cards-container.flex .posters-img {
+  width: 100%;
+  max-width: 20rem;
 }
-.section-all .cards-container.flex .posters-img,
 .section-all .cards-container.flex .backdrops-img {
   width: 100%;
+  max-width: 60rem;
 }
 .section-all .footer > .container {
   padding: 0;
 }
 @media (max-width: 639px) {
-  .section-all .backdrops .cards-container.grid {
-    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  .section-all .cards-container.wrap .card img,
+  .section-all .cards-container.wrap .card .no-img {
+    width: 11rem;
+    height: calc(11rem / 0.667);
+  }
+  .section-all .cards-container figcaption,
+  .section-all .cards-container .character {
+    max-width: 11rem;
   }
 }

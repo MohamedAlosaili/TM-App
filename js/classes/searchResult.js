@@ -10,7 +10,7 @@ class SearchResult extends MainClass {
             <div class="flex-column">
                 <section>
                   <h3 class="section-title">Movies / TV</h3>
-                  <div class="cards-container grid">
+                  <div class="cards-container wrap">
                   ${
                     this.getSectionCards(dataObj.searchResults.movies) ||
                     `
@@ -27,7 +27,7 @@ class SearchResult extends MainClass {
                 </section>
                 <section>
                   <h3 class="section-title">People</h3>
-                  <div class="cards-container grid">
+                  <div class="cards-container wrap">
                   ${
                     this.getCastCards(dataObj.searchResults.person, false) ||
                     `

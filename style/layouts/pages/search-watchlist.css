@@ -55,25 +55,19 @@
   border-bottom: 0.19rem solid var(--primary-txt-color);
 }
 /* Search Containers */
-.search-result .cards-container.grid {
-  padding: 2rem 1rem 1rem;
+.search-result .cards-container.wrap {
+  margin-top: 2rem;
 }
 .search-result .cards-container .cast-poster figcaption {
   font-size: 1rem;
 }
-/* Images Changes */
-.search-result .cards-container .poster img,
-.search-result .cards-container .cast-poster img,
-.watchlist-page .cards-container .poster img {
-  width: 100%;
-}
-@media (hover: hover) {
-  .search-result .cards-container .poster,
-  .watchlist-page .cards-container .poster {
-    height: 100%;
+@media (max-width: 639px) {
+  .search-result .cards-container.wrap .card img,
+  .search-result .cards-container.wrap .card .no-img {
+    width: 11rem;
+    height: calc(11rem / 0.667);
   }
-  .search-result .cards-container .poster img,
-  .watchlist-page .cards-container .poster img {
-    height: 100%;
+  .search-result .cards-container.wrap .wrapper {
+    max-width: 11rem;
   }
 }

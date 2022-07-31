@@ -7,6 +7,9 @@
   height: 0.15rem;
   background-color: rgba(255 255 255 / 0.1);
 }
+.discover-section .cards-container.wrap {
+  justify-content: center;
+}
 .discover-section .cards-container .card {
   transform: translateY(2rem);
   opacity: 0;

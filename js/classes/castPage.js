@@ -80,7 +80,7 @@ class CastPage extends MainClass {
                                 ? "Image"
                                 : "Images"
                             }</h2>    
-                            <div class="imgs-container cards-container grid">
+                            <div class="imgs-container cards-container wrap">
                                 ${this._getCastImages(
                                   personObj.images.profiles,
                                   personObj.name

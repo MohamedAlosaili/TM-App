@@ -124,10 +124,8 @@
 /* Cast Images Start */
 /* Imgs Container */
 .cast-page .imgs-container {
-  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
-  gap: 1rem;
   padding: 2rem 1rem 0;
-  align-items: start;
+  align-items: stretch;
 }
 .cast-page .imgs-container .cast-img {
   cursor: pointer;
@@ -137,8 +135,7 @@
 }
 .cast-page .imgs-container .cast-img img {
   height: 12rem;
-  width: 100%;
-  min-width: 10rem;
+  width: 12rem;
   object-fit: cover;
 }
 .cast-page .imgs-container .more {
@@ -146,11 +143,10 @@
 }
 .cast-page .imgs-container .more .wrapper {
   height: 12rem;
-  width: 100%;
-  min-width: 10rem;
+  width: 12rem;
 }
 .cast-page .imgs-container .cast-img:nth-child(n + 7) ~ .more {
-  display: block;
+  display: flex;
 }
 /* Browse Container */
 .cast-page .browse-imgs {
@@ -291,6 +287,13 @@
   .cast-page .landing {
     align-items: center;
     flex-direction: column;
+  }
+}
+@media (max-width: 639px) {
+  .cast-page .imgs-container .cast-img img,
+  .cast-page .imgs-container .more .wrapper {
+    width: 11.5rem;
+    height: 11.5rem;
   }
 }
 /* Media Queries End */

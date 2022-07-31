@@ -174,7 +174,7 @@ export function sectionNavHandler(e) {
   const btn = e.target.closest("[data-discover-page]");
   const idx = btn.dataset.idx;
 
-  Discover.$cardContainer.className = "cards-container grid";
+  Discover.$cardContainer.className = "cards-container wrap";
   const loader = document.createElement("div");
   loader.className = "loading-spinner";
   loader.innerHTML = `

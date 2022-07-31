@@ -34,11 +34,11 @@ class MovieSectionAll extends MainClass {
     this.$sectionTitle.innerHTML = `All ${type}`;
 
     if (type === "cast") {
-      this.$sectionContainer.classList.add("grid");
+      this.$sectionContainer.classList.add("wrap");
       this.$sectionContainer.classList.remove("flex");
     } else {
-      this.$sectionContainer.classList.remove("grid");
       this.$sectionContainer.classList.add("flex");
+      this.$sectionContainer.classList.remove("wrap");
     }
 
     this.$sectionContainer.innerHTML = this._getSectionContent(
@@ -65,7 +65,7 @@ class MovieSectionAll extends MainClass {
         dataObj.moviePage.posters.length !== 0
           ? `<section class="posters">
           <h3 class="imgs-title">Posters</h3>
-          <div class="cards-container grid">
+          <div class="cards-container wrap">
             ${this.getAllImages(dataObj.moviePage.posters, "poster")}
           </div>
         </section>`
@@ -75,7 +75,7 @@ class MovieSectionAll extends MainClass {
         dataObj.moviePage.backdrops.length !== 0
           ? `<section class="backdrops">
         <h3 class="imgs-title">Backdrops</h3>
-        <div class="cards-container grid">
+        <div class="cards-container wrap">
           ${this.getAllImages(dataObj.moviePage.backdrops, "backdrop")}
         </div>
       </section>`
