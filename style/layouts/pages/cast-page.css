@@ -39,16 +39,15 @@
 .cast-page .landing .poster {
   flex: 37.5rem;
 }
-.cast-page .landing .no-img {
-  height: 100%;
-}
 .cast-page .landing img {
   width: 100%;
   height: auto;
   aspect-ratio: 0.667;
 }
 .cast-page .landing .no-img {
-  width: 100%;
+  width: 25rem;
+  height: calc(25rem / 0.667);
+  max-width: 100%;
 }
 .cast-page .landing .poster-side .social-accounts {
   display: flex;
