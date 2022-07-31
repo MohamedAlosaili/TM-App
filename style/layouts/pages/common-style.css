@@ -100,9 +100,6 @@
   width: 12rem;
   height: calc(12rem / 0.667);
 }
-.landing .no-img {
-  width: 16rem;
-}
 .no-img .icon {
   font-size: 3rem;
   color: var(--accent-color);
@@ -162,7 +159,8 @@
   padding-top: 6.5rem;
   padding-bottom: 5rem;
 }
-.landing .poster img {
+.landing .poster img,
+.landing .poster .no-img {
   width: 16rem;
   height: calc(16rem / 0.667);
   -webkit-box-shadow: 0 0 1.2rem var(--secondary-bg-color);
@@ -440,7 +438,8 @@
   }
 }
 @media (max-width: 375px) {
-  .landing .poster .img-wrapper {
+  .landing .poster img,
+  .landing .poster .no-img {
     width: 12rem;
     height: calc(12rem / 0.667);
   }

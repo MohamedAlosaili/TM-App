@@ -37,9 +37,6 @@ body {
 .layer,
 .scroll-to-top,
 .underline::before {
-  -webkit-transition: var(--transition-three);
-  -moz-transition: var(--transition-three);
-  -o-transition: var(--transition-three);
   transition: var(--transition-three);
 }
 /* Transition End */
@@ -58,9 +55,6 @@ body {
   pointer-events: none;
   z-index: 5;
   background-color: var(--secondary-bg-color);
-  -webkit-transition: var(--transition-three);
-  -moz-transition: var(--transition-three);
-  -o-transition: var(--transition-three);
   transition: var(--transition-three);
 }
 .layer.active {
@@ -96,6 +90,8 @@ body {
   border-style: solid;
   border-color: var(--accent-color) var(--accent-color) var(--accent-color)
     transparent;
+  -webkit-animation: turn-right 1s infinite linear;
+  -moz-animation: turn-right 1s infinite linear;
   animation: turn-right 1s infinite linear;
 }
 .loading-spinner .load-out {
@@ -105,6 +101,8 @@ body {
   border-style: solid;
   border-color: var(--primary-txt-color) transparent var(--primary-txt-color)
     var(--primary-txt-color);
+  -webkit-animation: turn-left 1s infinite linear;
+  -moz-animation: turn-left 1s infinite linear;
   animation: turn-left 1s infinite linear;
 }
 /* Main Page */
@@ -140,16 +138,9 @@ body {
   cursor: pointer;
   font-size: 1rem;
   user-select: none;
-  -webkit-transition: var(--transition-three), transform 0s;
-  -moz-transition: var(--transition-three), transform 0s;
-  -o-transition: var(--transition-three), transform 0s;
   transition: var(--transition-three), transform 0s;
 }
 .btn:active {
-  -webkit-transform: scale(0.98);
-  -moz-transform: scale(0.98);
-  -ms-transform: scale(0.98);
-  -o-transform: scale(0.98);
   transform: scale(0.98);
 }
 .underline {
