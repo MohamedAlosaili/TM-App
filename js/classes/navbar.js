@@ -46,12 +46,12 @@ class Navbar {
     this.$mobileMenuToggler.addEventListener("click", mobileMenuHandler);
   }
 
-  mobileMenuState(classType, overflow, toggler) {
+  mobileMenuState(classType, position, toggler) {
     this.$mobileMenuToggler.className = `hamburger ${toggler}`;
     this.$mobileMenu.classList[classType]("active");
     this.$navbar.classList[classType]("active");
     mainClass.renderLayer(classType);
-    document.body.style.overflowY = overflow;
+    document.body.style.position = position;
   }
 
   _setFooterYear() {

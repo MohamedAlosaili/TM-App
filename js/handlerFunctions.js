@@ -19,7 +19,7 @@ import {
 } from "./functions.js";
 
 export function layerHandler() {
-  Navbar.mobileMenuState("remove", "auto", "close");
+  Navbar.mobileMenuState("remove", "relative", "close");
 
   if (dataObj.pageName === "tv-" || dataObj.pageName === "movie-") {
     MoviePage.$trailerContainer.classList.remove("active");
@@ -32,7 +32,7 @@ export function navLinksHandler(e) {
   // Deal with links
   Navbar.$navLinks.forEach((link) => link.classList.remove("active", "shake"));
   e.currentTarget.classList.add("active", "shake");
-  Navbar.mobileMenuState("remove", "auto", "close");
+  Navbar.mobileMenuState("remove", "relative", "close");
 
   // Deal with pages
   const pageName = e.currentTarget.dataset.page;
@@ -47,7 +47,7 @@ export function searchFromHandler(e) {
     SearchResult.renderLoader();
     getSearchResult(value);
 
-    Navbar.mobileMenuState("remove", "auto", "close");
+    Navbar.mobileMenuState("remove", "relative", "close");
     dataObj.pageName = "search?q=";
     location.hash = `search?q=${value}`;
     Navbar.updateNavLinks();
@@ -58,9 +58,9 @@ export function searchFromHandler(e) {
 
 export function mobileMenuHandler() {
   if (Navbar.$mobileMenu.classList.contains("active")) {
-    Navbar.mobileMenuState("remove", "auto", "close");
+    Navbar.mobileMenuState("remove", "relative", "close");
   } else {
-    Navbar.mobileMenuState("add", "hidden", "open");
+    Navbar.mobileMenuState("add", "fixed", "open");
   }
 }
 

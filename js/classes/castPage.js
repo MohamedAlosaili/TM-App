@@ -117,9 +117,17 @@ class CastPage extends MainClass {
                     <section>
                             <h2 class="section-title">Known for</h2>
                             <div class="cards-container flex">
-                                ${this.getSectionCards(
-                                  personObj.combined_credits.cast
-                                )}          
+                                ${
+                                  this.getSectionCards(
+                                    personObj.combined_credits.cast
+                                  ) ||
+                                  `<div class="no-content">
+                              <i class="icon empty-cards"></i>
+                                <p class="text">
+                                There are no movies for <span class="movie-name">${personObj.name}
+                                </p>
+                              </div>`
+                                }          
                             </div>
                     </section>  
                     <section>

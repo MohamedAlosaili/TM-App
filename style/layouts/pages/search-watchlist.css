@@ -59,6 +59,7 @@
   margin-top: 2rem;
 }
 .search-result .cards-container .cast-poster figcaption {
+  max-width: 12rem;
   font-size: 1rem;
 }
 @media (max-width: 639px) {
@@ -67,6 +68,7 @@
     width: 11rem;
     height: calc(11rem / 0.667);
   }
+  .search-result .cards-container .cast-poster figcaption,
   .search-result .cards-container.wrap .wrapper {
     max-width: 11rem;
   }
