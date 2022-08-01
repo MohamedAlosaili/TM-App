@@ -27,7 +27,7 @@
 ![screenshot](imgs/screenshots/cast-screenshot.png)
 ![screenshot](imgs/screenshots/popular-poeple-screenshot.png)
 
-##### have look to the [demo](https://fanciful-axolotl-730fac.netlify.app)
+### Have look to the [demo](https://fanciful-axolotl-730fac.netlify.app)
 
 I'll be happy to receive feedback:
 

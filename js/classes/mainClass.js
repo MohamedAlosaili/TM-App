@@ -16,7 +16,7 @@ export default class MainClass {
     `;
   }
 
-  renderLayer(type, zIndex = 5) {
+  renderLayer(type, zIndex = 8) {
     this.$layer.classList[type]("active");
     this.$layer.style.zIndex = zIndex;
   }
