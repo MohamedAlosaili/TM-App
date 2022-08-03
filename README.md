@@ -29,7 +29,7 @@
 
 ### Have look to the [demo](https://fanciful-axolotl-730fac.netlify.app)
 
-I'll be happy to receive feedback:
+I'll be happy to receive a feedback:
 
 * :dove: [Twitter](https://twitter.com/M0hamed85)
-* :email: [Email](mohamed.alosaili@gmail.com)
+* :email: [Email](mailto:mohamed.alosaili@gmail.com?subject=[GitHub]%20TM%20App)
