@@ -178,7 +178,7 @@ class MoviePage extends MainClass {
                     <h3><span class="define">${
                       type === `movie` ? `Duration` : `Episode Time`
                     }:</span> ${
-      movieObj.runtime ?? movieObj.episode_run_time
+      movieObj.runtime ?? movieObj.episode_run_time[0] ?? 0
     } min</h3>
                 </div>
                 <div class="button">

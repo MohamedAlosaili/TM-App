@@ -177,7 +177,7 @@ export async function getMoreCards() {
 export function addToWatchlist(btn) {
   const parent = btn.closest("[data-poster-parent]");
 
-  const posterImg = parent.querySelector("[data-poster]")?.src ?? null;
+  const posterImg = parent.querySelector("[data-poster]")?.src;
   const title = (
     parent.querySelector(".card-title") ?? parent.querySelector(".post-title")
   ).innerHTML;
