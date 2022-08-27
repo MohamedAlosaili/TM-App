@@ -92,7 +92,6 @@
 /* Nav-List End */
 /* Search Form Start */
 .nav-bar .search-form {
-  width: 100%;
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -218,6 +217,9 @@
   }
   .nav-bar .sidbar-menu.active {
     transform: translateX(0);
+  }
+  .nav-bar .search-form {
+    width: 100%;
   }
   .nav-bar .nav-list {
     flex-direction: column;
