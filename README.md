@@ -27,9 +27,9 @@
 ![screenshot](imgs/screenshots/cast-screenshot.png)
 ![screenshot](imgs/screenshots/popular-poeple-screenshot.png)
 
-### Have look to the [demo](https://fanciful-axolotl-730fac.netlify.app)
+### Have look to the [demo](https://tm-time.netlify.app)
 
 I'll be happy to receive a feedback:
 
-* :dove: [Twitter](https://twitter.com/M0hamed85)
-* :email: [Email](mailto:mohamed.alosaili@gmail.com?subject=[GitHub]%20TM%20App)
+- :dove: [Twitter](https://twitter.com/M0hamed85)
+- :email: [Email](mailto:mohamed.alosaili@gmail.com?subject=[GitHub]%20TM%20App)
